@@ -65,11 +65,11 @@ body {
 
 /* Compact Forms & Inputs */
 .compact-input {
-  @apply bg-slate-900/50 border border-white/10 rounded-xl px-3 py-2 text-sm focus:ring-1 focus:ring-primary-500/30 outline-none transition-all placeholder:text-slate-800 font-bold;
+  @apply bg-slate-900/50 border border-white/10 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-primary-500/30 outline-none transition-all placeholder:text-slate-400;
 }
 
 .compact-select {
-  @apply bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-[12px] focus:ring-1 focus:ring-primary-500/30 outline-none transition-all font-black uppercase tracking-widest appearance-none;
+  @apply bg-slate-900 border border-white/10 rounded-md px-3 py-2 text-[12px] focus:ring-1 focus:ring-primary-500/30 outline-none transition-all tracking-widest appearance-none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;

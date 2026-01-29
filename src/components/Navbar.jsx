@@ -11,10 +11,10 @@ const Navbar = () => {
         <nav className="sticky top-0 z-50 glass border-b border-white/5 bg-slate-950/40 backdrop-blur-2xl">
             <div className="container mx-auto px-6 h-14 flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent flex items-center justify-center shadow-lg shadow-primary-500/20 group-hover:scale-110 transition-transform">
+                    <div className="w-8 h-8 rounded-md bg-gradient-to-br from-primary-800 to-green-500 flex items-center justify-center shadow-md shadow-primary-500/20 group-hover:scale-110 transition-transform">
                         <span className="text-white font-black text-lg">T</span>
                     </div>
-                    <span className="text-xl font-bold bg-gradient-to-r from-primary-200 to-white bg-clip-text text-transparent hidden sm:block">
+                    <span className="text-xl font-bold bg-gradient-to-r from-red-800 to-green-500 bg-clip-text text-transparent hidden sm:block">
                         Town Beat
                     </span>
                 </Link>
@@ -53,7 +53,7 @@ const Navbar = () => {
                             </button>
                         </div>
                     ) : (
-                        <Link to="/login" className="flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white px-5 py-1.5 rounded-xl font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95 text-sm">
+                        <Link to="/login" className="flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white px-5 py-1.5 rounded-md font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95 text-sm">
                             <UserIcon size={16} />
                             <span>Sign In</span>
                         </Link>

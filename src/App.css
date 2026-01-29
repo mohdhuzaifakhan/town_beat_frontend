@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.compact-input {
+  height: 2.5rem;
+  line-height: 1.25rem;
+}
+

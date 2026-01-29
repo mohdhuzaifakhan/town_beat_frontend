@@ -10,7 +10,7 @@ const Home = () => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
     const [category, setCategory] = useState('All')
-    const [locationScope, setLocationScope] = useState('Local') // Local or Global
+    const [locationScope, setLocationScope] = useState('Local') 
     const { user } = useAuth()
 
     useEffect(() => {
@@ -36,28 +36,27 @@ const Home = () => {
 
     return (
         <div className="space-y-4 max-w-6xl mx-auto px-4 py-4">
-            {/* Header / Search & Location */}
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between relative">
                 <div className="relative w-full md:w-[400px] group">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-primary-400 transition-colors" size={14} />
                     <input
                         type="text"
                         placeholder="Search for local news..."
-                        className="w-full bg-slate-900/50 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary-500/20 transition-all font-bold text-xs placeholder:text-slate-800 relative z-10 uppercase tracking-widest"
+                        className="w-full bg-slate-900/50 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary-500/20 transition-all text-xs placeholder:text-slate-400 relative z-10 tracking-widest"
                     />
                 </div>
 
                 <div className="flex items-center gap-1 p-1 glass rounded-xl border-white/5">
                     <button
                         onClick={() => setLocationScope('Local')}
-                        className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === 'Local' ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/20' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'}`}
+                        className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === 'Local' ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/20' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'}`}
                     >
                         <MapPin size={10} />
                         {user?.location || 'Rampur'}
                     </button>
                     <button
                         onClick={() => setLocationScope('Global')}
-                        className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === 'Global' ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'}`}
+                        className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === 'Global' ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'}`}
                     >
                         <Globe size={10} />
                         Global
@@ -68,13 +67,12 @@ const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-8 space-y-4">
                     <CreatePostWidget onPostCreated={fetchPosts} />
-
                     <div className="flex items-center justify-between pb-1 px-1">
                         <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
                             <Sparkles className="text-primary-400" size={14} />
                             {locationScope === 'Local' ? `${user?.location || 'Rampur'} Signal` : 'Global Signal'}
                         </h2>
-                        <div className="flex gap-1 p-0.5 glass rounded-lg border-white/5">
+                        <div className="flex gap-1 p-1 glass rounded-md border-white/5">
                             {['All', 'Politics', 'Civic', 'Development'].map(cat => (
                                 <button
                                     key={cat}
@@ -184,8 +182,8 @@ const CreatePostWidget = ({ onPostCreated }) => {
                 <textarea
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
-                    className="w-full bg-slate-900/40 border border-white/5 rounded-xl p-3.5 min-h-[100px] focus:ring-1 focus:ring-primary-500/20 outline-none transition-all resize-none font-bold placeholder:text-slate-800 leading-relaxed text-[12px] uppercase tracking-wide"
-                    placeholder={`Broadcast update from ${user?.location || 'Rampur'}...`}
+                    className="w-full bg-slate-900/40 border border-white/5 rounded-xl p-3.5 min-h-[100px] focus:ring-1 focus:ring-primary-500/20 outline-none transition-all resize-none placeholder:text-slate-400 leading-relaxed text-[12px] tracking-wide"
+                    placeholder={`What is happening in your city ${user?.location || 'Rampur'}...`}
                 />
 
                 <div className="flex items-center justify-between gap-4">
@@ -193,7 +191,7 @@ const CreatePostWidget = ({ onPostCreated }) => {
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="compact-select py-1.5 px-3 uppercase text-[9px]"
+                            className="compact-select py-1.5 px-3 text-[9px]"
                         >
                             <option value="General">General</option>
                             <option value="Civic">Civic Dept</option>
@@ -203,7 +201,7 @@ const CreatePostWidget = ({ onPostCreated }) => {
 
                         <label className="cursor-pointer group/file">
                             <input type="file" className="hidden" onChange={(e) => setFile(e.target.files[0])} />
-                            <div className="p-2 rounded-lg bg-white/5 border border-white/5 group-hover/file:bg-primary-500/10 transition-all">
+                            <div className="p-2.5 rounded-md bg-white/5 border border-white/5 group-hover/file:bg-primary-500/10 transition-all">
                                 <ImageIcon size={14} className={file ? 'text-primary-400' : 'text-slate-600'} />
                             </div>
                         </label>
@@ -212,7 +210,7 @@ const CreatePostWidget = ({ onPostCreated }) => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="bg-primary-600 hover:bg-primary-500 text-white px-5 py-2 rounded-xl font-black transition-all shadow-lg shadow-primary-900/20 active:scale-95 disabled:opacity-50 flex items-center gap-2 text-[10px] uppercase tracking-widest"
+                        className="bg-primary-600 hover:bg-primary-500 text-white px-5 py-2 rounded-md font-black transition-all shadow-lg shadow-primary-900/20 active:scale-95 disabled:opacity-50 flex items-center gap-2 text-[10px] uppercase tracking-widest"
                     >
                         {loading ? <Loader2 className="animate-spin" size={14} /> : (
                             <>
