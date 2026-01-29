@@ -8,9 +8,9 @@ export const TrendingGroups = () => {
   }, []);
 
   return (
-    <div className="glass rounded-xl p-5 space-y-4 shadow-none border-white/5">
-      <h3 className="text-[9px] font-black uppercase tracking-widest text-slate-600">
-        Active Sectors
+    <div className="glass rounded-lg p-5 space-y-4 shadow-none border-white/5">
+      <h3 className="text-xs font-bold text-slate-600">
+        Trending Groups
       </h3>
       <div className="space-y-3">
         {groups.slice(0, 3).map((group) => (
@@ -26,10 +26,10 @@ export const TrendingGroups = () => {
               )}
             </div>
             <div>
-              <h4 className="font-black text-[10px] text-slate-400 group-hover:text-primary-400 transition-colors tracking-tight uppercase">
+              <h4 className="font-bold text-xs text-slate-400 group-hover:text-primary-400 transition-colors">
                 {group.name}
               </h4>
-              <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest opacity-60">
+              <p className="text-xs font-medium text-slate-600 opacity-60">
                 {group.membersCount} Members
               </p>
             </div>

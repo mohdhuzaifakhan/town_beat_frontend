@@ -11,15 +11,6 @@ import {
   Globe,
   Filter,
   Sparkles,
-  ChevronDown,
-  Clock,
-  Heart,
-  MessageSquare,
-  Share2,
-  PieChart,
-  ExternalLink,
-  Target,
-  Trash2,
 } from "lucide-react";
 import api from "../api/client";
 import axios from "axios";
@@ -62,29 +53,29 @@ const Home = () => {
   return (
     <div className="space-y-4 max-w-6xl mx-auto px-4 py-4">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between relative">
-        <div className="relative w-full md:w-[400px] group">
+        <div className="relative rounded-md w-full md:w-[400px] group">
           <Search
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-primary-400 transition-colors"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-400 transition-colors"
             size={14}
           />
           <input
             type="text"
             placeholder="Search for local news..."
-            className="w-full bg-slate-900/50 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary-500/20 transition-all text-xs placeholder:text-slate-400 relative z-10 tracking-widest"
+            className="w-full bg-slate-900/50 border border-white/5 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary-500/20 transition-all text-sm placeholder:text-slate-400 relative z-10"
           />
         </div>
 
-        <div className="flex items-center gap-1 p-1 glass rounded-xl border-white/5">
+        <div className="flex items-center gap-1 p-1 glass rounded-lg border-white/5">
           <button
             onClick={() => setLocationScope("Local")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === "Local" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/20" : "text-slate-500 hover:text-slate-300 hover:bg-white/5"}`}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all ${locationScope === "Local" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/20" : "text-slate-400 hover:text-slate-300 hover:bg-white/5"}`}
           >
             <MapPin size={10} />
             {user?.location || "Rampur"}
           </button>
           <button
             onClick={() => setLocationScope("Global")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-[10px] font-black uppercase tracking-widest transition-all ${locationScope === "Global" ? "bg-slate-800 text-white" : "text-slate-500 hover:text-slate-300 hover:bg-white/5"}`}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all ${locationScope === "Global" ? "bg-slate-800 text-white" : "text-slate-400 hover:text-slate-300 hover:bg-white/5"}`}
           >
             <Globe size={10} />
             Global
@@ -96,18 +87,18 @@ const Home = () => {
         <div className="lg:col-span-8 space-y-4">
           <CreatePostWidget onPostCreated={fetchPosts} />
           <div className="flex items-center justify-between pb-1 px-1">
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
+            <h2 className="text-xs tracking-[0.2em] text-slate-400 flex items-center gap-2">
               <Sparkles className="text-primary-400" size={14} />
               {locationScope === "Local"
                 ? `${user?.location || "Rampur"} Signal`
                 : "Global Signal"}
             </h2>
-            <div className="flex gap-1 p-1 glass rounded-md border-white/5">
+            <div className="flex gap-1 p-1 glass rounded-lg border-white/5">
               {["All", "Politics", "Civic", "Development"].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  className={`px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest transition-all ${category === cat ? "bg-primary-500/10 text-primary-400" : "text-slate-600 hover:text-slate-300"}`}
+                  className={`px-3 py-1 rounded-md text-sm transition-all ${category === cat ? "bg-primary-500/10 text-primary-400" : "text-slate-400 hover:text-slate-300"}`}
                 >
                   {cat}
                 </button>
@@ -118,20 +109,20 @@ const Home = () => {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-3">
               <Loader2 className="animate-spin text-primary-500" size={24} />
-              <p className="text-slate-600 font-black tracking-widest text-[9px] uppercase">
-                Decrypting Feed...
+              <p className="text-slate-400 text-sm">
+                Loading feed...
               </p>
             </div>
           ) : posts.length === 0 ? (
-            <div className="glass rounded-xl p-12 text-center space-y-3 border-dashed border-white/10">
+            <div className="glass rounded-lg p-12 text-center space-y-3 border-dashed border-white/10">
               <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/5">
                 <Search className="text-slate-700" size={20} />
               </div>
-              <h3 className="text-sm font-black text-slate-400 tracking-widest uppercase">
-                No Signal Detected
+              <h3 className="text-sm font-bold text-slate-400">
+                No posts found
               </h3>
-              <p className="text-[9px] font-bold text-slate-600 uppercase tracking-widest">
-                Be the first to archive local events.
+              <p className="text-slate-500 text-sm">
+                Be the first to post.
               </p>
             </div>
           ) : (

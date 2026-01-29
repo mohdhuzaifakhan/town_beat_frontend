@@ -73,8 +73,8 @@ const Register = () => {
             <User className="text-primary-500" size={24} />
             Citizen Registry
           </h1>
-          <p className="text-[12px] text-slate-400 tracking-widest">
-            Initialize your digital profile on the network
+          <p className="text-sm text-slate-400">
+            Create your account to join the community
           </p>
         </div>
 
@@ -82,7 +82,7 @@ const Register = () => {
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-[12px] tracking-widest text-center"
+            className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm text-center"
           >
             {error}
           </motion.div>
@@ -91,7 +91,7 @@ const Register = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">
+              <label className="text-xs text-slate-400 ml-1">
                 Name
               </label>
               <div className="relative group">
@@ -112,7 +112,7 @@ const Register = () => {
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">
+              <label className="text-xs text-slate-400 ml-1">
                 City
               </label>
               <div className="relative group">
@@ -145,7 +145,7 @@ const Register = () => {
               </div>
             </div>
             <div className="space-y-1.5 col-span-full">
-              <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">
+              <label className="text-xs text-slate-400 ml-1">
                 Email
               </label>
               <div className="relative group">
@@ -167,7 +167,7 @@ const Register = () => {
             </div>
 
             <div className="space-y-1.5 col-span-full">
-              <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">
+              <label className="text-xs text-slate-400 ml-1">
                 Password
               </label>
               <div className="relative group">
@@ -192,7 +192,7 @@ const Register = () => {
           {/* We will use this later */}
           {/* <div className="glass bg-white/5 p-4 rounded-xl flex items-start gap-4 border border-white/5">
             <ShieldCheck className="text-emerald-500 shrink-0" size={16} />
-            <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest leading-relaxed">
+            <p className="text-xs text-slate-500 leading-relaxed">
               Identity verification is required for network access. We prioritize
               authentic human connections.
             </p>
@@ -216,7 +216,7 @@ const Register = () => {
             )}
           </button>
         </form>
-        <div className="text-center text-[12px] tracking-widest text-slate-400">
+        <div className="text-center text-sm text-slate-400">
           Existing Record?{" "}
           <Link
             to="/login"

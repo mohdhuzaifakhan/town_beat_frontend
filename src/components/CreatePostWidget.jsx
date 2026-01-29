@@ -54,19 +54,19 @@ export const CreatePostWidget = ({ onPostCreated }) => {
 
   if (!user)
     return (
-      <div className="glass rounded-xl p-6 text-center text-[10px] font-black uppercase tracking-widest border border-white/5">
+      <div className="glass rounded-xl p-6 text-center text-[13px] tracking-widest border border-white/5">
         <Link
           to="/login"
-          className="text-primary-400 hover:text-primary-300 transition-colors"
+          className="text-primary-400 hover:text-primary-300 transition-colors font-medium"
         >
           Sign in
         </Link>{" "}
-        to secure your archival feed.
+        to post to your feed.
       </div>
     );
 
   return (
-    <div className="glass rounded-xl p-5 space-y-4 relative overflow-hidden group border-white/5 shadow-none">
+    <div className="glass rounded-lg p-5 space-y-4 relative overflow-hidden group border-white/5 shadow-none">
       <div className="flex items-center gap-3 relative">
         <div className="relative shrink-0">
           <img
@@ -77,14 +77,14 @@ export const CreatePostWidget = ({ onPostCreated }) => {
           <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-lg border-2 border-slate-950 shadow-lg" />
         </div>
         <div>
-          <h3 className="text-[11px] font-black text-white uppercase tracking-wider">
+          <h3 className="text-sm font-bold text-white tracking-wide">
             {user?.name}
           </h3>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-[8px] font-black uppercase tracking-widest text-primary-400">
+            <span className="text-xs font-bold text-primary-400">
               {user?.role}
             </span>
-            <div className="flex items-center gap-1 text-[8px] font-black text-slate-600 uppercase tracking-widest">
+            <div className="flex items-center gap-1 text-xs font-medium text-slate-500">
               <MapPin size={10} className="text-rose-500/50" />
               {user?.location || "Rampur"}
             </div>
@@ -96,8 +96,8 @@ export const CreatePostWidget = ({ onPostCreated }) => {
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          className="w-full bg-slate-900/40 border border-white/5 rounded-xl p-3.5 min-h-[100px] focus:ring-1 focus:ring-primary-500/20 outline-none transition-all resize-none placeholder:text-slate-400 leading-relaxed text-[12px] tracking-wide"
-          placeholder={`What is happening in your city ${user?.location || "Rampur"}...`}
+          className="w-full bg-slate-900/40 border border-white/5 rounded-lg p-3.5 min-h-[100px] focus:ring-1 focus:ring-primary-500/20 outline-none transition-all resize-none placeholder:text-slate-400 leading-relaxed text-sm"
+          placeholder={`What's happening in ${user?.location || "your city"}...`}
         />
 
         <div className="flex items-center justify-between gap-4">
@@ -105,7 +105,7 @@ export const CreatePostWidget = ({ onPostCreated }) => {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="compact-select py-1.5 px-3 text-[9px]"
+              className="compact-select py-1.5 px-3 text-xs rounded-md"
             >
               <option value="General">General</option>
               <option value="Civic">Civic Dept</option>
@@ -131,7 +131,7 @@ export const CreatePostWidget = ({ onPostCreated }) => {
           <button
             type="submit"
             disabled={loading}
-            className="bg-primary-600 hover:bg-primary-500 text-white px-5 py-2 rounded-md font-black transition-all shadow-lg shadow-primary-900/20 active:scale-95 disabled:opacity-50 flex items-center gap-2 text-[10px] uppercase tracking-widest"
+            className="bg-primary-600 hover:bg-primary-500 text-white px-5 py-2 rounded-lg font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95 disabled:opacity-50 flex items-center gap-2 text-xs"
           >
             {loading ? (
               <Loader2 className="animate-spin" size={14} />

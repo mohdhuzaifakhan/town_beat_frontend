@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { MapPin, ShieldCheck, Mail, Calendar, Settings, Edit3, Loader2 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/client'
+import { ProfilePostCard } from '../components/ProfilePostCard'
 
 const Profile = () => {
     const { user } = useAuth()
@@ -47,7 +48,7 @@ const Profile = () => {
     if (!user) return (
         <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
             <Loader2 className="animate-spin text-primary-400" size={32} />
-            <p className="text-slate-500 font-black uppercase tracking-widest text-[10px]">Verifying Identity...</p>
+            <p className="text-slate-400 text-sm">Loading profile...</p>
         </div>
     )
 
@@ -73,7 +74,7 @@ const Profile = () => {
                         <div className="flex gap-2">
                             <button
                                 onClick={() => setEditing(!editing)}
-                                className="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center gap-2 border border-white/5 transition-all active:scale-95"
+                                className="bg-white/5 hover:bg-white/10 text-white px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 border border-white/5 transition-all active:scale-95"
                             >
                                 <Edit3 size={14} className="text-primary-400" />
                                 Edit Account
@@ -90,31 +91,31 @@ const Profile = () => {
                                 {user.name}
                                 <span className="text-slate-600 text-xs font-bold tracking-widest">{user.handle}</span>
                             </h1>
-                            <div className="flex flex-wrap gap-4 mt-1.5 text-slate-500 text-[10px] font-black uppercase tracking-widest">
+                            <div className="flex flex-wrap gap-4 mt-1.5 text-slate-500 text-xs font-bold">
                                 <div className="flex items-center gap-1.5"><MapPin size={12} className="text-primary-400" /> {user.location || 'Unknown Sector'}</div>
                                 <div className="flex items-center gap-1.5"><Mail size={12} className="text-accent" /> {user.email}</div>
                                 <div className="flex items-center gap-1.5"><Calendar size={12} className="text-amber-400" /> Member since 2026</div>
                             </div>
                         </div>
 
-                        <p className="text-slate-400 text-xs font-bold leading-relaxed max-w-2xl uppercase tracking-wider opacity-80">
-                            {user.role === 'Admin' ? 'Platform Administrator ensuring community safety and integrity.' :
-                                user.role === 'Journalist' ? 'Verified Journalist delivering transparent local coverage.' :
-                                    'Active Community Member contributing to local growth.'}
+                        <p className="text-slate-400 text-sm leading-relaxed max-w-2xl opacity-80">
+                            {user.role === 'Admin' ? 'Platform administrator ensuring community safety and integrity.' :
+                                user.role === 'Journalist' ? 'Verified journalist delivering transparent local coverage.' :
+                                    'Active community member contributing to local growth.'}
                         </p>
 
                         <div className="flex gap-8 pt-2 border-t border-white/5">
                             <div className="flex flex-col">
                                 <span className="text-lg font-black text-white">{posts.reduce((acc, p) => acc + (p.likes?.length || 0), 0) + posts.length * 10}</span>
-                                <span className="text-[9px] font-black text-slate-600 uppercase tracking-widest">Reach</span>
+                                <span className="text-xs font-bold text-slate-500">Reach</span>
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-lg font-black text-primary-400">{user.credibility || 85}%</span>
-                                <span className="text-[9px] font-black text-slate-600 uppercase tracking-widest">Trust</span>
+                                <span className="text-xs font-bold text-slate-500">Trust</span>
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-lg font-black text-accent">{posts.length}</span>
-                                <span className="text-[9px] font-black text-slate-600 uppercase tracking-widest">Archives</span>
+                                <span className="text-xs font-bold text-slate-500">Posts</span>
                             </div>
                         </div>
                     </div>
@@ -136,7 +137,7 @@ const Profile = () => {
                     </h2>
                     <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                            <label className="text-[9px] font-black text-slate-600 uppercase tracking-widest ml-1">Identity Name</label>
+                            <label className="text-xs font-bold text-slate-400 ml-1">Name</label>
                             <input
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -145,7 +146,7 @@ const Profile = () => {
                             />
                         </div>
                         <div className="space-y-1.5">
-                            <label className="text-[9px] font-black text-slate-600 uppercase tracking-widest ml-1">Assigned Location</label>
+                            <label className="text-xs font-bold text-slate-400 ml-1">Location</label>
                             <input
                                 value={formData.location}
                                 onChange={e => setFormData({ ...formData, location: e.target.value })}
@@ -154,11 +155,11 @@ const Profile = () => {
                             />
                         </div>
                         <div className="flex gap-3 col-span-2 pt-2">
-                            <button type="submit" disabled={loading} className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest disabled:opacity-50 flex items-center gap-2 shadow-lg shadow-primary-900/20 active:scale-95 transition-all">
+                            <button type="submit" disabled={loading} className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-2.5 rounded-xl font-bold text-sm disabled:opacity-50 flex items-center gap-2 shadow-lg shadow-primary-900/20 active:scale-95 transition-all">
                                 {loading && <Loader2 className="animate-spin" size={12} />}
                                 Save Identity
                             </button>
-                            <button type="button" onClick={() => setEditing(false)} className="bg-white/5 hover:bg-white/10 text-slate-400 px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest border border-white/5 transition-all active:scale-95">Discard</button>
+                            <button type="button" onClick={() => setEditing(false)} className="bg-white/5 hover:bg-white/10 text-slate-400 px-6 py-2.5 rounded-xl font-bold text-sm border border-white/5 transition-all active:scale-95">Cancel</button>
                         </div>
                     </form>
                 </motion.div>
@@ -175,13 +176,13 @@ const Profile = () => {
                 {postsLoading ? (
                     <div className="flex flex-col items-center justify-center py-12 space-y-3">
                         <Loader2 className="animate-spin text-primary-500" size={24} />
-                        <p className="text-slate-600 font-black tracking-widest text-[9px] uppercase">Retrieving Records...</p>
+                        <p className="text-slate-400 text-sm">Loading posts...</p>
                     </div>
                 ) : posts.length === 0 ? (
                     <div className="glass rounded-xl p-12 text-center border-dashed border-white/10 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(245,158,11,0.03),transparent)]" />
                         <Edit3 className="text-slate-400 mx-auto mb-4 opacity-20" size={40} />
-                        <p className="text-slate-600 font-black uppercase tracking-widest text-[10px]">No recent footprints found</p>
+                        <p className="text-slate-500 text-sm">No posts yet</p>
                     </div>
                 ) : (
                     <div className="space-y-4 pb-10">
@@ -192,58 +193,6 @@ const Profile = () => {
                 )}
             </div>
         </div>
-    )
-}
-
-const ProfilePostCard = ({ post, onUpdate }) => {
-    const handleDelete = async () => {
-        if (!window.confirm('Erase this archive permanently?')) return
-        try {
-            await api.delete(`/posts/${post._id}`)
-            onUpdate()
-        } catch (err) {
-            console.error('Failed to delete post')
-        }
-    }
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-xl p-4 border border-white/5 space-y-3 relative group"
-        >
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                    <span className="text-[8px] font-black uppercase tracking-widest text-primary-400 bg-primary-400/5 px-2 py-0.5 rounded border border-primary-400/10">
-                        {post.category}
-                    </span>
-                    <span className="text-[8px] font-black text-slate-600 uppercase tracking-widest">
-                        {new Date(post.createdAt).toLocaleDateString()}
-                    </span>
-                </div>
-                <button
-                    onClick={handleDelete}
-                    className="p-1.5 rounded-lg bg-red-500/5 text-red-500/30 hover:bg-red-500/20 hover:text-red-400 transition-all border border-red-500/10"
-                >
-                    <Settings size={12} />
-                </button>
-            </div>
-
-            <p className="text-[11px] text-slate-400 font-bold leading-relaxed uppercase tracking-wide">
-                {post.body}
-            </p>
-
-            {post.image && (
-                <div className="rounded-lg overflow-hidden border border-white/5 aspect-square max-w-[120px]">
-                    <img src={post.image} className="w-full h-full object-cover opacity-80" alt="" />
-                </div>
-            )}
-
-            <div className="flex items-center gap-4 pt-2 border-t border-white/5 text-[8px] font-black text-slate-600 uppercase tracking-widest">
-                <span className="flex items-center gap-1"><ShieldCheck size={10} className="text-primary-500" /> {post.likes?.length || 0} Likes</span>
-                <span className="flex items-center gap-1"><Mail size={10} className="text-accent" /> {post.commentsCount || 0} Comments</span>
-            </div>
-        </motion.div>
     )
 }
 

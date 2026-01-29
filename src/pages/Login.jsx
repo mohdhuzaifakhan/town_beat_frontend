@@ -40,26 +40,26 @@ const Login = () => {
             <Lock className="text-primary-500" size={20} />
             Access Node
           </h1>
-          <p className="text-[12px] text-slate-400  tracking-widest">
-            Identify yourself to the network
+          <p className="text-sm text-slate-400">
+            Sign in to access your account
           </p>
         </div>
 
         {message && (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-[12px] tracking-widest text-center">
+          <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-sm text-center">
             {message}
           </div>
         )}
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-[12px] tracking-widest text-center">
+          <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm text-center">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-[10px] text-slate-400 uppercase tracking-widest ml-1">
+            <label className="text-xs text-slate-400 ml-1">
               Email ID
             </label>
             <div className="relative group">
@@ -80,7 +80,7 @@ const Login = () => {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[10px] uppercase text-slate-400 tracking-widest ml-1">
+            <label className="text-xs text-slate-400 ml-1">
               Password
             </label>
             <div className="relative group">
@@ -119,7 +119,7 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="text-center text-[12px] tracking-widest text-slate-400">
+        <div className="text-center text-sm text-slate-400">
           New Citizen?{" "}
           <Link
             to="/register"

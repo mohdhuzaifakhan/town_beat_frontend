@@ -56,7 +56,7 @@ const AdminAds = () => {
                 <ShieldAlert className="text-red-400" size={24} />
             </div>
             <h2 className="text-sm font-black text-slate-200 tracking-tighter uppercase">Access Terminal Restricted</h2>
-            <p className="text-slate-600 font-bold max-w-xs text-center text-[9px] uppercase tracking-widest leading-relaxed">Only high-level platform administrators can manage billboard deployments.</p>
+            <p className="text-slate-500 max-w-xs text-center text-xs leading-relaxed">Only platform administrators can manage billboard deployments.</p>
         </div>
     )
 
@@ -102,8 +102,8 @@ const AdminAds = () => {
                                     required
                                     value={formData.title}
                                     onChange={e => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full compact-input"
-                                    placeholder="e.g. SYSTEM UPDATE"
+                                    className="w-full compact-input text-sm"
+                                    placeholder="e.g. Special Offer"
                                 />
                             </div>
                             <div className="space-y-1.5">
@@ -112,8 +112,8 @@ const AdminAds = () => {
                                     required
                                     value={formData.description}
                                     onChange={e => setFormData({ ...formData, description: e.target.value })}
-                                    className="w-full compact-input min-h-[80px] py-3 h-24 resize-none uppercase text-[10px]"
-                                    placeholder="Transmit core campaign objective..."
+                                    className="w-full compact-input min-h-[80px] py-3 h-24 resize-none text-sm"
+                                    placeholder="Describe your campaign..."
                                 />
                             </div>
                             <div className="space-y-1.5">
@@ -171,7 +171,7 @@ const AdminAds = () => {
                         <div className="glass rounded-xl p-12 text-center border-dashed border-white/10 shadow-none">
                             <Megaphone className="text-slate-900 mx-auto mb-4 opacity-20" size={32} />
                             <h3 className="text-xs font-black text-slate-500 tracking-widest uppercase">SKYLINE VACANT</h3>
-                            <p className="text-slate-700 font-bold mt-2 text-[8px] uppercase tracking-widest">Awaiting tactical deployment.</p>
+                            <p className="text-slate-600 mt-2 text-xs">Awaiting deployment.</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

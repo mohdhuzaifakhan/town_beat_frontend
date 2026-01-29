@@ -56,7 +56,7 @@ body {
 
 .glass {
   @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-2xl;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 .glass-hover {
