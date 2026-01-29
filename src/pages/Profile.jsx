@@ -180,7 +180,7 @@ const Profile = () => {
                 ) : posts.length === 0 ? (
                     <div className="glass rounded-xl p-12 text-center border-dashed border-white/10 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(245,158,11,0.03),transparent)]" />
-                        <Edit3 className="text-slate-800 mx-auto mb-4 opacity-20" size={40} />
+                        <Edit3 className="text-slate-400 mx-auto mb-4 opacity-20" size={40} />
                         <p className="text-slate-600 font-black uppercase tracking-widest text-[10px]">No recent footprints found</p>
                     </div>
                 ) : (
