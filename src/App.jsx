@@ -10,6 +10,8 @@ import Campaigns from './pages/Campaigns'
 import Profile from './pages/Profile'
 import VerifyEmail from './pages/VerifyEmail'
 import AdminAds from './pages/AdminAds'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/verify" element={<VerifyEmail />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/polls" element={<Polls />} />

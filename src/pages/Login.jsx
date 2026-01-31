@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Mail, Lock, ArrowRight, Loader2, UserIcon } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  MapPin,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+} from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,108 +38,145 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-sm glass rounded-md p-6 space-y-6 border border-white/5 shadow-none"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-xl overflow-hidden"
       >
-        <div className="text-center space-y-2">
-          <h1 className="text-xl font-black tracking-tighter text-white flex items-center justify-center gap-2">
-            <Lock className="text-primary-500" size={20} />
-            Access Node
-          </h1>
-          <p className="text-sm text-slate-400">
-            Sign in to access your account
+        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-white/5">
+          <div>
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
+                <MapPin className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-black tracking-tight text-white">
+                Town Beat
+              </span>
+            </div>
+
+            <h2 className="text-4xl font-extrabold text-white leading-tight mb-6">
+              Local voices.
+              <br />
+              Real stories.
+              <br />
+              <span className="text-primary-500">One community.</span>
+            </h2>
+
+            <ul className="space-y-4 mt-8">
+              {[
+                "City‑based discussions",
+                "Hyper‑local news & alerts",
+                "Community events & updates",
+              ].map((text) => (
+                <li key={text} className="flex items-center gap-3 text-slate-300">
+                  <CheckCircle2 className="w-4 h-4 text-primary-500" />
+                  <span className="text-sm font-medium">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="text-xs text-slate-500">
+            © {new Date().getFullYear()} Town Beat — built for your city
           </p>
         </div>
 
-        {message && (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-sm text-center">
-            {message}
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm text-center">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1.5">
-            <label className="text-xs text-slate-400 ml-1">
-              Email ID
-            </label>
-            <div className="relative group">
-              <Mail
-                size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-500 transition-colors pointer-events-none"
-              />
-
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="example@gmail.com"
-                required
-                className="w-full compact-input !pl-8"
-              />
-            </div>
+        {/* Right Login Panel */}
+        <div className="p-8 lg:p-12 flex flex-col justify-center">
+          <div className="mb-8">
+            <h3 className="text-2xl font-black text-white">Welcome back</h3>
+            <p className="text-sm text-slate-400">
+              Sign in to continue to Town Beat
+            </p>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs text-slate-400 ml-1">
-              Password
-            </label>
-            <div className="relative group">
-              <Lock
-                size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-accent transition-colors pointer-events-none"
-              />
-
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="w-full compact-input !pl-8"
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 disabled:hover:bg-primary-600 text-white px-5 py-2 rounded-md font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95 text-sm"
-          >
-            {loading ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                <span>Signing in...</span>
-              </>
-            ) : (
-              <>
-                <UserIcon size={16} />
-                <span>Sign In</span>
-              </>
+          <AnimatePresence mode="wait">
+            {(message || error) && (
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                className={`mb-5 flex items-center gap-3 p-3 rounded-lg text-sm border ${
+                  message
+                    ? "bg-primary-500/10 border-primary-500/20 text-primary-400"
+                    : "bg-red-500/10 border-red-500/20 text-red-400"
+                }`}
+              >
+                <AlertCircle className="w-4 h-4" />
+                {message || error}
+              </motion.div>
             )}
-          </button>
-        </form>
+          </AnimatePresence>
 
-        <div className="text-center text-sm text-slate-400">
-          New Citizen?{" "}
-          <Link
-            to="/register"
-            className="text-primary-500 hover:text-primary-400 transition-colors"
-          >
-            Register
-          </Link>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs text-slate-400 ml-1">Email</label>
+              <div className="relative group">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="example@email.com"
+                  required
+                  className="w-full compact-input !pl-9"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs text-slate-400 ml-1">Password</label>
+              <div className="relative group">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full compact-input !pl-9"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => navigate("/forgot-password")}
+                className="text-xs text-primary-500 hover:text-primary-400"
+              >
+                Forgot password?
+              </button>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-4 flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 disabled:hover:bg-primary-600 text-white px-5 py-2.5 rounded-md font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95"
+            >
+              {loading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <>
+                  Sign In
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-8 text-center text-sm text-slate-400">
+            New here?{" "}
+            <Link
+              to="/register"
+              className="text-primary-500 hover:text-primary-400 font-semibold"
+            >
+              Create an account
+            </Link>
+          </div>
         </div>
       </motion.div>
     </div>
   );
-};
-
-export default Login;
+}

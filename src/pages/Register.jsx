@@ -1,20 +1,19 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Mail,
   Lock,
   User,
-  ArrowRight,
-  ShieldCheck,
-  Loader2,
   MapPin,
-  ChevronDown,
-  UserIcon
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
-const Register = () => {
+export default function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +22,7 @@ const Register = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -45,14 +45,15 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.location) {
-      return setError("Please select your location");
+      return setError("Please select your city");
     }
+
     setError("");
     setLoading(true);
     try {
       await register(formData);
       navigate("/login", {
-        state: { message: "Verification email sent! Please check your inbox." },
+        state: { message: "Verification email sent. Please check your inbox." },
       });
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -62,119 +63,142 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[90vh] flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-lg glass rounded-xl p-6 md:p-8 space-y-8 border border-white/5 shadow-none"
+        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-xl overflow-hidden"
       >
-        <div className="text-center space-y-2">
-          <h1 className="text-xl font-black tracking-tighter text-white flex items-center justify-center gap-3">
-            <User className="text-primary-500" size={24} />
-            Citizen Registry
-          </h1>
-          <p className="text-sm text-slate-400">
-            Create your account to join the community
+        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-white/5">
+          <div>
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
+                <MapPin className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-black tracking-tight text-white">
+                Town Beat
+              </span>
+            </div>
+
+            <h2 className="text-4xl font-extrabold text-white leading-tight mb-6">
+              Join your city.
+              <br />
+              Share your voice.
+              <br />
+              <span className="text-primary-500">Build community.</span>
+            </h2>
+
+            <ul className="space-y-4 mt-8">
+              {[
+                "Verified local citizens",
+                "City-based discussions",
+                "Trusted community updates",
+              ].map((text) => (
+                <li
+                  key={text}
+                  className="flex items-center gap-3 text-slate-300"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-primary-500" />
+                  <span className="text-sm font-medium">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="text-xs text-slate-500">
+            © {new Date().getFullYear()} Town Beat — built for your city
           </p>
         </div>
 
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm text-center"
-          >
-            {error}
-          </motion.div>
-        )}
+        <div className="p-8 lg:p-12 flex flex-col justify-center">
+          <div className="mb-8">
+            <h3 className="text-2xl font-black text-white">Create account</h3>
+            <p className="text-sm text-slate-400">
+              Join your local community on Town Beat
+            </p>
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs text-slate-400 ml-1">
-                Name
-              </label>
-              <div className="relative group">
-                <User
-                  size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-500 pointer-events-none transition-colors"
-                />
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  placeholder="Your Name"
-                  required
-                  className="w-full compact-input !pl-8"
-                />
+          <AnimatePresence mode="wait">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                className="mb-5 flex items-center gap-3 p-3 rounded-lg text-sm border bg-red-500/10 border-red-500/20 text-red-400"
+              >
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Name + City (2 columns) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Name */}
+              <div className="space-y-1.5">
+                <label className="text-xs text-slate-400 ml-1">Name</label>
+                <div className="relative group">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    placeholder="Your name"
+                    required
+                    className="w-full compact-input !pl-9"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-xs text-slate-400 ml-1">
-                City
-              </label>
-              <div className="relative group">
-                <MapPin
-                  size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-accent pointer-events-none transition-colors"
-                />
 
-                <select
-                  value={formData.location}
-                  onChange={(e) =>
-                    setFormData({ ...formData, location: e.target.value })
-                  }
-                  required
-                  className="w-full compact-select !pl-8 pr-10 appearance-none cursor-pointer"
-                >
-                  <option value="" disabled className="bg-slate-950">
-                    Select City
-                  </option>
-                  {cities.map((city) => (
-                    <option
-                      key={city}
-                      value={city}
-                      className="bg-slate-950 uppercase"
-                    >
-                      {city.toUpperCase()}
+              <div className="space-y-1.5">
+                <label className="text-xs text-slate-400 ml-1">City</label>
+                <div className="relative group">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+                  <select
+                    value={formData.location}
+                    onChange={(e) =>
+                      setFormData({ ...formData, location: e.target.value })
+                    }
+                    required
+                    className="w-full compact-select !pl-9 pr-10 appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled className="bg-slate-950">
+                      Select city
                     </option>
-                  ))}
-                </select>
+                    {cities.map((city) => (
+                      <option key={city} value={city} className="bg-slate-950">
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
-            <div className="space-y-1.5 col-span-full">
-              <label className="text-xs text-slate-400 ml-1">
-                Email
-              </label>
+            <div className="space-y-1.5">
+              <label className="text-xs text-slate-400 ml-1">Email</label>
               <div className="relative group">
-                <Mail
-                  size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-primary-500 pointer-events-none transition-colors"
-                />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="example@gmail.com"
+                  placeholder="example@email.com"
                   required
-                  className="w-full compact-input !pl-8"
+                  className="w-full compact-input !pl-9"
                 />
               </div>
             </div>
 
-            <div className="space-y-1.5 col-span-full">
-              <label className="text-xs text-slate-400 ml-1">
-                Password
-              </label>
+            {/* Password */}
+            <div className="space-y-1.5">
+              <label className="text-xs text-slate-400 ml-1">Password</label>
               <div className="relative group">
-                <Lock
-                  size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 group-focus-within:text-accent pointer-events-none transition-colors"
-                />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
                 <input
                   type="password"
                   value={formData.password}
@@ -183,51 +207,38 @@ const Register = () => {
                   }
                   placeholder="••••••••"
                   required
-                  className="w-full compact-input !pl-8"
+                  className="w-full compact-input !pl-9"
                 />
               </div>
             </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-4 flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 disabled:hover:bg-primary-600 text-white px-5 py-2.5 rounded-md font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95"
+            >
+              {loading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <>
+                  Create Account
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-8 text-center text-sm text-slate-400">
+            Already registered?{" "}
+            <Link
+              to="/login"
+              className="text-primary-500 hover:text-primary-400 font-semibold"
+            >
+              Sign in
+            </Link>
           </div>
-
-          {/* We will use this later */}
-          {/* <div className="glass bg-white/5 p-4 rounded-xl flex items-start gap-4 border border-white/5">
-            <ShieldCheck className="text-emerald-500 shrink-0" size={16} />
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Identity verification is required for network access. We prioritize
-              authentic human connections.
-            </p>
-          </div> */}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 disabled:hover:bg-primary-600 text-white px-5 py-2 rounded-md font-bold transition-all shadow-lg shadow-primary-900/20 active:scale-95 text-sm"
-          >
-            {loading ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                <span>Registring...</span>
-              </>
-            ) : (
-              <>
-                <UserIcon size={16} />
-                <span>Register</span>
-              </>
-            )}
-          </button>
-        </form>
-        <div className="text-center text-sm text-slate-400">
-          Existing Record?{" "}
-          <Link
-            to="/login"
-            className="text-primary-500 hover:text-primary-400 transition-colors"
-          >
-            Sign In
-          </Link>
         </div>
       </motion.div>
     </div>
   );
-};
-
-export default Register;
+}
