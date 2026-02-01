@@ -4,12 +4,13 @@ import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { GroupCard } from "../components/GroupCard";
 import { CreateGroupModal } from "../components/CreateGroupModal";
+import { motion } from "framer-motion";
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
-  const [view, setView] = useState("explore"); // 'explore', 'my', or 'unlock'
+  const [view, setView] = useState("explore");
   const [inviteCode, setInviteCode] = useState("");
   const [joining, setJoining] = useState(false);
   const [error, setError] = useState("");
@@ -42,7 +43,7 @@ const Groups = () => {
         setView("my");
         setInviteCode("");
       } else {
-        setError("Invalid synchronization code. Please check and try again.");
+        setError("Invalid group code. Please check and try again.");
       }
     } catch (err) {
       console.error(err);
@@ -67,21 +68,21 @@ const Groups = () => {
           <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full">
             <Users className="text-amber-500 shrink-0" size={24} />
             <span className="truncate">Regional Groups</span>
-            <span className="text-[11px] md:text-[12px] text-slate-600 font-medium ml-2 opacity-50 shrink-0">
+            <span className="text-[11px] md:text-[12px] text-slate-500 font-medium ml-2 opacity-50 shrink-0">
               Beta Access
             </span>
           </h1>
-          <p className="text-[10px] md:text-[11px] font-medium  text-slate-600 md:ml-9 truncate">
-            Sector-Specific Citizen Coalitions
+          <p className="text-[10px] md:text-[11px] font-medium  text-slate-500 md:ml-9 truncate">
+            Region-Specific Citizen Coalitions
           </p>
         </div>
         {user && (
           <button
             onClick={() => setShowCreate(true)}
-            className="w-full md:w-auto bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg font-medium text-[11px] flex items-center justify-center gap-3 transition-all shadow-lg shadow-primary-900/40 active:scale-95 border border-white/10"
+            className="w-full md:w-auto bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg font-bold text-[11px] flex items-center justify-center gap-3 transition-all shadow-lg shadow-primary-900/40 active:scale-95 border border-white/10"
           >
             <PlusSquare size={14} />
-            Establish Coalition
+            Create Group
           </button>
         )}
       </div>
@@ -90,19 +91,19 @@ const Groups = () => {
         <div className="flex p-1 bg-slate-900/80 rounded-lg border border-white/5 w-full sm:w-auto overflow-x-auto no-scrollbar">
           <button
             onClick={() => setView("explore")}
-            className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "explore" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
+            className={`flex-1 mx-0.5 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "explore" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
           >
             Explore
           </button>
           <button
             onClick={() => setView("my")}
-            className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "my" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
+            className={`flex-1 mx-0.5 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "my" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
           >
             Joined
           </button>
           <button
             onClick={() => setView("unlock")}
-            className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "unlock" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
+            className={`flex-1 mx-0.5 sm:flex-none px-4 py-1.5 rounded-lg text-[12px] font-medium transition-all whitespace-nowrap ${view === "unlock" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40" : "text-slate-500 hover:text-white hover:bg-white/5"}`}
           >
             Unlock
           </button>
@@ -120,7 +121,7 @@ const Groups = () => {
         <div className="flex flex-col items-center justify-center py-20 space-y-3">
           <Loader2 className="animate-spin text-primary-400" size={24} />
           <p className="text-slate-400 text-sm font-bold">
-            Synchronizing Sectors...
+            Synchronizing Groups...
           </p>
         </div>
       ) : view === "unlock" ? (
@@ -129,10 +130,10 @@ const Groups = () => {
             <div className="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center mx-auto border border-primary-500/20">
               <Shield className="text-primary-400" size={32} />
             </div>
-            <h2 className="text-lg font-medium text-white">Sync New Sector</h2>
-            <p className="text-xs text-slate-500 max-w-[280px] mx-auto leading-relaxed">
-              Enter the unique invite code shared by the community to link your
-              node to their sector.
+            <h2 className="text-lg font-medium text-white">Sync New Group</h2>
+            <p className="text-[13px] text-slate-500 max-w-[380px] mx-auto">
+              Enter the invite code shared by the community to link your node to
+              their group.
             </p>
           </div>
 
@@ -145,8 +146,8 @@ const Groups = () => {
                   setInviteCode(e.target.value);
                   setError("");
                 }}
-                placeholder="CODE..."
-                className="w-full bg-slate-950/50 border border-white/10 rounded-2xl py-6 px-4 text-center text-2xl md:text-3xl font-medium text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/50 transition-all shadow-2xl"
+                placeholder="Enter Code Here..."
+                className="w-full bg-slate-950/50 border border-white/10 rounded-lg py-2 px-2 text-center text-lg md:text-md font-medium text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all shadow-2xl"
                 maxLength={8}
               />
             </div>
@@ -164,7 +165,7 @@ const Groups = () => {
             <button
               type="submit"
               disabled={joining || !inviteCode.trim()}
-              className="w-full bg-primary-600 hover:bg-primary-500 text-white font-medium py-5 rounded-2xl transition-all duration-500 disabled:opacity-30 active:scale-[0.98] shadow-2xl shadow-primary-900/60 text-[12px] border border-white/10 mt-4"
+              className="w-full bg-primary-600 hover:bg-primary-500 text-white font-medium py-3 rounded-lg transition-all duration-500 disabled:opacity-30 active:scale-[0.98] shadow-2xl shadow-primary-900/60 text-[12px] border border-white/10 mt-2"
             >
               {joining ? (
                 <Loader2 className="animate-spin mx-auto" size={20} />
@@ -187,7 +188,7 @@ const Groups = () => {
               </div>
               <p className="text-slate-500 text-xs font-bold">
                 {view === "my"
-                  ? "No active sector connections found."
+                  ? "No active group connections found."
                   : "No communities discovered in this region."}
               </p>
             </div>

@@ -97,7 +97,7 @@ const Home = () => {
   const feedItems = getMixedFeed();
 
   return (
-    <div className="space-y-4 max-w-6xl mx-auto px-2 sm:px-4 py-4 mb-20 md:mb-0">
+    <div className="space-y-6 max-w-5xl mx-auto px-4 pb-20 mt-4">
       <FeedHeader
         location={user?.location || "Rampur"}
         locationScope={locationScope}
@@ -169,12 +169,10 @@ const Home = () => {
         </div>
 
         <div className="lg:col-span-4 space-y-6 hidden lg:block">
-          <PollWidget />
           <AdWidget />
           <TrendingGroups />
         </div>
 
-        {/* Mobile-only view for some widgets if needed, or keep them hidden for cleaner feel */}
         <div className="lg:hidden space-y-6 pt-8 border-t border-white/5">
           <TrendingGroups />
         </div>

@@ -14,7 +14,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+                <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -27,8 +27,8 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                                     <Users className="text-primary-500" size={20} />
                                 </div>
                                 <div>
-                                    <h2 className="text-sm font-medium  text-white">Invite Signal</h2>
-                                    <p className="text-slate-500 text-[12px] font-bold  ">{groupName}</p>
+                                    <h2 className="text-sm font-medium  text-white">Invite Group Code</h2>
+                                    <p className="text-slate-500 text-[12px]">{groupName}</p>
                                 </div>
                             </div>
                             <button onClick={onClose} className="p-1 rounded-lg hover:bg-white/5 text-slate-400">
@@ -38,11 +38,11 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
 
                         <div className="space-y-4">
                             <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                                Share this unique synchronization code with others to link them to this sector.
+                                Share this code with others to link them to this group
                             </p>
 
                             <div className="relative group">
-                                <div className="w-full bg-slate-950/50 border border-white/5 rounded-lg py-4 px-4 text-center">
+                                <div className="w-full bg-slate-950/50 border border-white/5 rounded-lg py-3 px-3 text-center">
                                     <span className="text-2xl font-medium text-white">
                                         {inviteCode}
                                     </span>
@@ -59,7 +59,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                         <div className="pt-2">
                             <button
                                 onClick={onClose}
-                                className="w-full bg-primary-600 hover:bg-primary-500 text-white font-bold py-2.5 rounded-lg transition-all shadow-lg shadow-primary-900/40 text-sm active:scale-95"
+                                className="w-full bg-primary-600 hover:bg-primary-500 text-white font-bold text-[11px] py-3 rounded-lg active:scale-95"
                             >
                                 Done
                             </button>

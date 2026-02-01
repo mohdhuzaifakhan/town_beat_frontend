@@ -6,7 +6,7 @@ export const NavLink = ({ to, icon, label, active, color }) => (
     className={`flex items-center gap-2 px-4 py-1.5 rounded-lg transition-all font-bold text-sm group relative ${
       active
         ? "bg-white/5 text-white"
-        : "text-slate-400 hover:text-white hover:bg-white/[0.03]"
+        : "text-slate-400 hover:text-white hover:bg-white/3"
     }`}
   >
     <span

@@ -7,7 +7,7 @@ export function FeedHeader({ location, locationScope, setLocationScope }) {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between relative px-1 sm:px-0">
-      <div className="relative rounded-md w-full md:w-[400px] group order-2 md:order-1">
+      <div className="relative rounded-md w-full md:w-100 group order-2 md:order-1">
         <h1 className="text-xl md:text-2xl font-medium text-white   er line-clamp-1">
           {search ? (
             `Results for "${search}"`

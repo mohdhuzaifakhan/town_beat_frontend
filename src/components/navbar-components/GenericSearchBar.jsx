@@ -31,7 +31,7 @@ const GenericSearchBar = () => {
   }, [searchParams]);
 
   return (
-    <div className="relative flex-1 max-w-[150px] md:max-w-none md:w-48 lg:w-64">
+    <div className="relative flex-1 max-w-37.5 md:max-w-none md:w-48 lg:w-64">
       <input
         type="text"
         value={searchTerm}
