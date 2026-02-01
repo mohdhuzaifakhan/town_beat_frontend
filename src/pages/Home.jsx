@@ -1,142 +1,181 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  TrendingUp,
-  MapPin,
-  Search,
-  PlusSquare,
-  Image as ImageIcon,
-  Send,
-  Loader2,
-  Globe,
-  Filter,
-  Sparkles,
-} from "lucide-react";
+import { Image as ImageIcon, Loader2 } from "lucide-react";
 import api from "../api/client";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { CreatePostWidget } from "../components/CreatePostWidget";
 import { PostCard } from "../components/PostCard";
 import { PollWidget } from "../components/PollWidget";
 import { AdWidget } from "../components/AdWidget";
 import { TrendingGroups } from "../components/TrendingGroups";
+import { AdFeedItem } from "../components/AdFeedItem";
+import { PollCard } from "../components/PollCard";
+import { CampaignCard } from "../components/CampaignCard";
+import { FeedHeader } from "../components/post-components/FeedHeader";
+import { NewsFilter } from "../components/post-components/NewsFilter";
+import { EmptyPostComponent } from "../components/post-components/EmptyPostComponent";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [ads, setAds] = useState([]);
+  const [polls, setPolls] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("All");
   const [locationScope, setLocationScope] = useState("Local");
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchPosts();
-  }, [category, locationScope]);
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search");
 
-  const fetchPosts = async () => {
-    setLoading(true);
+  useEffect(() => {
+    fetchContent();
+  }, [category, locationScope, search]);
+
+  const fetchContent = async (silent = false) => {
+    if (!silent) setLoading(true);
     try {
       let url = `/posts?category=${category}`;
       if (locationScope === "Local") {
         const loc = user?.location || "Rampur";
         url += `&location=${loc}`;
       }
-      const res = await api.get(url);
-      setPosts(res.data);
+      if (search) {
+        url += `&search=${encodeURIComponent(search)}`;
+      }
+      const postsRes = await api.get(url);
+      const adsRes = await api.get("/ads?placement=home_feed");
+      const pollsRes = await api.get("/polls");
+      const campaignsRes = await api.get("/campaigns");
+
+      setPosts(postsRes.data);
+      setAds(adsRes.data);
+      setPolls(pollsRes.data);
+      setCampaigns(campaignsRes.data);
     } catch (err) {
-      console.error("Failed to fetch posts");
+      console.error("Failed to fetch content");
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="space-y-4 max-w-6xl mx-auto px-4 py-4">
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between relative">
-        <div className="relative rounded-md w-full md:w-[400px] group">
-          <Search
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-400 transition-colors"
-            size={14}
-          />
-          <input
-            type="text"
-            placeholder="Search for local news..."
-            className="w-full bg-slate-900/50 border border-white/5 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary-500/20 transition-all text-sm placeholder:text-slate-400 relative z-10"
-          />
-        </div>
+  const getMixedFeed = () => {
+    let mixed = [];
+    let adIndex = 0;
+    let pollIndex = 0;
+    let campaignIndex = 0;
 
-        <div className="flex items-center gap-1 p-1 glass rounded-lg border-white/5">
-          <button
-            onClick={() => setLocationScope("Local")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all ${locationScope === "Local" ? "bg-primary-600 text-white shadow-lg shadow-primary-900/20" : "text-slate-400 hover:text-slate-300 hover:bg-white/5"}`}
-          >
-            <MapPin size={10} />
-            {user?.location || "Rampur"}
-          </button>
-          <button
-            onClick={() => setLocationScope("Global")}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-bold transition-all ${locationScope === "Global" ? "bg-slate-800 text-white" : "text-slate-400 hover:text-slate-300 hover:bg-white/5"}`}
-          >
-            <Globe size={10} />
-            Global
-          </button>
-        </div>
-      </div>
+    posts.forEach((post, index) => {
+      mixed.push({ type: "post", data: post });
+
+      if ((index + 1) % 3 === 0 && campaigns.length > 0) {
+        mixed.push({ type: "campaign", data: campaigns[campaignIndex] });
+        campaignIndex = (campaignIndex + 1) % campaigns.length;
+      }
+
+      if ((index + 1) % 4 === 0 && polls.length > 0 && (index + 1) % 3 !== 0) {
+        mixed.push({ type: "poll", data: polls[pollIndex] });
+        pollIndex = (pollIndex + 1) % polls.length;
+      }
+
+      // Insert ad after every 5th item (avoiding others where possible)
+      if (
+        (index + 1) % 5 === 0 &&
+        ads.length > 0 &&
+        (index + 1) % 3 !== 0 &&
+        (index + 1) % 4 !== 0
+      ) {
+        mixed.push({ type: "ad", data: ads[adIndex] });
+        adIndex = (adIndex + 1) % ads.length;
+      }
+    });
+
+    return mixed;
+  };
+
+  const feedItems = getMixedFeed();
+
+  return (
+    <div className="space-y-4 max-w-6xl mx-auto px-2 sm:px-4 py-4 mb-20 md:mb-0">
+      <FeedHeader
+        location={user?.location || "Rampur"}
+        locationScope={locationScope}
+        setLocationScope={setLocationScope}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8 space-y-4">
-          <CreatePostWidget onPostCreated={fetchPosts} />
-          <div className="flex items-center justify-between pb-1 px-1">
-            <h2 className="text-xs tracking-[0.2em] text-slate-400 flex items-center gap-2">
-              <Sparkles className="text-primary-400" size={14} />
-              {locationScope === "Local"
-                ? `${user?.location || "Rampur"} Signal`
-                : "Global Signal"}
-            </h2>
-            <div className="flex gap-1 p-1 glass rounded-lg border-white/5">
-              {["All", "Politics", "Civic", "Development"].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setCategory(cat)}
-                  className={`px-3 py-1 rounded-md text-sm transition-all ${category === cat ? "bg-primary-500/10 text-primary-400" : "text-slate-400 hover:text-slate-300"}`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
+          <CreatePostWidget onPostCreated={fetchContent} />
+          <NewsFilter
+            locationScope={locationScope}
+            location={user?.location}
+            category={category}
+            setCategory={setCategory}
+          />
 
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-3">
               <Loader2 className="animate-spin text-primary-500" size={24} />
-              <p className="text-slate-400 text-sm">
-                Loading feed...
-              </p>
+              <p className="text-slate-400 text-sm">Loading feed...</p>
             </div>
           ) : posts.length === 0 ? (
-            <div className="glass rounded-lg p-12 text-center space-y-3 border-dashed border-white/10">
-              <div className="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/5">
-                <Search className="text-slate-700" size={20} />
-              </div>
-              <h3 className="text-sm font-bold text-slate-400">
-                No posts found
-              </h3>
-              <p className="text-slate-500 text-sm">
-                Be the first to post.
-              </p>
-            </div>
+            <EmptyPostComponent />
           ) : (
             <div className="space-y-4">
-              {posts.map((post) => (
-                <PostCard key={post._id} post={post} onUpdate={fetchPosts} />
-              ))}
+              {feedItems.map((item, index) => {
+                if (item.type === "post") {
+                  return (
+                    <PostCard
+                      key={item.data._id}
+                      post={item.data}
+                      onUpdate={fetchContent}
+                    />
+                  );
+                } else if (item.type === "ad") {
+                  return (
+                    <AdFeedItem
+                      key={item.data._id || `ad-${index}`}
+                      ad={item.data}
+                    />
+                  );
+                } else if (item.type === "poll") {
+                  return (
+                    <div key={item.data._id} className="pb-2">
+                      <PollCard
+                        poll={item.data}
+                        user={user}
+                        onVote={async (optionId) => {
+                          await api.post(`/polls/vote/${optionId}`);
+                          fetchContent(true);
+                        }}
+                      />
+                    </div>
+                  );
+                } else if (item.type === "campaign") {
+                  return (
+                    <div key={item.data._id} className="pb-2">
+                      <CampaignCard
+                        campaign={item.data}
+                        onSupported={() => fetchContent(true)}
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
           )}
         </div>
 
-        <div className="lg:col-span-4 space-y-6">
+        <div className="lg:col-span-4 space-y-6 hidden lg:block">
           <PollWidget />
           <AdWidget />
+          <TrendingGroups />
+        </div>
+
+        {/* Mobile-only view for some widgets if needed, or keep them hidden for cleaner feel */}
+        <div className="lg:hidden space-y-6 pt-8 border-t border-white/5">
           <TrendingGroups />
         </div>
       </div>

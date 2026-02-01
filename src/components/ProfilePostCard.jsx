@@ -19,7 +19,7 @@ export const ProfilePostCard = ({ post, onUpdate }) => {
         <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="glass rounded-xl p-4 border border-white/5 space-y-3 relative group"
+            className="glass rounded-lg p-4 border border-white/5 space-y-3 relative group"
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">

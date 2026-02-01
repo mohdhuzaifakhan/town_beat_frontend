@@ -34,7 +34,7 @@ export default function ForgotPassword() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-xl"
+        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-lg"
       >
         {/* Left Panel */}
         <div className="hidden lg:flex flex-col justify-between p-10 border-r border-white/5">
@@ -43,7 +43,7 @@ export default function ForgotPassword() {
               <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
                 <MapPin className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-black text-white">Town Beat</span>
+              <span className="text-xl font-medium text-white">Town Beat</span>
             </div>
 
             <h2 className="text-4xl font-extrabold text-white leading-tight">
@@ -65,7 +65,7 @@ export default function ForgotPassword() {
 
         {/* Right Panel */}
         <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <h3 className="text-2xl font-black text-white mb-1">
+          <h3 className="text-2xl font-medium text-white mb-1">
             Reset your password
           </h3>
           <p className="text-sm text-slate-400 mb-6">

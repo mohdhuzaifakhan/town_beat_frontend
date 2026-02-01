@@ -42,7 +42,7 @@ export default function Login() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-xl overflow-hidden"
+        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-lg overflow-hidden"
       >
         <div className="hidden lg:flex flex-col justify-between p-10 border-r border-white/5">
           <div>
@@ -50,7 +50,7 @@ export default function Login() {
               <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
                 <MapPin className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-black tracking-tight text-white">
+              <span className="text-xl font-medium text-white">
                 Town Beat
               </span>
             </div>
@@ -83,11 +83,16 @@ export default function Login() {
         </div>
 
         {/* Right Login Panel */}
-        <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <div className="mb-8">
-            <h3 className="text-2xl font-black text-white">Welcome back</h3>
-            <p className="text-sm text-slate-400">
-              Sign in to continue to Town Beat
+        <div className="p-8 lg:p-12 flex flex-col justify-center bg-slate-900/40">
+          <div className="mb-8 text-center lg:text-left">
+            <div className="lg:hidden flex justify-center mb-6">
+              <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
+                <MapPin className="w-6 h-6 text-white" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-medium text-white">Access Terminal</h3>
+            <p className="text-sm text-slate-400 mt-1">
+              Synchronize with Town Beat network
             </p>
           </div>
 
@@ -97,11 +102,10 @@ export default function Login() {
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -16 }}
-                className={`mb-5 flex items-center gap-3 p-3 rounded-lg text-sm border ${
-                  message
-                    ? "bg-primary-500/10 border-primary-500/20 text-primary-400"
-                    : "bg-red-500/10 border-red-500/20 text-red-400"
-                }`}
+                className={`mb-5 flex items-center gap-3 p-3 rounded-lg text-sm border ${message
+                  ? "bg-primary-500/10 border-primary-500/20 text-primary-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
+                  }`}
               >
                 <AlertCircle className="w-4 h-4" />
                 {message || error}

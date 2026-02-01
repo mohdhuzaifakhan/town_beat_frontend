@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
@@ -8,201 +8,247 @@ import {
   Trash2,
   Clock,
   User,
-  ShieldCheck,
+  Eye,
+  X,
+  Send,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { ConfirmationModal } from "./ConfirmationModal";
+import api from "../api/client";
+import { CommentSection } from "./post-components/CommentSection";
 
-export const PostCard = ({ post, onLike, onDelete, isLiked }) => {
-  const { user } = useAuth()
-  const [showComments, setShowComments] = useState(false)
-  const [commentText, setCommentText] = useState('')
-  const [comments, setComments] = useState(post.comments || [])
-  const [loading, setLoading] = useState(false)
+export const PostCard = ({ post, onDelete }) => {
+  const { user } = useAuth();
+  const [isLiked, setIsLiked] = useState(post.likes?.includes(user?._id));
+  const [likesCount, setLikesCount] = useState(post.likes?.length || 0);
+  const [comments, setComments] = useState(post.comments || []);
+  const [viewsCount, setViewsCount] = useState(post.views || 0);
+  const [sharesCount, setSharesCount] = useState(post.shares || 0);
+
+  const [showComments, setShowComments] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  useEffect(() => {
+    const trackView = async () => {
+      try {
+        await api.post(`/posts/${post._id}/view`);
+        setViewsCount((prev) => prev + 1);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    trackView();
+  }, [post._id]);
+
+  useEffect(() => {
+    setIsLiked(post.likes?.includes(user?._id));
+    setLikesCount(post.likes?.length || 0);
+    setComments(post.comments || []);
+    setSharesCount(post.shares || 0);
+  }, [post, user?._id]);
+
+  const handleLike = async () => {
+    if (!user) return;
+
+    const previousIsLiked = isLiked;
+    const previousCount = likesCount;
+
+    setIsLiked(!isLiked);
+    setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+
+    try {
+      await api.post(`/posts/${post._id}/like`);
+    } catch (err) {
+      setIsLiked(previousIsLiked);
+      setLikesCount(previousCount);
+      console.error("Like failed", err);
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      await api.post(`/posts/${post._id}/share`);
+      setSharesCount((prev) => prev + 1);
+      setShowShareModal(true);
+
+      navigator.clipboard.writeText(
+        `${window.location.origin}/post/${post._id}`,
+      );
+    } catch (err) {
+      console.error("Failed to share");
+    }
+  };
 
   const handleComment = async (e) => {
-    e.preventDefault()
-    if (!commentText.trim()) return
+    e.preventDefault();
+    if (!commentText.trim()) return;
 
-    setLoading(true)
+    setIsSubmitting(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${post._id}/comment`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ text: commentText })
-      })
+      const response = await api.post(`/posts/${post._id}/comments`, {
+        text: commentText,
+      });
 
-      if (response.ok) {
-        const newComment = await response.json()
-        setComments([...comments, newComment])
-        setCommentText('')
+      if (response.data) {
+        const updatedPost = response.data;
+        setComments(updatedPost.comments || []);
+        setCommentText("");
       }
     } catch (err) {
-      console.error('Failed to comment:', err)
+      console.error("Failed to comment:", err);
     } finally {
-      setLoading(false)
+      setIsSubmitting(false);
     }
-  }
-
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      onDelete(post._id)
-    }
-  }
+  };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-lg border border-white/5 bg-slate-900/40 backdrop-blur-sm overflow-hidden hover:border-white/10 transition-all p-5 space-y-4 group"
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center ring-1 ring-white/10 shrink-0 shadow-lg">
-            {post.author?.avatar ? (
-              <img src={post.author.avatar} alt={post.author.name} className="w-full h-full rounded-lg object-cover" />
-            ) : (
-              <User size={20} className="text-slate-400" />
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass rounded-lg border border-white/5 bg-slate-900/40 backdrop-blur-md overflow-hidden hover:border-white/10 transition-all shadow-xl"
+      >
+        <div className="p-3 sm:p-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative group/avatar cursor-pointer">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-[2px]">
+                <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
+                  {post.author?.avatar ? (
+                    <img
+                      src={post.author.avatar}
+                      alt={post.author.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-slate-400">
+                      <User size={18} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div>
+              <span className="text-xs text-white">
+                {post.author?.name || "Anonymous User"}
+              </span>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mt-0.5">
+                <span className="text-primary-400 text-[11px]">
+                  {post.category}
+                </span>
+                <span className="w-0.5 h-0.5 bg-slate-600 rounded-full" />
+                <span className="flex items-center gap-1 text-[11px]">
+                  <Clock size={10} />
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </span>
+                <span className="w-0.5 h-0.5 bg-slate-600 rounded-full" />
+                <span
+                  className="flex items-center gap-1 text-[11px]"
+                  title={`${viewsCount} views`}
+                >
+                  <Eye size={10} />
+                  {viewsCount}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 text-[12px] text-rose-500/80 bg-white/5 px-2 py-1 rounded-full border border-white/5">
+              <MapPin size={10} className="text-rose-500/80" />
+              {post.location || "Global"}
+            </div>
+
+            {user?._id === post.author?._id && (
+              <button
+                onClick={() => setShowDeleteModal(true)}
+                className="p-1.5 rounded-full text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all"
+              >
+                <Trash2 size={16} />
+              </button>
             )}
           </div>
-          <div>
-            <h4 className="text-sm font-bold text-white tracking-wide">
-              {post.author?.name || 'Anonymous User'}
-            </h4>
-            <div className="flex items-center gap-2 mt-0.5">
-              <span className="text-xs font-bold text-primary-400">
-                {post.category}
-              </span>
-              <span className="w-0.5 h-0.5 bg-slate-600 rounded-full" />
-              <div className="flex items-center gap-1 text-xs font-medium text-slate-500">
-                <Clock size={12} className="text-amber-500/50" />
-                {new Date(post.createdAt).toLocaleDateString()}
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 bg-white/[0.03] p-1.5 rounded-md border border-white/5">
-            <MapPin size={12} className="text-rose-500/60 shrink-0" />
-            <span className="leading-none">
-              {post.location || "Local Sector"}
-            </span>
-          </div>
+        <div className="px-3 sm:px-4 pb-2 space-y-3">
+          <p className="text-slate-300 text-sm whitespace-pre-wrap">
+            {post.body}
+          </p>
 
-          {user?._id === post.author?._id && (
-            <button
-              onClick={handleDelete}
-              className="p-1.5 rounded-md bg-red-500/5 text-red-500/30 hover:bg-red-500/20 hover:text-red-400 transition-all border border-red-500/10"
-            >
-              <Trash2 size={14} />
-            </button>
+          {post.image && (
+            <div className="rounded-lg overflow-hidden border border-white/5 bg-black/50 aspect-video group/image relative">
+              <img
+                src={post.image}
+                alt="Post content"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-105"
+              />
+            </div>
           )}
         </div>
-      </div>
 
-      <div className="space-y-3">
-        <p className="text-slate-400 leading-relaxed whitespace-pre-wrap text-sm opacity-90">
-          {post.body}
-        </p>
+        <div className="px-3 sm:px-4 py-3 border-t border-white/5 mt-2 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1 font-medium text-[12px]">
+            <button
+              onClick={handleLike}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all text-sm font-medium active:scale-95 ${
+                isLiked
+                  ? "text-rose-500 bg-rose-500/10"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-white/5"
+              }`}
+            >
+              <Heart size={16} className={isLiked ? "fill-current" : ""} />
+              <span className="font-medium text-[12px]">{likesCount}</span>
+            </button>
 
-        {post.image && (
-          <div className="rounded-lg overflow-hidden border border-white/5 shadow-2xl shadow-black/50">
-            <img src={post.image} alt="Post content" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700" />
+            <button
+              onClick={() => setShowComments(!showComments)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all text-sm font-medium active:scale-95 ${
+                showComments
+                  ? "text-blue-400 bg-blue-500/10"
+                  : "text-slate-400 hover:text-slate-200 hover:bg-white/5"
+              }`}
+            >
+              <MessageSquare size={16} />
+              <span className="font-medium text-[12px]">{comments.length}</span>
+            </button>
+
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full transition-all text-sm font-medium active:scale-95 text-slate-400 hover:text-slate-200 hover:bg-white/5"
+            >
+              <Share2 size={16} />
+              <span className="font-medium text-[12px]">{sharesCount}</span>
+            </button>
           </div>
-        )}
-      </div>
+        </div>
 
-      <div className="flex items-center gap-6 border-t border-white/5 pt-4">
-        <button
-          onClick={() => onLike(post._id)}
-          className={`flex items-center gap-2 transition-all font-bold text-xs group/btn active:scale-95 ${isLiked ? "text-rose-500" : "text-slate-500 hover:text-rose-400"}`}
-        >
-          <div className={`p-1.5 rounded-full ${isLiked ? "bg-rose-500/10" : "bg-white/5 group-hover/btn:bg-rose-500/10"} transition-colors`}>
-            <Heart size={16} className={isLiked ? "fill-current" : ""} />
-          </div>
-          <span>{post.likes?.length || 0}</span>
-        </button>
+        <AnimatePresence>
+          {showComments ? <CommentSection comments={comments} commentText={commentText} setCommentText={setCommentText} handleComment={handleComment} isSubmitting={isSubmitting} /> : null}
+        </AnimatePresence>
+      </motion.div>
 
-        <button
-          onClick={() => setShowComments(!showComments)}
-          className={`flex items-center gap-2 transition-all font-bold text-xs group/btn active:scale-95 ${showComments ? "text-primary-400" : "text-slate-500 hover:text-sky-400"}`}
-        >
-          <div className={`p-1.5 rounded-full ${showComments ? "bg-primary-500/10" : "bg-white/5 group-hover/btn:bg-sky-500/10"} transition-colors`}>
-            <MessageSquare size={16} />
-          </div>
-          <span>{comments.length}</span>
-        </button>
+      <ConfirmationModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={() => onDelete(post._id)}
+        title="Delete Post"
+        message="Are you sure you want to delete this post? This action cannot be undone."
+        confirmText="Delete"
+        isDanger={true}
+      />
 
-        <button className="flex items-center gap-2 text-slate-500 hover:text-emerald-400 transition-all font-bold text-xs ml-auto group/btn active:scale-95">
-          <div className="p-1.5 rounded-full bg-white/5 group-hover/btn:bg-emerald-500/10 transition-colors">
-            <Share2 size={16} />
-          </div>
-          <span className="hidden sm:inline">Share</span>
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {showComments && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="border-t border-white/5 bg-black/20"
-          >
-            <div className="pt-4 space-y-4">
-              <h4 className="text-xs font-bold text-slate-500 flex items-center gap-2">
-                Comments <span className="bg-white/5 px-1.5 py-0.5 rounded text-slate-400">{comments.length}</span>
-              </h4>
-
-              <div className="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
-                {comments.map((comment, idx) => (
-                  <div key={idx} className="flex gap-3 group/comment">
-                    <div className="w-6 h-6 rounded-md bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
-                      <span className="text-xs font-bold text-slate-400">
-                        {comment.user?.name?.[0] || 'U'}
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-300">
-                          {comment.user?.name || 'Anonymous'}
-                        </span>
-                        <span className="text-[10px] text-slate-600">
-                          {new Date(comment.createdAt).toLocaleTimeString()}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-0.5">
-                        {comment.text}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <form onSubmit={handleComment} className="flex gap-2 pt-2 border-t border-white/5">
-                <input
-                  type="text"
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Write a comment..."
-                  className="flex-1 compact-input text-sm rounded-lg"
-                />
-                <button
-                  type="submit"
-                  disabled={loading || !commentText.trim()}
-                  className="bg-primary-600 hover:bg-primary-500 text-white px-3 py-1.5 rounded-lg font-bold text-xs transition-all disabled:opacity-50"
-                >
-                  Post
-                </button>
-              </form>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
+      <ConfirmationModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        onConfirm={() => setShowShareModal(false)}
+        title="Post Shared!"
+        message="The link to this post has been copied to your clipboard."
+        confirmText="Great"
+        cancelText="Close"
+        isDanger={false}
+      />
+    </>
+  );
+};
