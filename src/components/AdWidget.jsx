@@ -18,9 +18,26 @@ export const AdWidget = () => {
     fetchAds();
   }, []);
 
-  if (loading || ads.length === 0) return null;
+  const ad = ads.length > 0 ? ads[Math.floor(Math.random() * ads.length)] : null;
 
-  const ad = ads[Math.floor(Math.random() * ads.length)];
+  useEffect(() => {
+    if (ad?._id) {
+      api.post(`/ads/${ad._id}/impression`).catch(console.error);
+    }
+  }, [ad?._id]);
+
+  const handleAdClick = async () => {
+    if (!ad) return;
+    try {
+      await api.post(`/ads/${ad._id}/click`);
+      if (ad.link) window.open(ad.link, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      console.error("Failed to track click", err);
+      if (ad.link) window.open(ad.link, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  if (loading || ads.length === 0 || !ad) return null;
 
   return (
     <div className="glass rounded-lg p-5 space-y-4 relative overflow-hidden group">
@@ -51,16 +68,14 @@ export const AdWidget = () => {
         </div>
 
         {ad.link && (
-          <a
-            href={ad.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-1.5 rounded-lg text-xs font-bold text-white
-                       bg-white/5 hover:bg-white/10 transition border border-white/5 active:scale-95"
+          <button
+            onClick={handleAdClick}
+            className="flex items-center justify-center gap-2 w-full py-1.5 rounded-lg text-xs font-medium text-white
+                       bg-black/20 hover:bg-white/10 transition border border-white/10 active:scale-95"
           >
             Visit Website
             <ExternalLink size={12} className="text-indigo-400" />
-          </a>
+          </button>
         )}
       </div>
     </div>

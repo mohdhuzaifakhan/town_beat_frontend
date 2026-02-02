@@ -14,6 +14,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import AdsManager from './pages/AdsManager'
 import SinglePost from './pages/SinglePost'
+import Settings from './pages/Settings'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/polls" element={<Polls />} />
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/admin/ads" element={<AdminAds />} />
           <Route path="/ads/manager" element={<AdsManager />} />
           <Route path="/ads/manager" element={<AdsManager />} />

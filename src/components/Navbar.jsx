@@ -17,7 +17,7 @@ const Navbar = () => {
           <WebNavigation location={location} />
           <div className="flex items-center gap-3 shrink-0">
             <GenericSearchBar />
-            <NotificationButton />
+            {/* <NotificationButton /> */}
             <ProfileButton />
           </div>
         </div>

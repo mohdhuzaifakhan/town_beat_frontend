@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Megaphone, MoreHorizontal, ArrowRight } from "lucide-react";
 import api from '../api/client';
@@ -25,11 +26,9 @@ export const AdFeedItem = ({ ad }) => {
 
     // Use effect to track impression on mount (simple version)
     // In production use IntersectionObserver
-    /* 
     useEffect(() => {
         handleImpression();
     }, []);
-    */
 
     return (
         <motion.div

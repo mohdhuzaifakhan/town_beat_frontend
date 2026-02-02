@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import { Mail, ArrowRight, Loader2, AlertCircle, MapPin } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  Mail,
+  MapPin,
+  ArrowRight,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+} from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 export default function ForgotPassword() {
@@ -9,8 +16,10 @@ export default function ForgotPassword() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { forgotPassword } = useAuth(); // <-- backend hook
+  const { forgotPassword } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +32,7 @@ export default function ForgotPassword() {
         state: { message: "Password reset link sent to your email." },
       });
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      setError(err?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -32,14 +41,14 @@ export default function ForgotPassword() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-4xl grid lg:grid-cols-2 rounded-lg"
+        className="w-full max-w-5xl grid lg:grid-cols-2 rounded-lg overflow-hidden"
       >
-        {/* Left Panel */}
-        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-white/5">
+        {/* LEFT PANEL */}
+        <div className="hidden lg:flex flex-col justify-between p-6 border-r border-white/5">
           <div>
-            <div className="flex items-center gap-3 mb-10">
+            <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
                 <MapPin className="w-5 h-5 text-white" />
               </div>
@@ -47,65 +56,97 @@ export default function ForgotPassword() {
             </div>
 
             <h2 className="text-4xl font-extrabold text-white leading-tight">
-              Forgot password?
+              Forgot your password?
               <br />
-              <span className="text-primary-500">We’ve got you.</span>
+              <span className="text-primary-500">No worries.</span>
             </h2>
 
-            <p className="text-slate-400 mt-6 text-sm max-w-sm">
-              Enter your registered email and we’ll help you get back into your
-              city.
-            </p>
+            <ul className="space-y-3 mt-8">
+              {[
+                "Secure password recovery",
+                "Email-based verification",
+                "Quick access restoration",
+              ].map((text) => (
+                <li
+                  key={text}
+                  className="flex items-center gap-3 text-slate-300"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-primary-500" />
+                  <span className="text-sm font-medium">{text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Town Beat
-          </p>
         </div>
 
-        {/* Right Panel */}
         <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <h3 className="text-2xl font-medium text-white mb-1">
-            Reset your password
-          </h3>
-          <p className="text-sm text-slate-400 mb-6">
-            We’ll send a reset link to your email
-          </p>
+          <div className="mb-6 text-center lg:text-left">
+            <div className="lg:hidden flex justify-center mb-5">
+              <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
+                <MapPin className="w-6 h-6 text-white" />
+              </div>
+            </div>
 
-          <AnimatePresence>
-            {error && (
+            <h3 className="text-2xl font-medium text-white">
+              Reset your password
+            </h3>
+            <p className="text-sm text-slate-400 mt-1">
+              We’ll send a reset link to your registered email
+            </p>
+          </div>
+          <AnimatePresence mode="wait">
+            {(message || error) && (
               <motion.div
-                initial={{ opacity: 0, x: 16 }}
+                initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -16 }}
-                className="mb-4 flex items-center gap-3 p-3 rounded-lg text-sm border bg-red-500/10 border-red-500/20 text-red-400"
+                exit={{ opacity: 0, x: -12 }}
+                className={`mb-4 flex items-center gap-3 p-3 rounded-lg text-sm border ${
+                  message
+                    ? "bg-primary-500/10 border-primary-500/20 text-primary-400"
+                    : "bg-red-500/10 border-red-500/20 text-red-400"
+                }`}
               >
                 <AlertCircle className="w-4 h-4" />
-                {error}
+                {message || error}
               </motion.div>
             )}
           </AnimatePresence>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1.5">
-              <label className="text-xs text-slate-400 ml-1">Email</label>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="space-y-2">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Email Address
+              </label>
               <div className="relative group">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
                 <input
                   type="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@email.com"
-                  required
-                  className="w-full compact-input !pl-9"
+                  placeholder="example@email.com"
+                  className="
+                    w-full bg-slate-950/50
+                    border border-white/10 rounded-lg
+                    px-4 py-3 pl-9
+                    text-[11px] font-bold text-white
+                    placeholder:text-slate-500
+                    focus:outline-none focus:border-primary-500/50
+                    transition-all
+                  "
                 />
               </div>
             </div>
-
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-4 flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 text-white px-5 py-2.5 rounded-md font-bold shadow-lg shadow-primary-900/20 active:scale-95"
+              className="
+                w-full mt-3 flex items-center justify-center gap-2
+                bg-primary-600 hover:bg-primary-500
+                text-white px-5 py-2.5 rounded-md
+                font-bold text-[12px]
+                transition-all shadow-lg shadow-primary-900/20
+                disabled:opacity-60 active:scale-95
+              "
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -118,9 +159,12 @@ export default function ForgotPassword() {
             </button>
           </form>
 
-          <div className="mt-8 text-center text-sm text-slate-400">
+          <div className="mt-6 text-center text-sm text-slate-400">
             Remembered your password?{" "}
-            <Link to="/login" className="text-primary-500 font-semibold">
+            <Link
+              to="/login"
+              className="text-primary-500 hover:text-primary-400 font-semibold"
+            >
               Sign in
             </Link>
           </div>
