@@ -28,7 +28,7 @@ export const TrendingGroups = () => {
   if (loading || groups.length === 0) return null;
 
   return (
-    <div className="glass rounded-lg p-5 space-y-4 border-white/5">
+    <div className="glass rounded-lg p-5 space-y-4 border-white/10">
       <h3 className="text-[12px]   font-medium   text-slate-500">
         Trending Groups
       </h3>
@@ -38,7 +38,7 @@ export const TrendingGroups = () => {
           <div
             key={group._id}
             onClick={() => navigate(`/groups`)}
-            className="group flex items-center gap-4 p-3 rounded-lg bg-slate-900/40 border border-white/5
+            className="group flex items-center gap-4 p-3 rounded-lg bg-slate-900/40 border border-white/10
                        hover:border-primary-500/30 hover:bg-slate-900/60 transition-all cursor-pointer relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-primary-600/5 blur-2xl -mr-12 -mt-12 group-hover:bg-primary-600/10 transition-colors" />

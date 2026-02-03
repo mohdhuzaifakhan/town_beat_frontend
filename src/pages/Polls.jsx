@@ -47,7 +47,7 @@ const Polls = ({ isCreateModalOpen, setCreateModalOpen }) => {
   return (
     <div className="max-w-5xl mx-auto pb-24 md:pb-20 no-scrollbar">
       {/* Mobile Unified Dashboard for Polls */}
-      <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-3">
+      {/* <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div
             onClick={() => setCreateModalOpen(true)}
@@ -61,7 +61,7 @@ const Polls = ({ isCreateModalOpen, setCreateModalOpen }) => {
 
           <button
             onClick={() => setLocationScope(locationScope === "Local" ? "Global" : "Local")}
-            className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
+            className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
           >
             <div className="flex items-center gap-1">
               <div className={`w-1.5 h-1.5 rounded-full ${locationScope === "Local" ? "bg-primary-500 animate-pulse" : "bg-blue-400"}`} />
@@ -71,10 +71,10 @@ const Polls = ({ isCreateModalOpen, setCreateModalOpen }) => {
             </div>
           </button>
         </div>
-      </div>
+      </div> */}
 
       <div className="px-4 hidden md:block mt-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/5 pb-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/10 pb-6">
           <div className="space-y-1 max-w-full overflow-hidden">
             <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full text-white">
               <Vote className="text-primary-500 shrink-0" size={24} />

@@ -78,7 +78,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="relative w-full md:max-w-md bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
       >
-        <div className="flex items-center justify-between p-6 border-b border-white/5">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center border border-rose-500/20">
               <Megaphone className="text-rose-500" size={20} />
@@ -113,7 +113,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
                   setFormData({ ...formData, title: e.target.value })
                 }
                 placeholder="Enter campaign title..."
-                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
               />
             </div>
 
@@ -128,7 +128,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
                   setFormData({ ...formData, objective: e.target.value })
                 }
                 placeholder="Describe your campaign objective..."
-                className="w-full bg-slate-950/50 border border-white/5 rounded-lg p-5 h-32 resize-none text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 h-32 resize-none text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
               />
             </div>
 
@@ -144,7 +144,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, target: e.target.value })
                   }
-                  className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                  className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
                 />
               </div>
 
@@ -159,7 +159,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, daysLeft: e.target.value })
                   }
-                  className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                  className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
               <label className="text-[12px] font-medium text-slate-500 ml-1">
                 Campaign Image (Optional)
               </label>
-              <label className="flex items-center gap-4 w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 cursor-pointer hover:border-primary-500/40 transition-all shadow-inner group">
+              <label className="flex items-center gap-4 w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 cursor-pointer hover:border-primary-500/40 transition-all shadow-inner group">
                 <input
                   type="file"
                   hidden
@@ -199,7 +199,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/5 text-[12px]"
+                className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/10 text-[12px]"
               >
                 Cancel
               </button>

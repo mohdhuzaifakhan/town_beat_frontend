@@ -159,7 +159,7 @@ const Profile = () => {
   return (
     <div className="max-w-4xl mx-auto pb-24 md:pb-20 no-scrollbar px-3 md:px-0">
       <div className="space-y-6 md:space-y-8 mt-4">
-        <div className="glass rounded-lg overflow-hidden border border-white/5 relative group bg-slate-900/40 shadow-2xl">
+        <div className="glass rounded-lg overflow-hidden border border-white/10 relative group bg-slate-900/40">
           <div className="h-40 bg-slate-950 relative overflow-hidden">
             <div className="absolute inset-0 bg-linear-to-br from-primary-600/20 via-slate-950 to-rose-500/10" />
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
@@ -189,12 +189,12 @@ const Profile = () => {
               <div className="flex flex-row items-center gap-2.5 w-full md:w-auto justify-center md:justify-end">
                 <button
                   onClick={() => setEditing(!editing)}
-                  className="flex-1 md:flex-none min-w-[120px] bg-primary-600/10 hover:bg-primary-500 text-primary-400 hover:text-white px-3 py-2.5 rounded-lg   font-medium text-[9px] md:text-[12px]      flex items-center justify-center gap-2 border border-primary-500/20 transition-all active:scale-95 shadow-lg shadow-primary-900/10"
+                  className="flex-1 md:flex-none min-w-[120px] bg-primary-600/10 hover:bg-primary-500 text-primary-400 hover:text-white px-3 py-2.5 rounded-lg font-medium text-[12px] md:text-[12px]      flex items-center justify-center gap-2 border border-primary-500/20 transition-all active:scale-95 shadow-lg shadow-primary-900/10"
                 >
                   <Edit3 size={11} />
                   Update Profile
                 </button>
-                <button className="bg-white/5 hover:bg-white/10 text-slate-500 hover:text-white px-3 py-2.5 rounded-lg border border-white/5 transition-all active:scale-95 shrink-0 flex items-center justify-center">
+                <button className="bg-white/5 hover:bg-white/10 text-slate-500 hover:text-white px-3 py-3 rounded-lg border border-white/10 transition-all active:scale-95 shrink-0 flex items-center justify-center">
                   <Settings size={14} />
                 </button>
               </div>
@@ -229,14 +229,14 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-slate-950/40 rounded-lg border border-white/5 max-w-2xl relative overflow-hidden group/bio mx-auto md:mx-0">
+              <div className="p-4 bg-slate-950/40 rounded-lg border border-white/10 max-w-2xl relative overflow-hidden group/bio mx-auto md:mx-0">
                 <div className="absolute top-0 left-0 w-1 h-full bg-primary-600/20 group-hover/bio:bg-primary-500/60 transition-colors" />
                 <p className="text-[12px] text-slate-400 opacity-80 italic">
                   {user.bio || "I am a user of town beat"}
                 </p>
               </div>
 
-              {/* <div className="flex justify-around md:justify-start gap-6 md:gap-10 pt-4 border-t border-white/5">
+              {/* <div className="flex justify-around md:justify-start gap-6 md:gap-10 pt-4 border-t border-white/10">
               <div className="flex flex-col gap-0.5">
                 <span className="text-[12px] md:text-[12px] font-medium text-slate-500">
                   Reach
@@ -276,7 +276,7 @@ const Profile = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="glass rounded-lg p-5 md:p-8 border border-white/5 relative overflow-hidden bg-slate-900 shadow-xl"
+              className="glass rounded-lg p-5 md:p-8 border border-white/10 relative overflow-hidden bg-slate-900 shadow-xl"
             >
               <h2 className="text-[12px] font-medium text-primary-500 mb-8 flex items-center gap-3">
                 <Fingerprint size={16} />
@@ -345,7 +345,7 @@ const Profile = () => {
                   <button
                     type="button"
                     onClick={() => setEditing(false)}
-                    className="px-8 bg-white/5 hover:bg-white/10 text-slate-500 py-3 rounded-lg font-medium text-[12px] border border-white/5 transition-all active:scale-95"
+                    className="px-8 bg-white/5 hover:bg-white/10 text-slate-500 py-3 rounded-lg font-medium text-[12px] border border-white/10 transition-all active:scale-95"
                   >
                     Abort
                   </button>
@@ -356,7 +356,7 @@ const Profile = () => {
         </AnimatePresence>
 
         <div className="space-y-6">
-          <div className="flex items-center justify-between border-b border-white/5 pb-1 overflow-x-auto no-scrollbar scroll-smooth -mx-1">
+          <div className="flex items-center justify-between border-b border-white/10 pb-1 overflow-x-auto no-scrollbar scroll-smooth -mx-1">
             <div className="flex gap-6 md:gap-8 min-w-max px-4 md:px-1">
               {tabs.map((tab) => (
                 <button
@@ -377,7 +377,7 @@ const Profile = () => {
                   >
                     {tab.label}
                   </span>
-                  <span className="text-[12px] font-medium text-slate-700 bg-slate-950 px-1.5 py-0.5 rounded-md border border-white/5">
+                  <span className="text-[12px] font-medium text-slate-700 bg-slate-950 px-1.5 py-0.5 rounded-md border border-white/10">
                     {tab.count}
                   </span>
                   {activeTab === tab.id && (
@@ -412,7 +412,7 @@ const Profile = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="glass rounded-lg p-8 md:p-16 text-center border-dashed border-white/10 bg-slate-950/20"
                 >
-                  <div className="w-16 h-16 bg-slate-900/50 rounded-lg flex items-center justify-center mx-auto mb-6 border border-white/5">
+                  <div className="w-16 h-16 bg-slate-900/50 rounded-lg flex items-center justify-center mx-auto mb-6 border border-white/10">
                     <Fingerprint className="text-slate-800" size={32} />
                   </div>
                   <h3 className="text-[12px] font-medium text-slate-500 mb-2">

@@ -70,7 +70,7 @@ export function ProfileButton() {
 
       {showUserMenu && (
         <div className="absolute right-0 top-full mt-2 w-56 bg-slate-900 border border-white/10 rounded-lg shadow-2xl overflow-hidden py-1 animate-in fade-in zoom-in-95 duration-200 z-50">
-          <div className="px-4 py-3 border-b border-white/5">
+          <div className="px-4 py-3 border-b border-white/10">
             <p className="text-[12px]   font-medium text-white">{user.name}</p>
             <p className="text-[12px] text-slate-500">{user.email}</p>
           </div>
@@ -102,16 +102,16 @@ export function ProfileButton() {
               </Link>
             )}
 
-            <Link
+            {/* <Link
               to="/settings"
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
             >
               <Settings size={16} /> settings
-            </Link>
+            </Link> */}
           </div>
 
-          <div className="p-1 border-t border-white/5">
+          <div className="p-1 border-t border-white/10">
             <button
               onClick={logout}
               className="w-full flex items-center gap-2 px-3 py-2 text-[12px] text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-colors font-medium"

@@ -40,7 +40,7 @@ export const AdWidget = () => {
   if (loading || ads.length === 0 || !ad) return null;
 
   return (
-    <div className="glass rounded-lg p-5 space-y-5 relative overflow-hidden group border-white/5 bg-slate-900/40 shadow-xl">
+    <div className="glass rounded-lg p-5 space-y-5 relative overflow-hidden group border-white/10 bg-slate-900/40 shadow-xl">
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/[0.03] blur-2xl -mr-16 -mt-16 group-hover:bg-primary-500/10 transition-colors duration-1000" />
 
       <h3 className="text-[12px] font-medium text-primary-400 flex items-center gap-2 relative">
@@ -49,7 +49,7 @@ export const AdWidget = () => {
       </h3>
 
       <div className="space-y-3">
-        <div className="rounded-lg overflow-hidden border border-white/5 aspect-video bg-slate-900/40 relative">
+        <div className="rounded-lg overflow-hidden border border-white/10 aspect-video bg-slate-900/40 relative">
           {ad.imageUrl && (
             <img
               src={ad.imageUrl}

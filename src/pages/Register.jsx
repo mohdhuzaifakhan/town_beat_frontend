@@ -56,7 +56,7 @@ export default function Register() {
         className="w-full max-w-5xl md:grid md:grid-cols-2 rounded-lg overflow-hidden relative"
       >
         {/* left panel */}
-        <div className="hidden md:flex flex-col justify-around p-8 px-2 border-r border-white/5 items-center">
+        <div className="hidden md:flex flex-col justify-around p-8 px-2 border-r border-white/10 items-center">
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="w-12 h-12 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/40 border border-primary-500/20">
@@ -100,7 +100,7 @@ export default function Register() {
             </div>
 
             <h3 className="text-2xl md:text-3xl   font-medium text-white mb-2">
-              register
+              Register
             </h3>
             <p className="text-[12px] text-slate-500">
               create your town beat account
@@ -124,8 +124,8 @@ export default function Register() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[12px] text-slate-500 ml-1">
-                  full name
+                <label className="text-[12px] font-medium text-slate-500 ml-1">
+                  Full Name
                 </label>
                 <div className="relative">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
@@ -136,8 +136,8 @@ export default function Register() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    placeholder="your name"
-                    className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
+                    placeholder="Your name"
+                    className="w-full bg-slate-950/80 border border-white/10 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 shadow-inner"
                   />
                 </div>
               </div>
@@ -153,7 +153,7 @@ export default function Register() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-[12px] text-slate-500 ml-1">email</label>
+              <label className="text-[12px] font-medium text-slate-500 ml-1">Email</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
                 <input
@@ -163,14 +163,14 @@ export default function Register() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="your email"
-                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
+                  placeholder="example@gmail.com"
+                  className="w-full bg-slate-950/80 border border-white/10 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 shadow-inner"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-[12px] text-slate-500 ml-1">password</label>
+              <label className="text-[12px] font-medium text-slate-500 ml-1">Password</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
                 <input
@@ -181,7 +181,7 @@ export default function Register() {
                     setFormData({ ...formData, password: e.target.value })
                   }
                   placeholder="••••••••"
-                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
+                  className="w-full bg-slate-950/80 border border-white/10 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 shadow-inner"
                 />
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function Register() {
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <>
-                  register
+                  Register
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}

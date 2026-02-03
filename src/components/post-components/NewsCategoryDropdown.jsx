@@ -100,7 +100,7 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
         createPortal(
           <div
             ref={dropdownRef}
-            className="fixed z-99"
+            className="fixed z-9999"
             style={{
               top: rect.bottom + 8,
               left: rect.left,

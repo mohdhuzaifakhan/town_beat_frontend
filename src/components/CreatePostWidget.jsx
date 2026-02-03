@@ -61,7 +61,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
 
   if (!user)
     return (
-      <div className="glass rounded-lg p-6 text-center text-[13px] border border-white/5">
+      <div className="glass rounded-lg p-6 text-center text-[13px] border border-white/10">
         <Link
           to="/login"
           className="text-primary-400 hover:text-primary-300 transition-colors font-medium"
@@ -74,13 +74,13 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
 
   return (
     <>
-      <div className="glass rounded-lg space-y-0 relative overflow-hidden group border-white/5 shadow-2xl bg-slate-900/40">
+      <div className="glass rounded-lg space-y-0 relative overflow-hidden group border-white/10 shadow-2xl bg-slate-900/40">
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/[0.03] blur-3xl -mr-32 -mt-32 transition-colors duration-1000 group-hover:bg-primary-500/10" />
 
         {/* Trigger Header */}
         <div
           onClick={() => setIsExpanded(true)}
-          className={`p-5 flex items-center justify-between relative cursor-pointer transition-all duration-300 ${isExpanded ? "md:border-b md:border-white/5" : "hover:bg-white/[0.02]"}`}
+          className={`p-5 flex items-center justify-between relative cursor-pointer transition-all duration-300 ${isExpanded ? "md:border-b md:border-white/10" : "hover:bg-white/[0.02]"}`}
         >
           <div className="flex items-center gap-4">
             <div className="relative shrink-0">
@@ -99,7 +99,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                 <span className="text-[12px]   font-medium">
                   {user?.name?.substring(0, 15)}
                 </span>
-                <span className="text-[9px]   font-medium text-primary-500/60 bg-primary-500/5 px-2 py-0.5 rounded-lg border border-primary-500/10  ">
+                <span className="text-[10px]   font-medium text-primary-500/60 bg-primary-500/5 px-2 py-0.5 rounded-lg border border-primary-500/10  ">
                   {user?.location?.substring(0, 3).toUpperCase() || "GEN"}
                 </span>
               </div>
@@ -130,7 +130,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                       autoFocus
                       value={body}
                       onChange={(e) => setBody(e.target.value)}
-                      className="w-full bg-slate-950/50 border border-white/5 rounded-lg p-5 min-h-[140px] focus:outline-none focus:border-primary-500/40 transition-all resize-none placeholder:text-slate-800 text-[12px] text-white shadow-inner"
+                      className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 min-h-[140px] focus:outline-none focus:border-primary-500/40 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner"
                       placeholder={`What's happening in ${user?.location || "your city"}...`}
                     />
                   </div>
@@ -145,7 +145,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                       <label className="text-[12px] font-semibold text-slate-500 ml-1">
                         Add Image
                       </label>
-                      <label className="flex items-center gap-3 w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 cursor-pointer group/file hover:border-primary-500/40 transition-all shadow-inner">
+                      <label className="flex items-center gap-3 w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 cursor-pointer group/file hover:border-primary-500/40 transition-all shadow-inner">
                         <input
                           type="file"
                           className="hidden"
@@ -168,7 +168,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                     <button
                       type="button"
                       onClick={closeModal}
-                      className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/5 text-[12px]"
+                      className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/10 text-[12px]"
                     >
                       Cancel
                     </button>
@@ -226,7 +226,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
                 className="relative w-full bg-slate-900 rounded-lg border-t border-white/10 overflow-hidden shadow-2xl flex flex-col max-h-[95vh] safe-bottom"
               >
-                <div className="flex items-center justify-between p-6 border-b border-white/5">
+                <div className="flex items-center justify-between p-6 border-b border-white/10">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary-600/10 flex items-center justify-center border border-primary-500/20">
                       <Plus className="text-primary-500" size={20} />
@@ -258,7 +258,7 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                         autoFocus
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
-                        className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 min-h-[160px] focus:outline-none focus:border-primary-500 transition-all resize-none placeholder:text-slate-800 text-[12px] text-white shadow-inner"
+                        className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 min-h-[160px] focus:outline-none focus:border-primary-500 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner"
                         placeholder={`What's happening in ${user?.location || "your city"}...`}
                       />
                     </div>

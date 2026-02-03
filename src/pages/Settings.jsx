@@ -134,7 +134,7 @@ const Settings = () => {
     return (
         <div className="max-w-5xl mx-auto pb-24 md:pb-20 no-scrollbar px-3 md:px-0 mt-0">
             {/* Mobile Unified Header for Settings */}
-            <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-3 -mx-3">
+            <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-3 -mx-3">
                 <div className="flex items-center justify-between gap-3 px-3">
                     <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex-1">
                         <SettingsIcon size={16} className="text-primary-500" />
@@ -150,7 +150,7 @@ const Settings = () => {
                 </div>
             </div>
 
-            <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/5 pb-6 mt-4">
+            <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/10 pb-6 mt-4">
                 <div className="space-y-1 max-w-full overflow-hidden">
                     <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full text-white">
                         <SettingsIcon className="text-primary-500" size={24} />
@@ -163,7 +163,7 @@ const Settings = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
-                <div className="flex p-1 bg-slate-900/80 rounded-lg border border-white/5 w-full sm:w-auto overflow-x-auto no-scrollbar">
+                <div className="flex p-1 bg-slate-900/80 rounded-lg border border-white/10 w-full sm:w-auto overflow-x-auto no-scrollbar">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
@@ -188,7 +188,7 @@ const Settings = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="glass rounded-lg border border-white/5 p-6 md:p-8 bg-slate-900/40 shadow-2xl relative overflow-hidden"
+                        className="glass rounded-lg border border-white/10 p-6 md:p-8 bg-slate-900/40 shadow-2xl relative overflow-hidden"
                     >
                         {message.text && (
                             <div className={`mb-6 p-4 rounded-lg flex items-center gap-3 text-[12px] font-medium border
@@ -218,7 +218,7 @@ const Settings = () => {
                                         </div>
                                     </div>
 
-                                    <div className="p-5 md:p-6 rounded-lg bg-white/2 border border-white/5 flex flex-col justify-center gap-4">
+                                    <div className="p-5 md:p-6 rounded-lg bg-white/2 border border-white/10 flex flex-col justify-center gap-4">
                                         <div className="space-y-1">
                                             <p className="text-slate-500 text-[12px] font-medium">Top up Wallet</p>
                                             <div className="flex items-center gap-3 mt-2">
@@ -250,12 +250,12 @@ const Settings = () => {
                                     </h4>
                                     <div className="space-y-2">
                                         {history.length === 0 ? (
-                                            <div className="text-center py-12 border border-dashed border-white/5 rounded-lg">
+                                            <div className="text-center py-12 border border-dashed border-white/10 rounded-lg">
                                                 <p className="text-slate-600 text-[12px] font-medium">No transactions found.</p>
                                             </div>
                                         ) : (
                                             history.map((tx) => (
-                                                <div key={tx._id} className="flex items-center justify-between p-4 rounded-lg bg-white/2 border border-white/5 hover:border-white/10 transition-all group">
+                                                <div key={tx._id} className="flex items-center justify-between p-4 rounded-lg bg-white/2 border border-white/10 hover:border-white/10 transition-all group">
                                                     <div className="flex items-center gap-4">
                                                         <div className={`p-2 rounded-lg ${tx.type === 'TOPUP' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-primary-500/10 text-primary-400'}`}>
                                                             {tx.type === 'TOPUP' ? <ArrowDownLeft size={16} /> : <ArrowUpRight size={16} />}
@@ -269,7 +269,7 @@ const Settings = () => {
                                                         <p className={`text-[12px]   font-medium ${tx.type === 'TOPUP' ? 'text-emerald-400' : 'text-slate-300'}`}>
                                                             {tx.type === 'TOPUP' ? '+' : '-'}₹{tx.amount?.toFixed(2)}
                                                         </p>
-                                                        <p className="text-[9px] text-slate-600   font-medium">{tx.status}</p>
+                                                        <p className="text-[10px] text-slate-600   font-medium">{tx.status}</p>
                                                     </div>
                                                 </div>
                                             ))
@@ -296,7 +296,7 @@ const Settings = () => {
                                         "Exclusive Channels",
                                         "Early Features Access"
                                     ].map((feat, i) => (
-                                        <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-white/2 border border-white/5 text-[12px]   font-medium text-slate-400">
+                                        <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-white/2 border border-white/10 text-[12px]   font-medium text-slate-400">
                                             <CheckCircle2 size={14} className="text-amber-500" />
                                             {feat}
                                         </div>
@@ -323,7 +323,7 @@ const Settings = () => {
                             <div className="space-y-6">
                                 <h3 className="text-[12px]   font-medium text-slate-500 ml-1">Account Security</h3>
                                 <div className="space-y-4">
-                                    <div className="p-5 md:p-6 rounded-lg border border-white/5 bg-white/2 space-y-6 shadow-xl">
+                                    <div className="p-5 md:p-6 rounded-lg border border-white/10 bg-white/2 space-y-6 shadow-xl">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-2">
                                                 <label className="text-[12px]   font-medium text-slate-500 ml-1">Current Password</label>
@@ -377,7 +377,7 @@ const Settings = () => {
                                         { label: "Push Notifications", desc: "Get notified on your device", key: "push" },
                                         { label: "Marketing Notifications", desc: "Stay updated with our news", key: "marketing" }
                                     ].map((pref) => (
-                                        <div key={pref.key} className="flex items-center justify-between p-4 rounded-lg border border-white/5 bg-white/2 hover:border-white/10 transition-all group">
+                                        <div key={pref.key} className="flex items-center justify-between p-4 rounded-lg border border-white/10 bg-white/2 hover:border-white/10 transition-all group">
                                             <div className="space-y-1">
                                                 <h4 className="text-[12px]   font-medium text-white">{pref.label}</h4>
                                                 <p className="text-[12px] text-slate-500 font-medium">{pref.desc}</p>
@@ -387,7 +387,7 @@ const Settings = () => {
                                                 className={`w-10 h-5 rounded-full border transition-all flex items-center px-1 cursor-pointer shrink-0
                                                     ${notifs[pref.key]
                                                         ? 'bg-primary-600 border-primary-500/50 justify-end shadow-[0_0_10px_rgba(227,67,67,0.2)]'
-                                                        : 'bg-slate-800 border-white/5 justify-start'}`}
+                                                        : 'bg-slate-800 border-white/10 justify-start'}`}
                                             >
                                                 <motion.div
                                                     layout

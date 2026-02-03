@@ -45,7 +45,7 @@ export default function Login() {
         className="w-full max-w-5xl md:grid md:grid-cols-2 rounded-lg overflow-hidden relative"
       >
         {/* Left Side */}
-        <div className="hidden md:flex flex-col justify-around p-8 px-2 border-r border-white/5 items-center">
+        <div className="hidden md:flex flex-col justify-around p-8 px-2 border-r border-white/10 items-center">
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="w-12 h-12 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/40 border border-primary-500/20">
@@ -133,7 +133,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                  className="w-full bg-slate-950/80 border border-white/10 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
                 />
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                  className="w-full bg-slate-950/80 border border-white/10 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
                 />
               </div>
             </div>

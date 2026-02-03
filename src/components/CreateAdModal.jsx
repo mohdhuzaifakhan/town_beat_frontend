@@ -71,7 +71,7 @@ export const CreateAdModal = ({ onClose, onCreated }) => {
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="relative w-full md:max-w-xl bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
       >
-        <div className="flex items-center justify-between p-6 border-b border-white/5">
+        <div className="flex items-center justify-between p-6 border-b border-white/10">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-lg bg-primary-600/10 flex items-center justify-center border border-primary-500/20">
               <Megaphone className="text-primary-500" size={20} />

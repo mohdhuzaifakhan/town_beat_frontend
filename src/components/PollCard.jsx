@@ -34,7 +34,7 @@ export const PollCard = ({ poll, user, onVote, onDelete }) => {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`glass rounded-lg p-4 sm:p-6 space-y-5 relative overflow-hidden group border-white/5 ${isExpired ? "bg-slate-950/40" : "bg-slate-900/40"} transition-all duration-500`}
+      className={`glass rounded-lg p-4 sm:p-6 space-y-5 relative overflow-hidden group border-white/10 ${isExpired ? "bg-slate-950/40" : "bg-slate-900/40"} transition-all duration-500`}
     >
       <div
         className={`absolute top-0 right-0 w-64 h-64 blur-3xl -mr-32 -mt-32 transition-colors duration-1000 ${isExpired ? "bg-primary-500/10" : "bg-primary-600/3"}`}
@@ -92,7 +92,7 @@ export const PollCard = ({ poll, user, onVote, onDelete }) => {
               className={`
         relative w-full py-3 px-4 rounded-lg overflow-hidden
         border text-left transition-all active:scale-[0.99]
-        ${hasVoted ? "cursor-default border-white/5" : "border-white/10 hover:border-primary-500/40"}
+        ${hasVoted ? "cursor-default border-white/10" : "border-white/10 hover:border-primary-500/40"}
         ${isSelected ? "bg-primary-500/15 border-primary-500/50" : ""}
         ${isWinner ? "border-primary-500" : ""}
       `}
@@ -113,7 +113,7 @@ export const PollCard = ({ poll, user, onVote, onDelete }) => {
                   </span>
 
                   {isSelected && (
-                    <span className="text-[9px] px-1.5 py-0.5 rounded-sm bg-primary-500 text-white   font-medium shrink-0   ">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-sm bg-primary-500 text-white   font-medium shrink-0   ">
                       YOUR VOTE
                     </span>
                   )}
@@ -132,7 +132,7 @@ export const PollCard = ({ poll, user, onVote, onDelete }) => {
         })}
       </div>
 
-      <div className="flex flex-wrap items-center justify-between pt-4 border-t border-white/5 text-[12px] font-medium text-slate-500 relative">
+      <div className="flex flex-wrap items-center justify-between pt-4 border-t border-white/10 text-[12px] font-medium text-slate-500 relative">
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-1.5">
             <BarChart3 size={12} className="text-primary-500/40" />

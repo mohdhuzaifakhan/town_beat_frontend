@@ -34,7 +34,7 @@ export const AdFeedItem = ({ ad }) => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-lg border border-white/5 bg-slate-900/40 backdrop-blur-md overflow-hidden hover:border-primary-500/20 transition-all p-4 md:p-5 space-y-4 group relative shadow-xl"
+            className="glass rounded-lg border border-white/10 bg-slate-900/40 backdrop-blur-md overflow-hidden hover:border-primary-500/20 transition-all p-4 md:p-5 space-y-4 group relative shadow-xl"
         >
             <div className="absolute top-0 right-0 px-3 py-1 bg-primary-500/10 rounded-bl-xl border-l border-b border-primary-500/10 backdrop-blur-sm">
                 <span className="text-[12px] font-medium text-primary-400 flex items-center gap-1.5">
@@ -71,14 +71,14 @@ export const AdFeedItem = ({ ad }) => {
                 )}
 
                 {ad.imageUrl && (
-                    <div className="rounded-lg overflow-hidden border border-white/5 shadow-2xl bg-black/40 group-hover:border-primary-500/20 transition-all duration-500 aspect-video relative">
+                    <div className="rounded-lg overflow-hidden border border-white/10 shadow-2xl bg-black/40 group-hover:border-primary-500/20 transition-all duration-500 aspect-video relative">
                         <img src={ad.imageUrl} alt="Ad content" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
                 )}
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-white/5">
+            <div className="flex items-center justify-between pt-2 border-t border-white/10">
                 <div className="text-[12px] text-slate-500 font-medium">
                     TownBeat Ads Console
                 </div>

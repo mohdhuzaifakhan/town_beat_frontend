@@ -110,7 +110,7 @@ export const PostCard = ({ post, onDelete }) => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="glass rounded-lg border border-white/5 bg-slate-900/40 backdrop-blur-md overflow-hidden hover:border-white/10 transition-all shadow-xl"
+        className="glass rounded-lg border border-white/10 bg-slate-900/40 backdrop-blur-md overflow-hidden hover:border-white/10 transition-all shadow-xl"
       >
         <div className="p-3 sm:p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -171,7 +171,7 @@ export const PostCard = ({ post, onDelete }) => {
           </p>
 
           {post.image && (
-            <div className="rounded-lg overflow-hidden border border-white/5 bg-black/40 aspect-video group/image relative mt-3 shadow-2xl">
+            <div className="rounded-lg overflow-hidden border border-white/10 bg-black/40 aspect-video group/image relative mt-3 shadow-2xl">
               <img
                 src={post.image}
                 alt="Post content"
@@ -182,7 +182,7 @@ export const PostCard = ({ post, onDelete }) => {
           )}
         </div>
 
-        <div className="px-3 sm:px-4 py-3 border-t border-white/5 mt-2 flex items-center justify-between">
+        <div className="px-3 sm:px-4 py-3 border-t border-white/10 mt-2 flex items-center justify-between">
           <div className="flex items-center gap-1">
             <button
               onClick={handleLike}
@@ -228,7 +228,7 @@ export const PostCard = ({ post, onDelete }) => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden border-t border-white/5"
+              className="overflow-hidden border-t border-white/10"
             >
               <CommentSection
                 comments={comments}

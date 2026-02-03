@@ -15,7 +15,7 @@ export function CommentSection({
         initial={{ height: 0, opacity: 0 }}
         animate={{ height: "auto", opacity: 1 }}
         exit={{ height: 0, opacity: 0 }}
-        className="bg-black/20 border-t border-white/5"
+        className="bg-black/20 border-t border-white/10"
       >
         <div className="p-3 sm:p-4 space-y-4">
           <h4 className="text-[12px]   font-medium text-slate-500   pl-1">
@@ -45,7 +45,7 @@ export function CommentSection({
                       </span>
                     )}
                   </div>
-                  <div className="flex-1 bg-white/5 rounded-lg rounded-tl-none p-3 border border-white/5">
+                  <div className="flex-1 bg-white/5 rounded-lg rounded-tl-none p-3 border border-white/10">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[12px] text-white">
                         {comment.user?.name || "Anonymous"}

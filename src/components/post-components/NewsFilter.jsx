@@ -20,7 +20,7 @@ export function NewsFilter({ locationScope, location, category, setCategory }) {
       </div>
 
       <div className="relative flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
-        <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-900/40 border border-white/5 backdrop-blur-sm min-w-max">
+        <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-900/40 border border-white/10 backdrop-blur-sm min-w-max">
           {["All", "Politics", "Civic", "Development"].map((cat) => {
             const active = category === cat;
 

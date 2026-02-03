@@ -52,7 +52,7 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, 
                             <div className="flex flex-col md:flex-row gap-4">
                                 <button
                                     onClick={onClose}
-                                    className="flex-1 px-6 py-3 rounded-lg   font-medium text-[12px] text-slate-500 bg-white/5 hover:bg-white/10 hover:text-white transition-all border border-white/5"
+                                    className="flex-1 px-6 py-3 rounded-lg   font-medium text-[12px] text-slate-500 bg-white/5 hover:bg-white/10 hover:text-white transition-all border border-white/10"
                                 >
                                     {cancelText}
                                 </button>

@@ -25,7 +25,7 @@ const Navbar = ({ onCreatePost, onCreateGroup, onCreatePoll, onCreateCampaign, o
 
   return (
     <>
-      <nav className="sticky top-0 z-50 px-3 py-2 md:p-3 glass rounded-none! border-b border-white/5 bg-slate-950/60 backdrop-blur-2xl">
+      <nav className="sticky top-0 z-50 px-3 py-2 md:p-3 glass rounded-none! border-b border-white/10 bg-slate-950/60 backdrop-blur-2xl">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Logo />
 

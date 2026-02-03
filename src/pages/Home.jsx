@@ -99,9 +99,9 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
   return (
     <div className="max-w-5xl mx-auto pb-24 md:pb-20 no-scrollbar">
       {/* Search/Create Bar & Filters (Mobile Only) */}
-      <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-2">
-        <div className="flex items-center justify-between gap-3">
-          <div
+      {/* <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-2"> */}
+        {/* <div className="flex items-center justify-between gap-3"> */}
+          {/* <div
             onClick={onCreatePostClick}
             className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex items-center gap-3 text-slate-500 active:scale-[0.98] transition-all"
           >
@@ -111,15 +111,14 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
             <span className="text-[12px]   font-medium  ">
               Post an update...
             </span>
-          </div>
+          </div> */}
 
-          <button
+          {/* <button
             onClick={() =>
               setLocationScope(locationScope === "Local" ? "Global" : "Local")
             }
-            className="bg-white/5 border border-white/10 rounded-lg px-3 py-3 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
+            className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
           >
-            {/* <span className="text-[9px]   font-medium text-slate-500     er leading-none mb-1">Signal</span> */}
             <div className="flex items-center gap-1">
               <div
                 className={`w-1.5 h-1.5 rounded-full ${locationScope === "Local" ? "bg-primary-500 animate-pulse" : "bg-blue-400"}`}
@@ -130,18 +129,18 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
                   : "Global"}
               </span>
             </div>
-          </button>
-        </div>
+          </button> */}
+        {/* </div> */}
 
-        <div className="px-0.5 mt-1">
+        {/* <div className="px-0.5 mt-1">
           <NewsFilter
             locationScope={locationScope}
             location={user?.location}
             category={category}
             setCategory={setCategory}
           />
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
 
       <div className="px-3 md:px-4 hidden md:block my-4">
         <FeedHeader
@@ -153,7 +152,7 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 px-0 md:px-4">
         <div className="lg:col-span-8 space-y-4 md:space-y-6">
-          <div className="px-3 md:px-0 mt-4 md:mt-0">
+          <div className="px-3 md:block display:none md:px-0 mt-4 md:mt-0">
             <CreatePostWidget
               onPostCreated={fetchContent}
               isExpanded={isCreateModalOpen}

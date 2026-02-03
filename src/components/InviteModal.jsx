@@ -42,7 +42,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                             </p>
 
                             <div className="relative group">
-                                <div className="w-full bg-slate-950/50 border border-white/5 rounded-lg py-3 px-3 text-center">
+                                <div className="w-full bg-slate-950/50 border border-white/10 rounded-lg py-3 px-3 text-center">
                                     <span className="text-2xl font-medium text-white">
                                         {inviteCode}
                                     </span>

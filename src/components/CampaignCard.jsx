@@ -51,7 +51,7 @@ export const CampaignCard = ({ campaign, onSupported }) => {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="glass rounded-lg p-4 sm:p-6 flex flex-col md:flex-row gap-5 hover:border-primary-500/20 transition-all group border-white/5 shadow-2xl bg-slate-900/40 relative overflow-hidden"
+      className="glass rounded-lg p-4 sm:p-6 flex flex-col md:flex-row gap-5 hover:border-primary-500/20 transition-all group border-white/10 shadow-2xl bg-slate-900/40 relative overflow-hidden"
     >
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/3 blur-3xl -mr-32 -mt-32 transition-colors duration-1000 group-hover:bg-primary-500/10 pointer-events-none" />
       <div className="w-full md:w-32 lg:w-40 h-44 md:h-40 rounded-lg bg-slate-950 overflow-hidden shrink-0 border border-white/10 shadow-xl relative z-10 group-hover:border-primary-500/30 transition-all">
@@ -78,13 +78,13 @@ export const CampaignCard = ({ campaign, onSupported }) => {
                     className={`w-1 h-1 rounded-full animate-pulse ${isSupported ? "bg-emerald-500" : "bg-rose-500"}`}
                   />
                   <span
-                    className={`text-[9px]   font-medium ${isSupported ? "text-emerald-400" : "text-rose-400"}`}
+                    className={`text-[10px]   font-medium ${isSupported ? "text-emerald-400" : "text-rose-400"}`}
                   >
                     {isSupported ? "SUPPORT RECORDED" : "OPERATIONAL PULSE"}
                   </span>
                 </div>
                 {isOrganizer && (
-                  <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[9px] font-medium text-amber-500">
+                  <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[10px] font-medium text-amber-500">
                     Authority
                   </span>
                 )}
@@ -120,7 +120,7 @@ export const CampaignCard = ({ campaign, onSupported }) => {
             )}
           </div>
 
-          <div className="space-y-3 bg-slate-950/40 p-3.5 rounded-lg border border-white/5">
+          <div className="space-y-3 bg-slate-950/40 p-3.5 rounded-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Target className="text-primary-500/60" size={13} />
@@ -138,7 +138,7 @@ export const CampaignCard = ({ campaign, onSupported }) => {
             <p className="text-[12px] text-slate-400 font-medium leading-relaxed opacity-80 italic line-clamp-2">
               {campaign.objective}
             </p>
-            <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden border border-white/5 p-px">
+            <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden border border-white/10 p-px">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{
@@ -151,7 +151,7 @@ export const CampaignCard = ({ campaign, onSupported }) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5 mt-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 mt-4">
           <div className="flex items-center gap-4 sm:gap-6 order-2 sm:order-1">
             <div className="flex items-center gap-2">
               <Clock
@@ -159,14 +159,14 @@ export const CampaignCard = ({ campaign, onSupported }) => {
                 size={12}
               />
               <span
-                className={`text-[9px] font-medium ${campaign.daysLeft <= 1 ? "text-rose-500/80" : "text-slate-500"}`}
+                className={`text-[10px] font-medium ${campaign.daysLeft <= 1 ? "text-rose-500/80" : "text-slate-500"}`}
               >
                 {campaign.daysLeft} DAYS LEFT
               </span>
             </div>
             <div className="flex items-center gap-2 text-slate-500">
               <Megaphone className="opacity-40" size={12} />
-              <span className="text-[9px] font-medium">
+              <span className="text-[10px] font-medium">
                 {campaign.supporters?.length || 0} / {campaign.target} SIGNALS
               </span>
             </div>

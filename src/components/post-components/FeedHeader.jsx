@@ -23,7 +23,7 @@ export function FeedHeader({ location, locationScope, setLocationScope }) {
           </p>
         </div>
 
-        <div className="flex items-center gap-1.5 p-1 glass rounded-lg border-white/5">
+        <div className="flex items-center gap-1.5 p-1 glass rounded-lg border-white/10">
           <button
             onClick={() => setLocationScope("Local")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-all ${locationScope === "Local"
@@ -57,7 +57,7 @@ export function FeedHeader({ location, locationScope, setLocationScope }) {
             <p className="text-[12px] text-slate-500   font-medium      -mt-0.5">The Pulse of Your Region</p>
           </div>
 
-          <div className="flex items-center gap-1.5 p-0.5 bg-white/5 rounded-lg border border-white/5">
+          <div className="flex items-center gap-1.5 p-0.5 bg-white/5 rounded-lg border border-white/10">
             <button
               onClick={() => setLocationScope("Local")}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[12px]   font-medium transition-all ${locationScope === "Local"

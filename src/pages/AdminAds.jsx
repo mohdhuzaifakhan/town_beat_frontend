@@ -96,7 +96,7 @@ const AdminAds = () => {
     return (
         <div className="max-w-6xl mx-auto pb-24 md:pb-20 no-scrollbar px-3 md:px-0">
             {/* Mobile Unified Header for Admin Ads */}
-            <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-3 -mx-3">
+            {/* <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-3 -mx-3">
                 <div className="flex items-center justify-between gap-3 px-3">
                     <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex-1">
                         <ShieldAlert size={16} className="text-primary-500" />
@@ -110,9 +110,9 @@ const AdminAds = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/5 pb-6 mt-4">
+            <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/10 pb-6 mt-4">
                 <div className="space-y-1 max-w-full overflow-hidden">
                     <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full text-white">
                         <Sparkles className="text-primary-500 shrink-0" size={24} />
@@ -124,7 +124,7 @@ const AdminAds = () => {
                 </div>
             </div>
 
-            <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-white/5 shadow-inner mt-6 overflow-x-auto no-scrollbar my-2">
+            <div className="md:flex hidden items-center gap-1 p-1 rounded-lg bg-slate-900 border border-white/10 shadow-inner my-6 overflow-x-auto no-scrollbar">
                 {['pending_approval', 'active', 'paused', 'expired', 'budget_exhausted', 'all'].map(t => (
                     <button
                         key={t}
@@ -142,7 +142,7 @@ const AdminAds = () => {
 
             <div className="space-y-4">
                 {loading ? (
-                    <div className="animate-pulse h-32 bg-white/5 rounded-lg border border-white/5" />
+                    <div className="animate-pulse h-32 bg-white/5 rounded-lg border border-white/10" />
                 ) : filteredAds.length === 0 ? (
                     <div className="glass rounded-lg p-12 text-center border-dashed border-white/10 shadow-none">
                         <Megaphone className="text-slate-900 mx-auto mb-4 opacity-20" size={32} />
@@ -157,7 +157,7 @@ const AdminAds = () => {
                                 layout
                                 initial={{ opacity: 0, y: 12 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="glass rounded-xl overflow-hidden border border-white/5 bg-slate-950/40 hover:border-primary-500/30 transition-all duration-500 group"
+                                className="glass rounded-lg overflow-hidden border border-white/10 bg-slate-950/40 hover:border-primary-500/30 transition-all duration-500 group"
                             >
 
                                 <div className="relative h-36 overflow-hidden">
@@ -228,7 +228,7 @@ const AdminAds = () => {
                                         )}
                                     </div>
 
-                                    <div className="flex items-center justify-between px-3 md:px-4 py-3 rounded-lg bg-slate-900 border border-white/5 shadow-inner">
+                                    <div className="flex items-center justify-between px-3 md:px-4 py-3 rounded-lg bg-slate-900 border border-white/10 shadow-inner">
                                         <div className="flex flex-col gap-0.5">
                                             <span className="text-[12px] text-slate-500 font-medium">Budget</span>
                                             <span className="text-[13px]   font-medium text-emerald-400">₹{ad.budget?.toFixed(2)}</span>

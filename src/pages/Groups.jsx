@@ -36,7 +36,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
     setError("");
     try {
       const res = await api.post("/groups/join-by-code", {
-        code: inviteCode.trim().to  (),
+        code: inviteCode.trim().toUpperCase(),
       });
       if (res.data) {
         await fetchGroups();
@@ -64,7 +64,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
   return (
     <div className="max-w-5xl mx-auto pb-24 md:pb-20 no-scrollbar">
       {/* Mobile Unified Dashboard for Groups */}
-      <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-3">
+      {/* <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div
             onClick={() => setCreateModalOpen(true)}
@@ -78,7 +78,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
 
           <button
             onClick={() => setLocationScope(locationScope === "Local" ? "Global" : "Local")}
-            className="bg-white/5 border border-white/10 rounded-lg px-3 py-3 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
+            className="bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 flex flex-col items-center justify-center min-w-[70px] active:scale-95 transition-all"
           >
             <div className="flex items-center gap-1">
               <div className={`w-1.5 h-1.5 rounded-full ${locationScope === "Local" ? "bg-primary-500 animate-pulse" : "bg-blue-400"}`} />
@@ -89,7 +89,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
           </button>
         </div>
 
-        <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-white/5 shadow-inner">
+        <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-white/10 shadow-inner">
           {[
             { id: "explore", label: "Explore", icon: <Globe size={12} /> },
             { id: "my", label: "Joined", icon: <Users size={12} /> },
@@ -109,10 +109,10 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
       <div className="px-4 hidden md:block mt-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/5 pb-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/10 pb-6">
           <div className="space-y-1 max-w-full overflow-hidden">
             <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full">
               <Users className="text-primary-500 shrink-0" size={24} />
@@ -134,7 +134,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
-          <div className="flex p-1 bg-slate-900 rounded-lg border border-white/5 w-full sm:w-auto shadow-inner">
+          <div className="flex p-1 bg-slate-900 rounded-lg border border-white/10 w-full sm:w-auto shadow-inner">
             {["explore", "my", "unlock"].map((v) => (
               <button
                 key={v}
@@ -175,11 +175,11 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
                 value={inviteCode}
                 autoFocus
                 onChange={(e) => {
-                  setInviteCode(e.target.value.to  ());
+                  setInviteCode(e.target.value.toUpperCase());
                   setError("");
                 }}
                 placeholder="Invite Code"
-                className="w-full bg-slate-950/50 border border-white/10 rounded-lg py-3 px-4 text-center text-2xl   font-medium text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/50 transition-all shadow-2xl outline-none"
+                className="w-full bg-slate-950/50 border border-white/10 rounded-lg py-3 px-4 text-center text-2xl   font-medium text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all shadow-2xl outline-none"
                 maxLength={8}
               />
               {error && <p className="text-rose-500 text-[12px] font-medium">{error}</p>}

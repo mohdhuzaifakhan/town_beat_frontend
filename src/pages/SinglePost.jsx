@@ -51,7 +51,7 @@ const SinglePost = () => {
     return (
         <div className="max-w-3xl mx-auto pb-24 md:pb-6 no-scrollbar">
             {/* Mobile Header for Single Post */}
-            <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3">
+            <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3">
                 <button
                     onClick={() => navigate(-1)}
                     className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-slate-400 active:scale-95 transition-all"

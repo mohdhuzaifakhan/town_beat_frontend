@@ -29,7 +29,7 @@ export const PollWidget = ({ userId }) => {
   if (!activePoll) return null;
 
   return (
-    <div className="glass rounded-lg p-5 space-y-4 border-white/5 shadow-2xl bg-slate-900/40">
+    <div className="glass rounded-lg p-5 space-y-4 border-white/10 shadow-2xl bg-slate-900/40">
       <div className="flex items-center justify-between">
         <h3 className="text-[12px] font-medium text-emerald-400 flex items-center gap-2">
           <PieChart size={14} />

@@ -237,7 +237,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
     <>
       <div className="max-w-6xl mx-auto pb-24 md:pb-20 no-scrollbar px-3 md:px-0">
         {/* Mobile Unified Header for Ads Manager */}
-        <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3 space-y-3 -mx-3">
+        <div className="md:hidden sticky top-13.75 z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 pb-2 pt-3 px-3 space-y-3 -mx-3">
           <div className="flex items-center justify-between gap-3 px-3">
             <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2 flex-1">
               <Megaphone size={16} className="text-primary-500" />
@@ -255,7 +255,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
           </div>
         </div>
 
-        <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/5 pb-6 mt-4">
+        <div className="hidden md:flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left border-b border-white/10 pb-6 mt-4">
           <div className="space-y-1 max-w-full overflow-hidden">
             <h1 className="text-xl md:text-2xl font-medium flex items-center justify-center md:justify-start gap-3 max-w-full text-white">
               <Megaphone className="text-primary-500 shrink-0" size={24} />
@@ -269,13 +269,13 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
           <div className="flex items-center gap-4 w-full md:w-auto">
             <button
               onClick={() => setCreateModalOpen(true)}
-              className="flex-1 md:flex-none glass px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white border-primary-500/20 transition-all   font-medium text-[12px] active:scale-95 shadow-lg shadow-primary-900/40"
+              className="flex-1 md:flex-none glass px-6 py-3 rounded-lg flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white border-primary-500/20 transition-all   font-medium text-[12px] active:scale-95 shadow-lg shadow-primary-900/40"
             >
               <Plus size={16} />
               Create Ad
             </button>
 
-            <Link to="/settings" className="glass p-4 rounded-xl flex items-center gap-4 bg-slate-900/40 border-white/5 hover:border-primary-500/30 transition-all">
+            <Link to="/settings" className="glass p-4 rounded-lg flex items-center gap-4 bg-slate-900/40 border-white/10 hover:border-primary-500/30 transition-all">
               <div className="p-2.5 rounded-lg bg-primary-500/10 text-primary-400">
                 <IndianRupee size={20} />
               </div>
@@ -294,7 +294,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
               <div className="h-px bg-white/5 flex-1 ml-6" />
             </div>
             {loading ? (
-              <div className="animate-pulse h-32 bg-white/5 rounded-lg border border-white/5" />
+              <div className="animate-pulse h-32 bg-white/5 rounded-lg border border-white/10" />
             ) : myAds.length === 0 ? (
               <div className="glass rounded-lg p-12 text-center border-dashed border-white/10">
                 <Megaphone
@@ -315,7 +315,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                     key={ad._id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="glass p-0 rounded-xl overflow-hidden border border-white/5 flex flex-col sm:flex-row gap-0 bg-slate-900/40 shadow-xl group"
+                    className="glass p-0 rounded-lg overflow-hidden border border-white/10 flex flex-col sm:flex-row gap-0 bg-slate-900/40 shadow-xl group"
                   >
                     <div className="w-full sm:w-32 h-32 relative shrink-0 bg-slate-800 flex items-center justify-center">
                       {ad.imageUrl ? (
@@ -352,7 +352,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-5 border-t border-white/5">
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-5 border-t border-white/10">
                         <div className="space-y-1">
                           <p className="text-[12px] text-slate-500 font-medium">
                             Impressions
@@ -382,11 +382,11 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-2 pt-5 border-t border-white/5">
+                      <div className="flex flex-wrap items-center gap-2 pt-5 border-t border-white/10">
                         {ad.status === "active" && (
                           <button
                             onClick={() => handlePause(ad._id)}
-                            className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-[12px]   font-medium transition-all border border-white/10 active:scale-95"
+                            className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-lg text-[12px]   font-medium transition-all border border-white/10 active:scale-95"
                           >
                             Pause
                           </button>
@@ -394,14 +394,14 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         {ad.status === "paused" && (
                           <button
                             onClick={() => handleResume(ad._id)}
-                            className="px-5 py-2.5 bg-primary-600/10 hover:bg-primary-600 text-primary-400 hover:text-white rounded-xl text-[12px]   font-medium transition-all border border-primary-500/20 active:scale-95 shadow-lg shadow-primary-900/20"
+                            className="px-5 py-2.5 bg-primary-600/10 hover:bg-primary-600 text-primary-400 hover:text-white rounded-lg text-[12px]   font-medium transition-all border border-primary-500/20 active:scale-95 shadow-lg shadow-primary-900/20"
                           >
                             Resume
                           </button>
                         )}
                         <button
                           onClick={() => handleDelete(ad._id)}
-                          className="px-5 py-2.5 bg-rose-600/10 hover:bg-rose-600 text-rose-500 hover:text-white rounded-xl text-[12px]   font-medium transition-all border border-rose-500/20 ml-auto active:scale-95"
+                          className="px-5 py-2.5 bg-rose-600/10 hover:bg-rose-600 text-rose-500 hover:text-white rounded-lg text-[12px]   font-medium transition-all border border-rose-500/20 ml-auto active:scale-95"
                         >
                           Delete
                         </button>
@@ -433,7 +433,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="relative w-full md:max-w-2xl bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
             >
-              <div className="flex items-center justify-between p-6 border-b border-white/5">
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
                 <div className="space-y-1">
                   <h2 className="text-lg   font-medium text-white">Create New Ad</h2>
                   <p className="text-[12px] text-slate-500">Fill in the details for your campaign</p>
@@ -455,7 +455,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                       required
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-[12px]   font-medium text-white focus:outline-none focus:border-primary-500/50 transition-all placeholder:text-slate-700"
+                      className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-[12px]   font-medium text-white focus:outline-none focus:border-primary-500/50 transition-all placeholder:text-slate-700"
                       placeholder="Enter a compelling transmission headline..."
                     />
                   </div>
@@ -466,7 +466,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                       <select
                         value={formData.adType}
                         onChange={(e) => setFormData({ ...formData, adType: e.target.value })}
-                        className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-[12px]   font-medium text-white focus:outline-none appearance-none cursor-pointer"
+                        className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-[12px]   font-medium text-white focus:outline-none appearance-none cursor-pointer"
                       >
                         <option value="feed">Central Feed Signal</option>
                         <option value="banner">Network Banner</option>
@@ -482,7 +482,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                           required
                           value={formData.budget}
                           onChange={(e) => setFormData({ ...formData, budget: Number(e.target.value) })}
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-[12px]   font-medium text-white focus:outline-none"
+                          className="w-full bg-slate-950 border border-white/10 rounded-lg pl-10 pr-4 py-3 text-[12px]   font-medium text-white focus:outline-none"
                         />
                       </div>
                     </div>
@@ -496,7 +496,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         required
                         value={formData.startDate}
                         onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                        className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-[12px]   font-medium text-white appearance-none"
+                        className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-[12px]   font-medium text-white appearance-none"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -506,7 +506,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         required
                         value={formData.endDate}
                         onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                        className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-[12px]   font-medium text-white appearance-none"
+                        className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-[12px]   font-medium text-white appearance-none"
                       />
                     </div>
                   </div>
@@ -519,11 +519,11 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         <input
                           value={formData.imageUrl}
                           onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-[12px]   font-medium text-white placeholder:text-slate-700"
+                          className="w-full bg-slate-950 border border-white/10 rounded-lg pl-12 pr-4 py-3 text-[12px]   font-medium text-white placeholder:text-slate-700"
                           placeholder="Paste image URL..."
                         />
                       </div>
-                      <label className="flex items-center justify-center gap-3 py-3 bg-white/5 border border-white/10 rounded-xl cursor-pointer hover:bg-white/10 transition-all text-[12px]   font-medium text-slate-400">
+                      <label className="flex items-center justify-center gap-3 py-3 bg-white/5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 transition-all text-[12px]   font-medium text-slate-400">
                         {uploading ? <Loader2 className="animate-spin" size={16} /> : <Plus size={16} />}
                         {uploading ? "Uploading..." : "Upload image"}
                         <input
@@ -543,7 +543,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                       <select
                         value={formData.placement}
                         onChange={e => setFormData({ ...formData, placement: e.target.value })}
-                        className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-[12px]   font-medium text-white appearance-none cursor-pointer"
+                        className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 text-[12px]   font-medium text-white appearance-none cursor-pointer"
                       >
                         <option value="home_feed">Home Feed Signal</option>
                         <option value="sidebar">Peripheral Sidebar</option>
@@ -557,7 +557,7 @@ const AdsManager = ({ isCreateModalOpen, setCreateModalOpen }) => {
                         <input
                           value={formData.link}
                           onChange={(e) => setFormData({ ...formData, link: e.target.value })}
-                          className="w-full bg-slate-950 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-[12px]   font-medium text-white placeholder:text-slate-700"
+                          className="w-full bg-slate-950 border border-white/10 rounded-lg pl-12 pr-4 py-3 text-[12px]   font-medium text-white placeholder:text-slate-700"
                           placeholder="https://destination.nexus/..."
                         />
                       </div>

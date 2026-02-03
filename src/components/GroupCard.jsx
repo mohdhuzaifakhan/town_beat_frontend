@@ -74,7 +74,7 @@ export const GroupCard = ({ group, onUpdate }) => {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="group relative bg-slate-900/40 border border-white/5 rounded-lg p-3 sm:p-5 hover:border-primary-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-900/10 overflow-hidden"
+        className="group relative bg-slate-900/40 border border-white/10 rounded-lg p-3 sm:p-5 hover:border-primary-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-900/10 overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-48 h-48 bg-primary-600/[0.03] blur-3xl -mr-24 -mt-24 group-hover:bg-primary-600/10 transition-colors duration-500" />
 
@@ -101,7 +101,7 @@ export const GroupCard = ({ group, onUpdate }) => {
                   {group.name}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="px-1.5 py-0.5 rounded-md text-[12px]   font-medium bg-white/5 border border-white/5 text-slate-500     ">
+                  <span className="px-1.5 py-0.5 rounded-md text-[12px]   font-medium bg-white/5 border border-white/10 text-slate-500     ">
                     {group.type}
                   </span>
                   {isOwner && (
@@ -111,7 +111,7 @@ export const GroupCard = ({ group, onUpdate }) => {
                   )}
                 </div>
               </div>
-              <div className="flex items-center gap-1 text-[12px]   font-medium text-slate-400 bg-slate-950/50 px-2 py-1 rounded-lg border border-white/5 shadow-inner shrink-0">
+              <div className="flex items-center gap-1 text-[12px]   font-medium text-slate-400 bg-slate-950/50 px-2 py-1 rounded-lg border border-white/10 shadow-inner shrink-0">
                 <Users size={10} className="text-primary-500" />
                 {group.membersCount}
               </div>
