@@ -28,7 +28,7 @@ export const InputModal = ({ isOpen, onClose, onConfirm, title, message, placeho
                                     <div className="p-2 rounded-lg bg-primary-500/10 text-primary-400">
                                         <AlertCircle size={24} />
                                     </div>
-                                    <h3 className="text-lg font-bold text-white">{title}</h3>
+                                    <h3 className="text-lg   font-medium text-white">{title}</h3>
                                 </div>
                                 <button
                                     onClick={onClose}
@@ -38,7 +38,7 @@ export const InputModal = ({ isOpen, onClose, onConfirm, title, message, placeho
                                 </button>
                             </div>
 
-                            <p className="text-slate-400 mb-4 text-sm">
+                            <p className="text-slate-400 mb-4 text-[12px]">
                                 {message}
                             </p>
 
@@ -47,13 +47,13 @@ export const InputModal = ({ isOpen, onClose, onConfirm, title, message, placeho
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 placeholder={placeholder}
-                                className="w-full bg-slate-950 border border-white/10 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-primary-500/50 transition-all resize-none h-24 mb-6"
+                                className="w-full bg-slate-950 border border-white/10 rounded-lg p-3 text-[12px] text-white focus:outline-none focus:border-primary-500/50 transition-all resize-none h-24 mb-6"
                             />
 
                             <div className="flex gap-3 justify-end">
                                 <button
                                     onClick={onClose}
-                                    className="px-4 py-2 rounded-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors text-sm"
+                                    className="px-4 py-2 rounded-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors text-[12px]"
                                 >
                                     {cancelText}
                                 </button>
@@ -64,7 +64,7 @@ export const InputModal = ({ isOpen, onClose, onConfirm, title, message, placeho
                                         setInputValue("");
                                         onClose();
                                     }}
-                                    className={`px-4 py-2 rounded-lg font-bold text-white transition-all transform active:scale-95 text-sm disabled:opacity-50 disabled:active:scale-100 ${isDanger
+                                    className={`px-4 py-2 rounded-lg   font-medium text-white transition-all transform active:scale-95 text-[12px] disabled:opacity-50 disabled:active:scale-100 ${isDanger
                                         ? "bg-red-500 hover:bg-red-600"
                                         : "bg-primary-600 hover:bg-primary-500"
                                         }`}

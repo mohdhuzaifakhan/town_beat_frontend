@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const MobileNavLink = ({ to, icon, active, color }) => (
   <Link
     to={to}
-    className={`flex flex-col items-center justify-center gap-1 w-12 h-12 rounded-xl transition-all ${
+    className={`flex flex-col items-center justify-center gap-1 w-12 h-12 rounded-lg transition-all ${
       active ? color : "text-slate-500"
     }`}
   >

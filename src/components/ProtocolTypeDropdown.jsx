@@ -5,10 +5,10 @@ import { ChevronDown, Check } from "lucide-react";
 import { Landmark, Vote, Archive, Users } from "lucide-react";
 
 const protocolTypes = [
-  { value: "Civic", label: "Civic Protocol", icon: Landmark },
-  { value: "Political", label: "Political Protocol", icon: Vote },
-  { value: "News", label: "Archive Protocol", icon: Archive },
-  { value: "Social", label: "Connect Protocol", icon: Users },
+  { value: "Civic", label: "Civic", icon: Landmark },
+  { value: "Political", label: "Political", icon: Vote },
+  { value: "News", label: "News", icon: Archive },
+  { value: "Social", label: "Social", icon: Users },
 ];
 
 
@@ -54,7 +54,7 @@ export const ProtocolTypeDropdown = ({ value, onChange }) => {
   return (
     <div className="space-y-2">
       <label className="text-[12px] font-medium text-slate-500 ml-1">
-        Protocol Type
+        Group Type
       </label>
 
       <button
@@ -64,23 +64,21 @@ export const ProtocolTypeDropdown = ({ value, onChange }) => {
         className={`
           w-full flex items-center justify-between gap-2
           bg-slate-950/50 border rounded-lg px-4 py-3
-          text-[11px] font-bold transition-all
-          ${
-            open
-              ? "border-primary-500 ring-2 ring-primary-500/20"
-              : "border-white/10 hover:border-white/20"
+          text-[12px] transition-all
+          ${open
+            ? "border-primary-500 ring-2 ring-primary-500/20"
+            : "border-white/10 hover:border-white/20"
           }
           text-white
         `}
       >
         <div className="flex items-center gap-2 truncate">
           {current && <current.icon className="w-4 h-4 text-primary-400" />}
-          <span>{current?.label || "Select Protocol"}</span>
+          <span>{current?.label || "Select type"}</span>
         </div>
         <ChevronDown
-          className={`w-4 h-4 text-slate-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`w-4 h-4 text-slate-500 transition-transform ${open ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -96,7 +94,7 @@ export const ProtocolTypeDropdown = ({ value, onChange }) => {
               width: rect.width,
             }}
           >
-            <div className="bg-slate-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden">
+            <div className="bg-slate-900 border border-white/10 rounded-lg shadow-2xl overflow-hidden">
               <div className="p-1">
                 {protocolTypes.map((item) => {
                   const Icon = item.icon;
@@ -112,10 +110,9 @@ export const ProtocolTypeDropdown = ({ value, onChange }) => {
                       className={`
                         w-full flex items-center justify-between
                         px-3 py-2 rounded-md text-[12px] transition-colors
-                        ${
-                          isSelected
-                            ? "bg-primary-600/10 text-primary-400"
-                            : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                        ${isSelected
+                          ? "bg-primary-600/10 text-primary-400"
+                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }
                       `}
                     >

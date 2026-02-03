@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const NavLink = ({ to, icon, label, active, color }) => (
   <Link
     to={to}
-    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg transition-all font-bold text-sm group relative ${
+    className={`flex items-center gap-2 px-4 py-1.5 rounded-lg transition-all   font-medium text-[12px] group relative ${
       active
         ? "bg-white/5 text-white"
         : "text-slate-400 hover:text-white hover:bg-white/3"

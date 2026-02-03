@@ -10,11 +10,11 @@ export const ApprovalBudgetModal = ({ data, onClose }) => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+                className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
             >
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <h2 className="text-lg   font-medium text-gray-800">
                         Approval Budget
                     </h2>
                     <button onClick={onClose}>
@@ -37,7 +37,7 @@ export const ApprovalBudgetModal = ({ data, onClose }) => {
                     </p>
 
                     {data.reason && (
-                        <p className="mt-1 text-sm text-gray-600">
+                        <p className="mt-1 text-[12px] text-gray-600">
                             {data.reason}
                         </p>
                     )}
@@ -45,7 +45,7 @@ export const ApprovalBudgetModal = ({ data, onClose }) => {
 
                 {/* Link */}
                 <div className="flex items-center justify-between rounded-lg border p-3">
-                    <span className="text-sm text-gray-700">
+                    <span className="text-[12px] text-gray-700">
                         View budget details
                     </span>
 

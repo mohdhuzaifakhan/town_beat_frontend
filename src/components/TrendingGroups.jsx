@@ -29,7 +29,7 @@ export const TrendingGroups = () => {
 
   return (
     <div className="glass rounded-lg p-5 space-y-4 border-white/5">
-      <h3 className="text-xs font-bold tracking-wide text-slate-500">
+      <h3 className="text-[12px]   font-medium   text-slate-500">
         Trending Groups
       </h3>
 
@@ -43,8 +43,8 @@ export const TrendingGroups = () => {
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-primary-600/5 blur-2xl -mr-12 -mt-12 group-hover:bg-primary-600/10 transition-colors" />
             <div
-              className="w-10 h-10 rounded-xl bg-slate-950 border border-white/10 flex items-center justify-center
-                            text-primary-500 font-semibold text-sm overflow-hidden shrink-0 shadow-lg"
+              className="w-10 h-10 rounded-lg bg-slate-950 border border-white/10 flex items-center justify-center
+                            text-primary-500 font-semibold text-[12px] overflow-hidden shrink-0 shadow-lg"
             >
               {group.image ? (
                 <img
@@ -57,10 +57,10 @@ export const TrendingGroups = () => {
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="text-xs font-medium text-slate-300 truncate group-hover:text-primary-400 transition-colors">
+              <h4 className="text-[12px] font-medium text-slate-300 truncate group-hover:text-primary-400 transition-colors">
                 {group.name}
               </h4>
-              <div className="flex items-center gap-2 text-[10px] text-slate-500">
+              <div className="flex items-center gap-2 text-[12px] text-slate-500">
                 <Users size={10} className="text-primary-500" />
                 {group.membersCount || 0} Members
               </div>

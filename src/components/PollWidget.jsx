@@ -38,7 +38,7 @@ export const PollWidget = ({ userId }) => {
         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
       </div>
 
-      <p className="text-xs font-medium text-white leading-tight line-clamp-2">
+      <p className="text-[12px] font-medium text-white leading-tight line-clamp-2">
         {activePoll.question}
       </p>
 
@@ -68,7 +68,7 @@ export const PollWidget = ({ userId }) => {
       </div>
       <Link
         to="/polls"
-        className="block text-center text-[11px] text-slate-600 hover:text-white transition"
+        className="block text-center text-[12px] text-slate-600 hover:text-white transition"
       >
         View all polls →
       </Link>

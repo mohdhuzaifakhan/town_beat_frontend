@@ -40,10 +40,12 @@ export const AdWidget = () => {
   if (loading || ads.length === 0 || !ad) return null;
 
   return (
-    <div className="glass rounded-lg p-5 space-y-4 relative overflow-hidden group">
-      <h3 className="text-xs font-bold text-indigo-400 flex items-center gap-2">
-        <Sparkles size={14} />
-        Sponsored
+    <div className="glass rounded-lg p-5 space-y-5 relative overflow-hidden group border-white/5 bg-slate-900/40 shadow-xl">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-primary-500/[0.03] blur-2xl -mr-16 -mt-16 group-hover:bg-primary-500/10 transition-colors duration-1000" />
+
+      <h3 className="text-[12px] font-medium text-primary-400 flex items-center gap-2 relative">
+        <Sparkles size={12} className="text-primary-500" />
+        Signal Promo
       </h3>
 
       <div className="space-y-3">
@@ -58,11 +60,11 @@ export const AdWidget = () => {
           <div className="absolute inset-0 bg-linear-to-t from-slate-950/50 to-transparent" />
         </div>
 
-        <div className="space-y-1">
-          <h4 className="text-sm font-semibold text-white leading-tight">
+        <div className="space-y-1.5 relative">
+          <h4 className="text-[12px] font-medium text-white group-hover:text-primary-400 transition-colors">
             {ad.title}
           </h4>
-          <p className="text-xs text-slate-500 line-clamp-2">
+          <p className="text-[12px] font-medium text-slate-500 line-clamp-2">
             {ad.description}
           </p>
         </div>
@@ -70,11 +72,11 @@ export const AdWidget = () => {
         {ad.link && (
           <button
             onClick={handleAdClick}
-            className="flex items-center justify-center gap-2 w-full py-1.5 rounded-lg text-xs font-medium text-white
-                       bg-black/20 hover:bg-white/10 transition border border-white/10 active:scale-95"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-[12px]  font-medium text-white
+                       bg-white/5 hover:bg-primary-600 transition-all border border-white/10 hover:border-primary-500/20 active:scale-95 shadow-lg group-hover:shadow-primary-900/10"
           >
-            Visit Website
-            <ExternalLink size={12} className="text-indigo-400" />
+            Access Asset
+            <ExternalLink size={12} className="text-primary-400 group-hover:text-white" />
           </button>
         )}
       </div>

@@ -23,10 +23,10 @@ export const ProfilePostCard = ({ post, onUpdate }) => {
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-primary-400 bg-primary-400/5 px-2 py-0.5 rounded border border-primary-400/10">
+                    <span className="text-[12px]   font-medium text-primary-400 bg-primary-400/5 px-2 py-0.5 rounded border border-primary-400/10">
                         {post.category}
                     </span>
-                    <span className="text-xs text-slate-500">
+                    <span className="text-[12px] text-slate-500">
                         {new Date(post.createdAt).toLocaleDateString()}
                     </span>
                 </div>
@@ -38,7 +38,7 @@ export const ProfilePostCard = ({ post, onUpdate }) => {
                 </button>
             </div>
 
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-[12px] text-slate-400 leading-relaxed">
                 {post.body}
             </p>
 
@@ -48,7 +48,7 @@ export const ProfilePostCard = ({ post, onUpdate }) => {
                 </div>
             )}
 
-            <div className="flex items-center gap-4 pt-2 border-t border-white/5 text-xs font-bold text-slate-500">
+            <div className="flex items-center gap-4 pt-2 border-t border-white/5 text-[12px]   font-medium text-slate-500">
                 <span className="flex items-center gap-1"><ShieldCheck size={10} className="text-primary-500" /> {post.likes?.length || 0} Likes</span>
                 <span className="flex items-center gap-1"><Mail size={10} className="text-accent" /> {post.commentsCount || 0} Comments</span>
             </div>

@@ -63,155 +63,160 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center">
       <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="glass w-full max-w-md rounded-xl border border-white/10 bg-slate-900 shadow-2xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="relative w-full md:max-w-md bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center">
-              <Megaphone className="text-rose-500" size={16} />
+        <div className="flex items-center justify-between p-6 border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center border border-rose-500/20">
+              <Megaphone className="text-rose-500" size={20} />
             </div>
             <div>
-              <h2 className="text-xs font-semibold text-white">
+              <h2 className="text-[12px]   font-medium text-white">
                 Create Campaign
               </h2>
-              <p className="text-[11px] text-slate-500">
-                Authorized Community Action Protocol
+              <p className="text-[12px] text-slate-500">
+                Start a movement in your city
               </p>
             </div>
           </div>
-
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-white transition"
+            className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
           >
-            <X size={16} />
+            <X size={18} />
           </button>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="max-h-[70vh] overflow-y-auto p-5 space-y-4"
-        >
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              Campaign Title
-            </label>
-            <input
-              required
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
-              placeholder="Enter Compaign Title"
-              className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              Campaign Objective
-            </label>
-            <textarea
-              required
-              value={formData.objective}
-              onChange={(e) =>
-                setFormData({ ...formData, objective: e.target.value })
-              }
-              placeholder="Your Compaign Objective"
-              className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white placeholder:text-slate-700 focus:outline-none focus:border-primary-500/50 transition-all resize-none min-h-[90px]"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
+        <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
+          <form onSubmit={handleSubmit} className="space-y-6 pb-6">
             <div className="space-y-2">
               <label className="text-[12px] font-medium text-slate-500 ml-1">
-                Participation Target
+                Campaign Title
               </label>
               <input
-                type="number"
-                min="1"
-                value={formData.target}
+                required
+                value={formData.title}
                 onChange={(e) =>
-                  setFormData({ ...formData, target: e.target.value })
+                  setFormData({ ...formData, title: e.target.value })
                 }
-                className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white focus:outline-none focus:border-primary-500/50 transition-all"
+                placeholder="Enter campaign title..."
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
               />
             </div>
 
             <div className="space-y-2">
               <label className="text-[12px] font-medium text-slate-500 ml-1">
-                Campaign Duration (Days)
+                Description
               </label>
-              <input
-                type="number"
-                min="1"
-                value={formData.daysLeft}
+              <textarea
+                required
+                value={formData.objective}
                 onChange={(e) =>
-                  setFormData({ ...formData, daysLeft: e.target.value })
+                  setFormData({ ...formData, objective: e.target.value })
                 }
-                className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white focus:outline-none focus:border-primary-500/50 transition-all"
+                placeholder="Describe your campaign objective..."
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg p-5 h-32 resize-none text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
               />
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              Campaign Visual (Optional)
-            </label>
-            <label className="flex items-center gap-3 w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-2.5 cursor-pointer hover:border-primary-500/40 transition-all">
-              <input
-                type="file"
-                hidden
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-              <ImageIcon
-                size={14}
-                className={file ? "text-primary-400" : "text-slate-600"}
-              />
-              <span
-                className={`text-[11px] font-bold truncate ${
-                  file ? "text-white" : "text-slate-500"
-                }`}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-[12px] font-medium text-slate-500 ml-1">
+                  Target Supporters
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  value={formData.target}
+                  onChange={(e) =>
+                    setFormData({ ...formData, target: e.target.value })
+                  }
+                  className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[12px] font-medium text-slate-500 ml-1">
+                  Duration (Days)
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  value={formData.daysLeft}
+                  onChange={(e) =>
+                    setFormData({ ...formData, daysLeft: e.target.value })
+                  }
+                  className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Campaign Image (Optional)
+              </label>
+              <label className="flex items-center gap-4 w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 cursor-pointer hover:border-primary-500/40 transition-all shadow-inner group">
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+                <div className={`p-2 rounded-lg ${file ? "bg-primary-500/20 text-primary-400" : "bg-slate-900 text-slate-600"} group-hover:scale-110 transition-transform`}>
+                  <ImageIcon size={18} />
+                </div>
+                <span
+                  className={`text-[12px]   font-medium truncate ${file ? "text-white" : "text-slate-700"
+                    }`}
+                >
+                  {file ? file.name : "Upload image"}
+                </span>
+              </label>
+            </div>
+
+            {progress > 0 && progress < 100 && (
+              <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden shadow-inner">
+                <div
+                  className="h-full bg-primary-600 transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            )}
+
+            <div className="flex gap-4 pt-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/5 text-[12px]"
               >
-                {file ? file.name : "Attach Image"}
-              </span>
-            </label>
-          </div>
-
-          {progress > 0 && progress < 100 && (
-            <div className="h-1 w-full bg-slate-950 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary-600 transition-all"
-                style={{ width: `${progress}%` }}
-              />
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 bg-primary-600 hover:bg-primary-500 text-white   font-medium py-3 rounded-lg transition-all disabled:opacity-50 active:scale-95 shadow-xl shadow-primary-900/40 text-[12px] border border-white/10"
+              >
+                {loading ? (
+                  <Loader2 className="animate-spin mx-auto" size={16} />
+                ) : (
+                  "Create"
+                )}
+              </button>
             </div>
-          )}
-          <div className="flex gap-3 pt-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-white/5 hover:bg-white/10 text-slate-400 py-3 rounded-lg text-[11px] font-bold border border-white/10 transition"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 bg-primary-600 hover:bg-primary-500 text-white py-3 rounded-lg text-[11px] font-bold transition-all disabled:opacity-50 active:scale-95"
-            >
-              {loading ? (
-                <Loader2 className="animate-spin mx-auto" size={14} />
-              ) : (
-                "Launch Campaign"
-              )}
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </motion.div>
     </div>
   );

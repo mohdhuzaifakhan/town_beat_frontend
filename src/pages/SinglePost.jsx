@@ -39,9 +39,9 @@ const SinglePost = () => {
             <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
                 <AlertCircle className="text-slate-500" size={32} />
             </div>
-            <h2 className="text-xl font-bold text-white">Content Unavailable</h2>
+            <h2 className="text-xl   font-medium text-white">Content Unavailable</h2>
             <p className="text-slate-400">{error || "This post doesn't exist anymore."}</p>
-            <Link to="/" className="inline-flex items-center gap-2 text-primary-400 font-bold hover:text-primary-300 transition-colors mt-4">
+            <Link to="/" className="inline-flex items-center gap-2 text-primary-400   font-medium hover:text-primary-300 transition-colors mt-4">
                 <ArrowLeft size={16} />
                 Return to Feed
             </Link>
@@ -49,21 +49,34 @@ const SinglePost = () => {
     )
 
     return (
-        <div className="max-w-3xl mx-auto py-6 pb-24 md:pb-6 space-y-6">
-            <button
-                onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group mb-4 px-2"
-            >
-                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                <span className="text-[11px] font-medium">Back to Signal Stream</span>
-            </button>
+        <div className="max-w-3xl mx-auto pb-24 md:pb-6 no-scrollbar">
+            {/* Mobile Header for Single Post */}
+            <div className="md:hidden sticky top-[57px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/5 pb-2 pt-3 px-3">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-slate-400 active:scale-95 transition-all"
+                >
+                    <ArrowLeft size={16} />
+                    <span className="text-[12px]   font-medium  ">Return to Signal Stream</span>
+                </button>
+            </div>
 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-            >
-                <PostCard post={post} />
-            </motion.div>
+            <div className="px-3 md:px-0 mt-6 md:mt-4 space-y-6">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="hidden md:flex items-center gap-2 text-slate-500 hover:text-white transition-colors group mb-4"
+                >
+                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                    <span className="text-[12px]   font-medium     ">Back to Stream</span>
+                </button>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                >
+                    <PostCard post={post} onUpdate={() => navigate(0)} />
+                </motion.div>
+            </div>
         </div>
     )
 }

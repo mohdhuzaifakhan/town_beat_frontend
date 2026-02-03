@@ -31,7 +31,7 @@ export default function Register() {
     e.preventDefault();
 
     if (!formData.location) {
-      return setError("Please select your city");
+      return setError("please select your city");
     }
 
     setError("");
@@ -39,83 +39,81 @@ export default function Register() {
     try {
       await register(formData);
       navigate("/login", {
-        state: {
-          message: "Verification email sent. Please check your inbox.",
-        },
+        state: { message: "verification email sent. check your inbox." },
       });
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      setError(err.response?.data?.message || "registration failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 overflow-x-hidden p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl grid lg:grid-cols-2 rounded-lg overflow-hidden"
+        className="w-full max-w-5xl md:grid md:grid-cols-2 rounded-lg overflow-hidden relative"
       >
-        {/* LEFT PANEL */}
-        <div className="hidden lg:flex flex-col justify-between p-6 border-r border-white/5">
+        {/* left panel */}
+        <div className="hidden md:flex flex-col justify-around p-8 px-2 border-r border-white/5 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
-                <MapPin className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-12 h-12 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/40 border border-primary-500/20">
+                <MapPin className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-medium text-white">Town Beat</span>
+              <span className="text-2xl   font-medium text-white">town beat</span>
             </div>
 
-            <h2 className="text-4xl font-extrabold text-white leading-tight">
-              Join your city.
+            <h2 className="text-4xl   font-medium text-white">
+              join your <span className="text-primary-500">city.</span>
               <br />
-              Share your voice.
+              share your <span className="text-primary-500">voice.</span>
               <br />
-              <span className="text-primary-500">Build community.</span>
+              build <span className="text-primary-500">network.</span>
             </h2>
 
-            <ul className="space-y-3 mt-8">
+            <ul className="space-y-2 mt-12">
               {[
-                "Verified local citizens",
-                "City-based discussions",
-                "Trusted community updates",
+                "verified local citizens",
+                "city-based signals",
+                "trusted updates",
               ].map((text) => (
-                <li
-                  key={text}
-                  className="flex items-center gap-3 text-slate-300"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-primary-500" />
-                  <span className="text-sm font-medium">{text}</span>
+                <li key={text} className="flex items-center gap-3 text-slate-400">
+                  <div className="w-5 h-5 rounded-full bg-primary-500/10 flex items-center justify-center border border-primary-500/20">
+                    <CheckCircle2 className="w-3 h-3 text-primary-500" />
+                  </div>
+                  <span className="text-[12px] font-medium">{text}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="p-8 lg:p-12 flex flex-col justify-center">
-          <div className="mb-6 text-center lg:text-left">
-            <div className="lg:hidden flex justify-center mb-5">
-              <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-900/30">
+        {/* right panel */}
+        <div className="w-full flex flex-col justify-center p-8 px-2 sm:p-4 lg:p-16 relative z-10">
+          <div className="mb-10 text-center md:text-left">
+            <div className="md:hidden flex justify-center mb-3">
+              <div className="w-12 h-12 rounded-lg bg-primary-600 flex items-center justify-center shadow-2xl shadow-primary-900/50 border border-primary-500/20">
                 <MapPin className="w-6 h-6 text-white" />
               </div>
             </div>
 
-            <h3 className="text-2xl font-medium text-white">
-              Initialize Identity
+            <h3 className="text-2xl md:text-3xl   font-medium text-white mb-2">
+              register
             </h3>
-            <p className="text-sm text-slate-400 mt-1">
-              Register on the Town Beat network
+            <p className="text-[12px] text-slate-500">
+              create your town beat account
             </p>
           </div>
 
           <AnimatePresence mode="wait">
             {error && (
               <motion.div
-                initial={{ opacity: 0, x: 12 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -12 }}
-                className="mb-4 flex items-center gap-3 p-3 rounded-lg text-sm border bg-red-500/10 border-red-500/20 text-red-400"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="mb-6 flex items-center gap-4 p-4 rounded-lg text-[12px] border border-red-500/20 bg-red-500/10 text-red-500"
               >
                 <AlertCircle className="w-4 h-4" />
                 {error}
@@ -123,14 +121,14 @@ export default function Register() {
             )}
           </AnimatePresence>
 
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[12px] font-medium text-slate-500 ml-1">
-                  Full Name
+                <label className="text-[12px] text-slate-500 ml-1">
+                  full name
                 </label>
-                <div className="relative group">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
                   <input
                     type="text"
                     required
@@ -138,32 +136,26 @@ export default function Register() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    placeholder="Your name"
-                    className="
-                      w-full bg-slate-950/50
-                      border border-white/10 rounded-lg
-                      px-4 py-3 pl-9
-                      text-[11px] font-bold text-white
-                      placeholder:text-slate-500
-                      focus:outline-none focus:border-primary-500/50
-                      transition-all
-                    "
+                    placeholder="your name"
+                    className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
                   />
                 </div>
               </div>
-              <CityDropdown
-                value={formData.location}
-                onChange={(city) =>
-                  setFormData({ ...formData, location: city })
-                }
-              />
+
+              <div className="space-y-2">
+                <CityDropdown
+                  value={formData.location}
+                  onChange={(city) =>
+                    setFormData({ ...formData, location: city })
+                  }
+                />
+              </div>
             </div>
+
             <div className="space-y-2">
-              <label className="text-[12px] font-medium text-slate-500 ml-1">
-                Email Address
-              </label>
-              <div className="relative group">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+              <label className="text-[12px] text-slate-500 ml-1">email</label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
                 <input
                   type="email"
                   required
@@ -171,26 +163,16 @@ export default function Register() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="example@email.com"
-                  className="
-                    w-full bg-slate-950/50
-                    border border-white/10 rounded-lg
-                    px-4 py-3 pl-9
-                    text-[11px] font-bold text-white
-                    placeholder:text-slate-500
-                    focus:outline-none focus:border-primary-500/50
-                    transition-all
-                  "
+                  placeholder="your email"
+                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-[12px] font-medium text-slate-500 ml-1">
-                Password
-              </label>
-              <div className="relative group">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary-500" />
+              <label className="text-[12px] text-slate-500 ml-1">password</label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
                 <input
                   type="password"
                   required
@@ -199,49 +181,37 @@ export default function Register() {
                     setFormData({ ...formData, password: e.target.value })
                   }
                   placeholder="••••••••"
-                  className="
-                    w-full bg-slate-950/50
-                    border border-white/10 rounded-lg
-                    px-4 py-3 pl-9
-                    text-[11px] font-bold text-white
-                    placeholder:text-slate-500
-                    focus:outline-none focus:border-primary-500/50
-                    transition-all
-                  "
+                  className="w-full bg-slate-950/80 border border-white/5 rounded-lg px-5 py-3 pl-14 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 shadow-inner"
                 />
               </div>
             </div>
+
             <button
               type="submit"
               disabled={loading}
-              className="
-                w-full mt-3 flex items-center justify-center gap-2
-                bg-primary-600 hover:bg-primary-500
-                text-white px-5 py-2.5 rounded-md
-                font-bold text-[12px]
-                transition-all shadow-lg shadow-primary-900/20
-                disabled:opacity-60 active:scale-95
-              "
+              className="w-full mt-4 flex items-center justify-center gap-4 bg-primary-600 hover:bg-primary-500 text-white px-8 py-3 rounded-lg   font-medium text-[12px] transition-all shadow-2xl shadow-primary-900/40 disabled:opacity-60 active:scale-[0.98] border border-white/10"
             >
               {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <>
-                  Create Account
-                  <ArrowRight className="w-4 h-4" />
+                  register
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-slate-400">
-            Already registered?{" "}
-            <Link
-              to="/login"
-              className="text-primary-500 hover:text-primary-400 font-semibold"
-            >
-              Sign in
-            </Link>
+          <div className="mt-10 text-center">
+            <p className="text-[12px] text-slate-500">
+              already have an account?
+              <Link
+                to="/login"
+                className="ml-1 text-primary-500 hover:text-primary-400"
+              >
+                login
+              </Link>
+            </p>
           </div>
         </div>
       </motion.div>

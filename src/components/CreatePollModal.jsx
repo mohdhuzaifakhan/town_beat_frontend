@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Vote, Loader2 } from "lucide-react";
+import { Vote, Loader2, X } from "lucide-react";
 import api from "../api/client";
-import { PollDurationDropdown } from "./PollDurationDropdown.";
+import { PollDurationDropdown } from "./PollDurationDropdown";
 
 export const CreatePollModal = ({ onClose, onCreated }) => {
   const [question, setQuestion] = useState("");
@@ -62,100 +62,124 @@ export const CreatePollModal = ({ onClose, onCreated }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="glass w-full max-w-sm rounded-lg p-6 border-white/5 max-h-[90vh] flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="relative w-full md:max-w-md bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
       >
-        {/* Header (fixed) */}
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center">
-            <Vote className="text-primary-500" size={16} />
+        <div className="flex items-center justify-between p-6 border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-lg bg-primary-600/10 flex items-center justify-center border border-primary-500/20">
+              < Vote className="text-primary-500" size={20} />
+            </div>
+            <div>
+              <h2 className="text-[12px]   font-medium text-white">
+                Create Poll
+              </h2>
+              <p className="text-[12px] text-slate-500">
+                Ask your community
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xs font-medium text-white">Create Poll</h2>
-            <p className="text-slate-600 text-[11px] font-medium">
-              Ask a question. Let your region decide.
-            </p>
-          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+          >
+            <X size={18} />
+          </button>
         </div>
 
-        {/* Scrollable content */}
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-5 overflow-y-auto pr-1 mt-5 custom-scrollbar"
-        >
-          {/* Question */}
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              What do you want to ask?
-            </label>
-            <textarea
-              required
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-4 h-24 resize-none text-[11px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all font-bold"
-              placeholder="Type a clear question for your community"
-            />
-          </div>
-
-          {/* Options */}
-          <div className="space-y-3">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              Poll Options
-            </label>
-
+        <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
+          <form onSubmit={handleSubmit} className="space-y-6 pb-6">
             <div className="space-y-2">
-              {options.map((opt, idx) => (
-                <input
-                  key={idx}
-                  required
-                  value={opt}
-                  onChange={(e) => updateOption(idx, e.target.value)}
-                  className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all"
-                  placeholder={`Option ${idx + 1}`}
-                />
-              ))}
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Poll Question
+              </label>
+              <textarea
+                required
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg p-5 h-28 resize-none text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                placeholder="Type a clear question for your community..."
+              />
             </div>
 
-            <button
-              type="button"
-              onClick={addOption}
-              className="text-primary-500 text-[12px] font-medium hover:text-primary-400 transition-colors ml-1"
-            >
-              + Add another option
-            </button>
-          </div>
+            <div className="space-y-4">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Options
+              </label>
 
-          <PollDurationDropdown
-            value={durationUnit}
-            onChange={setDurationUnit}
-            durationValue={durationValue}
-            setDurationValue={setDurationValue}
-          />
+              <div className="space-y-3">
+                {options.map((opt, idx) => (
+                  <div key={idx} className="relative group/opt">
+                    <input
+                      required
+                      value={opt}
+                      onChange={(e) => updateOption(idx, e.target.value)}
+                      className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                      placeholder={`Option ${idx + 1}`}
+                    />
+                    {options.length > 2 && (
+                      <button
+                        type="button"
+                        onClick={() => setOptions(options.filter((_, i) => i !== idx))}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-700 hover:text-red-500 transition-colors"
+                      >
+                        <X size={14} />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-          <div className="flex gap-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500 font-bold py-3 rounded-lg transition-all border border-white/5 text-[11px]"
-            >
-              Abort
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 bg-primary-600 hover:bg-primary-500 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-primary-900/40 text-[11px] border border-white/10"
-            >
-              {loading ? (
-                <Loader2 className="animate-spin mx-auto" size={12} />
-              ) : (
-                "Publish Poll"
-              )}
-            </button>
-          </div>
-        </form>
+              <button
+                type="button"
+                onClick={addOption}
+                className="flex items-center gap-2 text-primary-500 text-[12px]   font-medium hover:text-primary-400 transition-colors ml-1"
+              >
+                + Add Option
+              </button>
+            </div>
+
+            <PollDurationDropdown
+              value={durationUnit}
+              onChange={setDurationUnit}
+              durationValue={durationValue}
+              setDurationValue={setDurationValue}
+            />
+
+            <div className="flex gap-4 pt-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/5 text-[12px]"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 bg-primary-600 hover:bg-primary-500 text-white   font-medium py-3 rounded-lg transition-all disabled:opacity-50 active:scale-95 shadow-xl shadow-primary-900/40 text-[12px] border border-white/10"
+              >
+                {loading ? (
+                  <Loader2 className="animate-spin mx-auto" size={16} />
+                ) : (
+                  "Create Poll"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </motion.div>
     </div>
   );

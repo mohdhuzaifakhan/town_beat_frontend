@@ -44,7 +44,7 @@ const GenericSearchBar = () => {
           rounded-lg
           py-1.5
           pl-8 pr-3
-          text-xs md:text-sm
+          text-[12px] md:text-[12px]
           text-white
           placeholder:text-slate-500
           focus:outline-none

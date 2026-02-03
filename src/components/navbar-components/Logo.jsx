@@ -10,7 +10,7 @@ export function Logo({ title }) {
       >
         <MapPin className="w-4 h-4 text-white" />
       </Link>
-      <span className="text-xl font-bold text-white hidden sm:block">
+      <span className="text-xl   font-medium text-white hidden sm:block">
         {title || "Town Beat"}
       </span>
     </div>

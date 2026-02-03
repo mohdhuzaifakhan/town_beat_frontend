@@ -10,10 +10,10 @@ import {
 } from "lucide-react";
 
 const categories = [
-  { value: "General", label: "General News", icon: Newspaper },
-  { value: "Civic", label: "Civic News", icon: Landmark },
-  { value: "Development", label: "Development News", icon: Building2 },
-  { value: "Politics", label: "Politics News", icon: Vote },
+  { value: "General", label: "General", icon: Newspaper },
+  { value: "Civic", label: "Civic", icon: Landmark },
+  { value: "Development", label: "Development", icon: Building2 },
+  { value: "Politics", label: "Politics", icon: Vote },
 ];
 
 export const NewsCategoryDropdown = ({ category, setCategory }) => {
@@ -63,8 +63,8 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
 
   return (
     <div className="space-y-2">
-      <label className="text-[11px] font-medium text-slate-500 ml-1">
-        News Category
+      <label className="text-[12px] font-medium text-slate-500 ml-1">
+        Post Category
       </label>
 
       <button
@@ -72,13 +72,12 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
         type="button"
         onClick={() => setOpen((p) => !p)}
         className={`
-          flex justify-between items-center gap-2 w-full
+          flex justify-between items-center gap-3 w-full
           bg-slate-950/50 border rounded-lg px-4 py-3
-          text-sm font-medium transition-all
-          ${
-            open
-              ? "border-primary-500 ring-2 ring-primary-500/20"
-              : "border-slate-700 hover:border-slate-500"
+          text-[12px] font-medium transition-all
+          ${open
+            ? "border-primary-500 ring-2 ring-primary-500/20"
+            : "border-slate-700 hover:border-slate-500"
           }
           text-slate-200
         `}
@@ -86,14 +85,13 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
         <div className="flex items-center gap-2 truncate">
           {current && <current.icon className="w-4 h-4 text-primary-400" />}
           <span className="truncate">
-            {current?.label || "Select Category"}
+            {current?.label || "Select category"}
           </span>
         </div>
 
         <ChevronDown
-          className={`w-4 h-4 text-slate-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`w-4 h-4 text-slate-500 transition-transform ${open ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -109,10 +107,10 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
               width: rect.width,
             }}
           >
-            <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
+            <div className="bg-slate-900 border border-slate-700 rounded-lg shadow-2xl overflow-hidden">
               <div className="p-1 max-h-72 overflow-y-auto custom-scrollbar">
-                <div className="px-3 py-2 text-[11px] font-semibold uppercase    text-slate-500">
-                  Select Category
+                <div className="px-3 py-2 text-[12px] text-slate-500">
+                  Select category
                 </div>
 
                 {categories.map((item) => {
@@ -128,11 +126,10 @@ export const NewsCategoryDropdown = ({ category, setCategory }) => {
                       }}
                       className={`
                         w-full flex items-center justify-between
-                        px-3 py-2 rounded-md text-sm transition-colors
-                        ${
-                          isSelected
-                            ? "bg-primary-600/10 text-primary-400"
-                            : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                        px-3 py-2 rounded-md text-[12px] transition-colors
+                        ${isSelected
+                          ? "bg-primary-600/10 text-primary-400"
+                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }
                       `}
                     >

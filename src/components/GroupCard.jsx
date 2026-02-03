@@ -72,78 +72,67 @@ export const GroupCard = ({ group, onUpdate }) => {
     <>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="group relative bg-slate-900/40 border border-white/5 rounded-lg p-3 sm:p-5 hover:border-primary-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-900/10 overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/5 blur-3xl -mr-16 -mt-16 group-hover:bg-primary-600/10 transition-colors duration-500" />
-        <div className="flex gap-5">
+        <div className="absolute top-0 right-0 w-48 h-48 bg-primary-600/[0.03] blur-3xl -mr-24 -mt-24 group-hover:bg-primary-600/10 transition-colors duration-500" />
+
+        <div className="flex gap-4 sm:gap-5">
           <div className="relative shrink-0">
-            <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-white/10 flex items-center justify-center text-2xl font-medium text-primary-500 group-hover:scale-105 transition-transform duration-500 overflow-hidden shadow-2xl">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg sm:rounded-lg bg-slate-950 border border-white/10 flex items-center justify-center text-xl sm:text-2xl   font-medium text-primary-500 group-hover:scale-105 transition-transform duration-500 overflow-hidden shadow-2xl">
               {group.image ? (
-                <img src={group.image} className="w-full h-full object-cover" />
+                <img src={group.image} className="w-full h-full object-cover" alt={group.name} />
               ) : (
                 group.name[0]
               )}
             </div>
             {isMember && (
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg bg-emerald-500 border-4 border-slate-900 flex items-center justify-center shadow-lg">
-                <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-emerald-500 border-[3px] border-slate-950 flex items-center justify-center shadow-lg">
+                <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white animate-pulse" />
               </div>
             )}
           </div>
 
-          <div className="flex-1 min-w-0 space-y-3">
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-1 min-w-0">
-                <h3 className="text-sm font-medium text-white    truncate group-hover:text-primary-300 transition-colors duration-300">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <div className="space-y-0.5 min-w-0">
+                <h3 className="text-[12px]   font-medium text-white truncate group-hover:text-primary-400 transition-colors duration-300">
                   {group.name}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-md text-[11px] font-medium   bg-white/5 border border-white/5 text-slate-500">
+                  <span className="px-1.5 py-0.5 rounded-md text-[12px]   font-medium bg-white/5 border border-white/5 text-slate-500     ">
                     {group.type}
                   </span>
                   {isOwner && (
-                    <span className="px-2 py-0.5 rounded-md text-[11px] font-medium   bg-amber-500/10 border border-amber-500/20 text-amber-500">
+                    <span className="px-1.5 py-0.5 rounded-md text-[12px]   font-medium bg-amber-500/10 border border-amber-500/20 text-amber-500     ">
                       Authority
                     </span>
                   )}
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-[12px] font-medium text-slate-500   bg-slate-950/50 px-3 py-1.5 rounded-lg border border-white/5 shadow-inner">
-                <Users size={12} className="text-primary-500" />
+              <div className="flex items-center gap-1 text-[12px]   font-medium text-slate-400 bg-slate-950/50 px-2 py-1 rounded-lg border border-white/5 shadow-inner shrink-0">
+                <Users size={10} className="text-primary-500" />
                 {group.membersCount}
               </div>
             </div>
 
-            <p className="text-[12px] text-slate-300 font-medium line-clamp-2">
-              {group.description ||
-                "Connecting local citizens through shared objectives."}
+            <p className="text-[12px] text-slate-400 font-medium line-clamp-2 mt-2 leading-relaxed">
+              {group.description || "No description provided for this sector."}
             </p>
 
-            <div className="flex items-center justify-between pt-2">
-              <div className="flex gap-4">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleInviteTrigger();
-                  }}
-                  className="
-                    w-full sm:w-auto
-                    px-4 py-2
-                    rounded-lg
-                    bg-emerald-500/10 hover:bg-emerald-500
-                    text-emerald-400 hover:text-white
-                    border border-emerald-500/20
-                    transition-all duration-300
-                    font-medium text-[11px]
-                    active:scale-95
-                    flex items-center justify-center gap-2
-                "
-                >
-                  Group Code
-                </button>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-3">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleInviteTrigger();
+                }}
+                className="px-4 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 transition-all duration-300   font-medium text-[12px]      active:scale-95 flex items-center justify-center gap-2"
+              >
+                Access Code
+              </button>
+
+              <div className="flex gap-2">
                 {isOwner ? (
                   <button
                     onClick={(e) => {
@@ -151,9 +140,9 @@ export const GroupCard = ({ group, onUpdate }) => {
                       setIsDeleting(true);
                     }}
                     disabled={loading}
-                    className="w-full sm:w-auto px-4 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white border border-rose-500/20 transition-all duration-300 font-medium text-[11px]   disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2"
+                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white border border-rose-500/20 transition-all duration-300   font-medium text-[12px]      disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2"
                   >
-                    <Trash2 size={12} /> Dismantle
+                    <Trash2 size={12} strokeWidth={2.5} /> Dismantle
                   </button>
                 ) : isMember ? (
                   <button
@@ -162,9 +151,9 @@ export const GroupCard = ({ group, onUpdate }) => {
                       setIsLeaving(true);
                     }}
                     disabled={loading}
-                    className="w-full sm:w-auto px-4 py-2 rounded-lg bg-white/5 hover:bg-rose-500/10 text-slate-400 hover:text-rose-500 border border-white/5 hover:border-rose-500/20 transition-all duration-300 font-medium text-[11px] disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2"
+                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-white/5 hover:bg-rose-500/10 text-slate-400 hover:text-rose-500 border border-white/10 hover:border-rose-500/20 transition-all duration-300   font-medium text-[12px]      disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2"
                   >
-                    <LogOut size={12} /> Disconnect
+                    <LogOut size={12} strokeWidth={2.5} /> Leave
                   </button>
                 ) : (
                   <button
@@ -173,18 +162,9 @@ export const GroupCard = ({ group, onUpdate }) => {
                       handleJoin();
                     }}
                     disabled={loading}
-                    className="w-full sm:w-auto px-4 py-2 rounded-lg 
-                      bg-primary-500/10 hover:bg-primary-500 
-                      text-primary-500 hover:text-white 
-                        border border-primary-500/20 
-                        transition-all duration-300 
-                        font-medium text-[11px] 
-                        disabled:opacity-50 
-                        active:scale-95 
-                        shadow-sm hover:shadow-md"
-
+                    className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-primary-600 hover:bg-primary-500 text-white border border-primary-400/20 transition-all duration-300   font-medium text-[12px]      disabled:opacity-50 active:scale-95 shadow-lg shadow-primary-900/20"
                   >
-                    {loading ? "Connecting..." : "Join Group"}
+                    {loading ? "Joining..." : "Join Sector"}
                   </button>
                 )}
               </div>

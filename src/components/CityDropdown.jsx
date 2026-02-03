@@ -74,7 +74,7 @@ export const CityDropdown = ({ value, onChange }) => {
 
   return (
     <div className="space-y-1.5">
-      <label className="text-xs text-slate-400 ml-1">City</label>
+      <label className="text-[12px] font-medium text-slate-500 ml-1">City</label>
 
       <button
         ref={triggerRef}
@@ -84,10 +84,9 @@ export const CityDropdown = ({ value, onChange }) => {
           w-full flex items-center justify-between
           bg-slate-950/50 border rounded-lg px-4 py-3
           text-[12px] transition-all border-white/10
-          ${
-            open
-              ? "border-primary-500 ring-2 ring-primary-500/20"
-              : "border-slate-700 hover:border-slate-500"
+          ${open
+            ? "border-primary-500 ring-2 ring-primary-500/20"
+            : "border-slate-700 hover:border-slate-500"
           }
           text-slate-200
         `}
@@ -98,9 +97,8 @@ export const CityDropdown = ({ value, onChange }) => {
         </div>
 
         <ChevronDown
-          className={`w-4 h-4 text-slate-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`w-4 h-4 text-slate-500 transition-transform ${open ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -116,11 +114,11 @@ export const CityDropdown = ({ value, onChange }) => {
               width: rect.width,
             }}
           >
-            <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
+            <div className="bg-slate-900 border border-slate-700 rounded-lg shadow-2xl overflow-hidden">
               {/* 👇 max-h ≈ 8 items */}
               <div className="max-h-[320px] overflow-y-auto custom-scrollbar p-1">
-                <div className="px-3 py-2 text-[11px] font-semibold uppercase text-slate-500">
-                  Select City
+                <div className="px-3 py-2 text-[12px] text-slate-500">
+                  Select city
                 </div>
 
                 {cities.map((city) => {
@@ -135,11 +133,10 @@ export const CityDropdown = ({ value, onChange }) => {
                       }}
                       className={`
                         w-full flex items-center justify-between
-                        px-3 py-2 rounded-md text-sm transition-colors
-                        ${
-                          isSelected
-                            ? "bg-primary-600/10 text-primary-400"
-                            : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                        px-3 py-2 rounded-md text-[12px] transition-colors
+                        ${isSelected
+                          ? "bg-primary-600/10 text-primary-400"
+                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }
                       `}
                     >

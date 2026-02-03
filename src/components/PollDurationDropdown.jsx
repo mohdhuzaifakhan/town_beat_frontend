@@ -71,7 +71,7 @@ export const PollDurationDropdown = ({
           min="1"
           value={durationValue}
           onChange={(e) => setDurationValue(e.target.value)}
-          className="w-20 bg-slate-950/50 border border-white/10 rounded-lg px-3 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-primary-500/50 transition-all"
+          className="w-20 bg-slate-950/50 border border-white/10 rounded-lg px-3 py-2 text-[12px] text-white focus:outline-none focus:border-primary-500/50 transition-all font-medium"
         />
 
         <button
@@ -81,24 +81,22 @@ export const PollDurationDropdown = ({
           className={`
             flex-1 flex items-center justify-between gap-2
             bg-slate-950/50 border rounded-lg px-4 py-2
-            text-[11px] font-bold transition-all
-            ${
-              open
-                ? "border-primary-500 ring-2 ring-primary-500/20"
-                : "border-white/10 hover:border-white/20"
+            text-[12px] transition-all
+            ${open
+              ? "border-primary-500 ring-2 ring-primary-500/20"
+              : "border-white/10 hover:border-white/20"
             }
             text-white
           `}
         >
           <div className="flex items-center gap-2 truncate">
             <Clock className="w-4 h-4 text-primary-400" />
-            <span>{current?.label || "Select Unit"}</span>
+            <span>{current?.label || "Select unit"}</span>
           </div>
 
           <ChevronDown
-            className={`w-4 h-4 text-slate-500 transition-transform ${
-              open ? "rotate-180" : ""
-            }`}
+            className={`w-4 h-4 text-slate-500 transition-transform ${open ? "rotate-180" : ""
+              }`}
           />
         </button>
       </div>
@@ -116,7 +114,7 @@ export const PollDurationDropdown = ({
               width: rect.width - 80,
             }}
           >
-            <div className="bg-slate-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden">
+            <div className="bg-slate-900 border border-white/10 rounded-lg shadow-2xl overflow-hidden">
               <div className="p-1">
                 {durationUnits.map((item) => {
                   const isSelected = value === item.value;
@@ -131,10 +129,9 @@ export const PollDurationDropdown = ({
                       className={`
                         w-full flex items-center justify-between
                         px-3 py-2 rounded-md text-[12px] transition-colors
-                        ${
-                          isSelected
-                            ? "bg-primary-600/10 text-primary-400"
-                            : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                        ${isSelected
+                          ? "bg-primary-600/10 text-primary-400"
+                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }
                       `}
                     >

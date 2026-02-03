@@ -18,13 +18,13 @@ export function CommentSection({
         className="bg-black/20 border-t border-white/5"
       >
         <div className="p-3 sm:p-4 space-y-4">
-          <h4 className="text-xs font-bold text-slate-500   pl-1">
+          <h4 className="text-[12px]   font-medium text-slate-500   pl-1">
             Comments ({comments.length})
           </h4>
 
           <div className="space-y-4 max-h-80 overflow-y-auto custom-scrollbar pr-2">
             {comments.length === 0 ? (
-              <div className="text-center py-8 text-slate-500 text-sm">
+              <div className="text-center py-8 text-slate-500 text-[12px]">
                 No comments yet. Be the first to start the conversation!
               </div>
             ) : (
@@ -40,21 +40,21 @@ export function CommentSection({
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <span className="text-xs text-white">
+                      <span className="text-[12px] text-white">
                         {comment.user?.name?.[0] || "U"}
                       </span>
                     )}
                   </div>
                   <div className="flex-1 bg-white/5 rounded-lg rounded-tl-none p-3 border border-white/5">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-white">
+                      <span className="text-[12px] text-white">
                         {comment.user?.name || "Anonymous"}
                       </span>
-                      <span className="text-[11px] text-slate-500">
+                      <span className="text-[12px] text-slate-500">
                         {new Date(comment.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-400">{comment.text}</p>
+                    <p className="text-[12px] text-slate-400">{comment.text}</p>
                   </div>
                 </div>
               ))
@@ -68,7 +68,7 @@ export function CommentSection({
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
                 placeholder="Write a thoughtful comment..."
-                className="w-full bg-slate-900/50 border border-white/10 rounded-lg py-3 pl-4 pr-12 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/50 transition-all"
+                className="w-full bg-slate-900/50 border border-white/10 rounded-lg py-3 pl-4 pr-12 text-[12px] text-white placeholder:text-slate-600 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/50 transition-all"
               />
               <button
                 type="submit"

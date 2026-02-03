@@ -27,7 +27,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                                     <Users className="text-primary-500" size={20} />
                                 </div>
                                 <div>
-                                    <h2 className="text-sm font-medium  text-white">Invite Group Code</h2>
+                                    <h2 className="text-[12px] font-medium  text-white">Invite Group Code</h2>
                                     <p className="text-slate-500 text-[12px]">{groupName}</p>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                         </div>
 
                         <div className="space-y-4">
-                            <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                            <p className="text-[12px] text-slate-400 leading-relaxed font-medium">
                                 Share this code with others to link them to this group
                             </p>
 
@@ -59,7 +59,7 @@ export const InviteModal = ({ isOpen, onClose, inviteCode, groupName }) => {
                         <div className="pt-2">
                             <button
                                 onClick={onClose}
-                                className="w-full bg-primary-600 hover:bg-primary-500 text-white font-bold text-[11px] py-3 rounded-lg active:scale-95"
+                                className="w-full bg-primary-600 hover:bg-primary-500 text-white   font-medium text-[12px] py-3 rounded-lg active:scale-95"
                             >
                                 Done
                             </button>

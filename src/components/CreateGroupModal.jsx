@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Users, PlusSquare, Loader2, Globe, Shield } from "lucide-react";
+import { Users, PlusSquare, Loader2, Globe, Shield, X } from "lucide-react";
 import api from "../api/client";
 import { ProtocolTypeDropdown } from "./ProtocolTypeDropdown";
 
@@ -27,80 +27,101 @@ export const CreateGroupModal = ({ onClose, onCreated }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="glass w-full max-w-sm rounded-lg p-6 space-y-5 border-white/5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="relative w-full md:max-w-md bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
       >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center">
-            <Users className="text-primary-500" size={16} />
+        <div className="flex items-center justify-between p-6 border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-lg bg-primary-600/10 flex items-center justify-center border border-primary-500/20">
+              <Users className="text-primary-500" size={20} />
+            </div>
+            <div>
+              <h2 className="text-[12px]   font-medium text-white">
+                Create Group
+              </h2>
+              <p className="text-[12px] text-slate-500">
+                Build your local community
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xs font-medium text-white">
-              Create Group
-            </h2>
-            <p className="text-slate-600 text-[11px] font-medium">
-              Connect People
-            </p>
-          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+          >
+            <X size={18} />
+          </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              Group Name
-            </label>
-            <input
-              required
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-4 py-3 text-[11px] font-bold text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all"
-              placeholder="Enter Group Name."
-            />
-          </div>
-          <ProtocolTypeDropdown
-            value={formData.type}
-            onChange={(type) => setFormData({ ...formData, type })}
-          />
+        <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
+          <form onSubmit={handleSubmit} className="space-y-6 pb-6">
+            <div className="space-y-2">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Group Name
+              </label>
+              <input
+                required
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                placeholder="Enter group name..."
+              />
+            </div>
 
-          <div className="space-y-2">
-            <label className="text-[12px] font-medium text-slate-500 ml-1">
-              What Is The Purpose?
-            </label>
-            <textarea
-              value={formData.description}
-              onChange={(e) =>
-                setFormData({ ...formData, description: e.target.value })
-              }
-              className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-4 h-24 resize-none text-[11px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/50 transition-all font-bold"
-              placeholder="Describe the purpose of this group"
+            <ProtocolTypeDropdown
+              value={formData.type}
+              onChange={(type) => setFormData({ ...formData, type })}
             />
-          </div>
-          <div className="flex gap-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500 font-bold py-3 rounded-lg transition-all border border-white/5 text-[11px]"
-            >
-              Abort
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 bg-primary-600 hover:bg-primary-500 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-primary-900/40 text-[11px] border border-white/10"
-            >
-              {loading ? (
-                <Loader2 className="animate-spin mx-auto" size={12} />
-              ) : (
-                "Create"
-              )}
-            </button>
-          </div>
-        </form>
+
+            <div className="space-y-2">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                Description
+              </label>
+              <textarea
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+                className="w-full bg-slate-950/50 border border-white/5 rounded-lg p-5 h-32 resize-none text-[12px] text-white placeholder:text-slate-800 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                placeholder="Describe the purpose of this group..."
+              />
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-slate-500   font-medium py-3 rounded-lg transition-all border border-white/5 text-[12px]"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 bg-primary-600 hover:bg-primary-500 text-white   font-medium py-3 rounded-lg transition-all disabled:opacity-50 active:scale-95 shadow-xl shadow-primary-900/40 text-[12px] border border-white/10"
+              >
+                {loading ? (
+                  <Loader2 className="animate-spin mx-auto" size={16} />
+                ) : (
+                  "Create"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </motion.div>
     </div>
   );

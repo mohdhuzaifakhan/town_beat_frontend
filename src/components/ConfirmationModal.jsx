@@ -5,46 +5,54 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-[150] flex items-end md:items-center justify-center">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
                     />
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-md overflow-hidden rounded-lg bg-slate-900 border border-white/10 shadow-2xl"
+                        initial={{ y: "100%", opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: "100%", opacity: 0 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        className="relative w-full md:max-w-md bg-slate-900 md:rounded-lg rounded-t-lg border-t md:border border-white/10 overflow-hidden shadow-2xl overflow-y-auto no-scrollbar"
                     >
-                        <div className="p-6">
-                            <div className="flex items-start justify-between mb-4">
-                                <div className="flex items-center gap-3">
-                                    {isDanger && (
-                                        <div className="p-2 rounded-lg bg-red-500/10 text-red-500">
-                                            <AlertTriangle size={24} />
+                        <div className="p-8">
+                            <div className="flex items-center justify-between mb-6">
+                                <div className="flex items-center gap-4">
+                                    {isDanger ? (
+                                        <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center border border-red-500/20">
+                                            <AlertTriangle className="text-red-500" size={24} />
+                                        </div>
+                                    ) : (
+                                        <div className="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center border border-primary-500/20">
+                                            <AlertTriangle className="text-primary-500" size={24} />
                                         </div>
                                     )}
-                                    <h3 className="text-lg font-bold text-white">{title}</h3>
+                                    <div>
+                                        <h3 className="text-[12px]   font-medium text-white">{title}</h3>
+                                        <p className="text-[12px] text-slate-500 mt-0.5">Please confirm your action</p>
+                                    </div>
                                 </div>
                                 <button
                                     onClick={onClose}
-                                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                                    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
                                 >
-                                    <X size={20} />
+                                    <X size={18} />
                                 </button>
                             </div>
 
-                            <p className="text-slate-400 mb-6 leading-relaxed">
+                            <p className="text-[12px] text-slate-400 leading-relaxed mb-8">
                                 {message}
                             </p>
 
-                            <div className="flex gap-3 justify-end">
+                            <div className="flex flex-col md:flex-row gap-4">
                                 <button
                                     onClick={onClose}
-                                    className="px-4 py-2 rounded-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                                    className="flex-1 px-6 py-3 rounded-lg   font-medium text-[12px] text-slate-500 bg-white/5 hover:bg-white/10 hover:text-white transition-all border border-white/5"
                                 >
                                     {cancelText}
                                 </button>
@@ -53,9 +61,9 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, 
                                         onConfirm();
                                         onClose();
                                     }}
-                                    className={`px-4 py-2 rounded-lg font-bold text-white transition-all transform active:scale-95 ${isDanger
-                                        ? "bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/20"
-                                        : "bg-primary-600 hover:bg-primary-500 shadow-lg shadow-primary-500/20"
+                                    className={`flex-[1.5] px-6 py-3 rounded-lg   font-medium text-[12px] text-white transition-all transform active:scale-95 border border-white/10 ${isDanger
+                                        ? "bg-red-600 hover:bg-red-500 shadow-2xl shadow-red-900/40"
+                                        : "bg-primary-600 hover:bg-primary-500 shadow-2xl shadow-primary-900/40"
                                         }`}
                                 >
                                     {confirmText}
