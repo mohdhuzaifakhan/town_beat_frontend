@@ -40,7 +40,7 @@ export function ProfileButton() {
         className="flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white px-5 py-1.5 rounded-md   font-medium transition-all shadow-lg shadow-primary-900/20 active:scale-95 text-[12px]"
       >
         <UserIcon size={16} />
-        <span>sign in</span>
+        <span>Sign in</span>
       </Link>
     );
   }
@@ -81,33 +81,33 @@ export function ProfileButton() {
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
             >
-              <UserIcon size={16} /> profile
+              <UserIcon size={16} /> Profile
             </Link>
 
-            <Link
+            {/* <Link
               to="/ads/manager"
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 rounded-lg transition-colors font-medium"
             >
-              <Megaphone size={16} /> promote
-            </Link>
+              <Megaphone size={16} /> Promote
+            </Link> */}
 
-            {user.role === "Admin" && (
+            {/* {user.role === "Admin" && (
               <Link
                 to="/admin/ads"
                 onClick={() => setShowUserMenu(false)}
                 className="flex items-center gap-2 px-3 py-2 text-[12px] text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/10 rounded-lg transition-colors font-medium"
               >
-                <PlusSquare size={16} /> billboard
+                <PlusSquare size={16} /> Billboard
               </Link>
-            )}
+            )} */}
 
             {/* <Link
               to="/settings"
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
             >
-              <Settings size={16} /> settings
+              <Settings size={16} /> Settings
             </Link> */}
           </div>
 
@@ -116,7 +116,7 @@ export function ProfileButton() {
               onClick={logout}
               className="w-full flex items-center gap-2 px-3 py-2 text-[12px] text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-colors font-medium"
             >
-              <LogOut size={16} /> sign out
+              <LogOut size={16} /> Sign out
             </button>
           </div>
         </div>

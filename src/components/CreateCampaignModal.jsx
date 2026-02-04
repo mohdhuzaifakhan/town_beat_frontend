@@ -34,7 +34,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
         const uploadData = new FormData();
         uploadData.append("file", file);
 
-        const uploadRes = await api.post("/s3/upload", uploadData, {
+        const uploadRes = await api.post("/files/upload-url", uploadData, {
           onUploadProgress: (p) =>
             setProgress(Math.round((p.loaded * 100) / p.total)),
         });

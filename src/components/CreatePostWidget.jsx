@@ -5,8 +5,13 @@ import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { NewsCategoryDropdown } from "./post-components/NewsCategoryDropdown";
+import axios from "axios";
 
-export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setIsExpanded: propSetExpanded }) => {
+export const CreatePostWidget = ({
+  onPostCreated,
+  isExpanded: propExpanded,
+  setIsExpanded: propSetExpanded,
+}) => {
   const { user } = useAuth();
   const [internalExpanded, setInternalExpanded] = useState(false);
   const [body, setBody] = useState("");
@@ -16,7 +21,8 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
   const [progress, setProgress] = useState(0);
 
   // Use prop if provided, otherwise use internal state
-  const isExpanded = propExpanded !== undefined ? propExpanded : internalExpanded;
+  const isExpanded =
+    propExpanded !== undefined ? propExpanded : internalExpanded;
   const setIsExpanded = (val) => {
     if (propSetExpanded) propSetExpanded(val);
     else setInternalExpanded(val);
@@ -31,14 +37,25 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
 
     try {
       let fileUrl = "";
+
       if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const res = await api.post("/files/upload", formData, {
-          onUploadProgress: (p) =>
-            setProgress(Math.round((p.loaded * 100) / p.total)),
+        const { data } = await api.post("/files/upload-url", {
+          fileName: file.name,
+          mimeType: file.type,
         });
-        fileUrl = res.data.url;
+
+        const { uploadUrl, publicUrl } = data;
+
+        await axios.put(uploadUrl, file, {
+          headers: {
+            "Content-Type": file.type,
+          },
+          onUploadProgress: (e) => {
+            setProgress(Math.round((e.loaded * 100) / e.total));
+          },
+        });
+
+        fileUrl = publicUrl;
       }
 
       await api.post("/posts", {
@@ -47,13 +64,14 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
         image: fileUrl,
         location: user?.location || "Rampur",
       });
+
       setBody("");
       setFile(null);
       setProgress(0);
       closeModal();
       onPostCreated();
     } catch (err) {
-      console.error("Failed to create post");
+      console.error("Failed to create post", err);
     } finally {
       setLoading(false);
     }
@@ -153,7 +171,9 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                         />
                         <ImageIcon
                           size={16}
-                          className={file ? "text-primary-400" : "text-slate-700"}
+                          className={
+                            file ? "text-primary-400" : "text-slate-700"
+                          }
                         />
                         <span
                           className={`text-[12px]   font-medium truncate ${file ? "text-white" : "text-slate-700"}`}
@@ -279,7 +299,9 @@ export const CreatePostWidget = ({ onPostCreated, isExpanded: propExpanded, setI
                             className="hidden"
                             onChange={(e) => setFile(e.target.files[0])}
                           />
-                          <div className={`p-2.5 rounded-lg ${file ? "bg-primary-500/20 text-primary-400" : "bg-slate-900 text-slate-600"}`}>
+                          <div
+                            className={`p-2.5 rounded-lg ${file ? "bg-primary-500/20 text-primary-400" : "bg-slate-900 text-slate-600"}`}
+                          >
                             <ImageIcon size={20} />
                           </div>
                           <span
