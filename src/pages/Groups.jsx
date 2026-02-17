@@ -4,6 +4,7 @@ import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { GroupCard } from "../components/GroupCard";
 import { CreateGroupModal } from "../components/CreateGroupModal";
+import { ConfirmationModal } from "../components/ConfirmationModal";
 import { motion } from "framer-motion";
 
 const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
@@ -13,6 +14,7 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
   const [inviteCode, setInviteCode] = useState("");
   const [joining, setJoining] = useState(false);
   const [error, setError] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const [locationScope, setLocationScope] = useState("Local"); // Added for consistency
   const { user } = useAuth();
 
@@ -43,11 +45,13 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
         setView("my");
         setInviteCode("");
       } else {
-        setError("Invalid group code. Please check and try again.");
+        setError("Security System Error: The provided access code is invalid or has expired.");
+        setShowErrorModal(true);
       }
     } catch (err) {
       console.error(err);
-      setError("Failed to join group. Please check your connection.");
+      setError(err.response?.data?.message || "Encryption Failure: Could not establish a secure connection to join the group.");
+      setShowErrorModal(true);
     } finally {
       setJoining(false);
     }
@@ -218,6 +222,18 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
             setCreateModalOpen(false);
             fetchGroups();
           }}
+        />
+      )}
+
+      {showErrorModal && (
+        <ConfirmationModal
+          isOpen={showErrorModal}
+          onClose={() => setShowErrorModal(false)}
+          onConfirm={() => setShowErrorModal(false)}
+          title="Security System Alert"
+          message={error}
+          confirmText="Acknowledge"
+          isDanger={true}
         />
       )}
     </div>

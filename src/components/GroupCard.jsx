@@ -4,6 +4,7 @@ import { Users, Trash2, LogOut } from "lucide-react";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { Link } from "react-router-dom";
 
 import { InviteModal } from "./InviteModal";
 
@@ -13,6 +14,8 @@ export const GroupCard = ({ group, onUpdate }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const isOwner = user?._id === group.owner;
   const isMember = group.members.includes(user?._id);
@@ -25,6 +28,8 @@ export const GroupCard = ({ group, onUpdate }) => {
       onUpdate();
     } catch (err) {
       console.error(err);
+      setErrorMsg(err.response?.data?.message || "Protocol Failure: Could not join group.");
+      setShowErrorModal(true);
     } finally {
       setLoading(false);
     }
@@ -37,6 +42,8 @@ export const GroupCard = ({ group, onUpdate }) => {
       onUpdate();
     } catch (err) {
       console.error(err);
+      setErrorMsg(err.response?.data?.message || "Protocol Failure: Could not disconnect from group.");
+      setShowErrorModal(true);
     } finally {
       setLoading(false);
       setIsLeaving(false);
@@ -50,6 +57,8 @@ export const GroupCard = ({ group, onUpdate }) => {
       onUpdate();
     } catch (err) {
       console.error(err);
+      setErrorMsg(err.response?.data?.message || "Dismantle Failure: Could not remove group from the collective.");
+      setShowErrorModal(true);
     } finally {
       setLoading(false);
       setIsDeleting(false);
@@ -63,6 +72,8 @@ export const GroupCard = ({ group, onUpdate }) => {
         onUpdate();
       } catch (err) {
         console.error(err);
+        setErrorMsg("Failed to generate access code.");
+        setShowErrorModal(true);
       }
     }
     setShowInvite(true);
@@ -78,7 +89,7 @@ export const GroupCard = ({ group, onUpdate }) => {
       >
         <div className="absolute top-0 right-0 w-48 h-48 bg-primary-600/[0.03] blur-3xl -mr-24 -mt-24 group-hover:bg-primary-600/10 transition-colors duration-500" />
 
-        <div className="flex gap-4 sm:gap-5">
+        <Link to={`/groups/${group._id}`} className="flex gap-4 sm:gap-5">
           <div className="relative shrink-0">
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg sm:rounded-lg bg-slate-950 border border-white/10 flex items-center justify-center text-xl sm:text-2xl   font-medium text-primary-500 group-hover:scale-105 transition-transform duration-500 overflow-hidden shadow-2xl">
               {group.image ? (
@@ -109,6 +120,9 @@ export const GroupCard = ({ group, onUpdate }) => {
                       Authority
                     </span>
                   )}
+                  <span className="px-1.5 py-0.5 rounded-md text-[12px] font-medium bg-primary-500/10 border border-primary-500/20 text-primary-500">
+                    {group.city}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center gap-1 text-[12px]   font-medium text-slate-400 bg-slate-950/50 px-2 py-1 rounded-lg border border-white/10 shadow-inner shrink-0">
@@ -118,12 +132,13 @@ export const GroupCard = ({ group, onUpdate }) => {
             </div>
 
             <p className="text-[12px] text-slate-400 font-medium line-clamp-2 mt-2 leading-relaxed">
-              {group.description || "No description provided for this sector."}
+              {group.description || "No description provided for this group."}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-3" onClick={(e) => e.preventDefault()}>
               <button
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   handleInviteTrigger();
                 }}
@@ -136,6 +151,7 @@ export const GroupCard = ({ group, onUpdate }) => {
                 {isOwner ? (
                   <button
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       setIsDeleting(true);
                     }}
@@ -147,6 +163,7 @@ export const GroupCard = ({ group, onUpdate }) => {
                 ) : isMember ? (
                   <button
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       setIsLeaving(true);
                     }}
@@ -158,27 +175,28 @@ export const GroupCard = ({ group, onUpdate }) => {
                 ) : (
                   <button
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       handleJoin();
                     }}
                     disabled={loading}
                     className="flex-1 sm:flex-none px-6 py-2 rounded-lg bg-primary-600 hover:bg-primary-500 text-white border border-primary-400/20 transition-all duration-300   font-medium text-[12px]      disabled:opacity-50 active:scale-95 shadow-lg shadow-primary-900/20"
                   >
-                    {loading ? "Joining..." : "Join Sector"}
+                    {loading ? "Joining..." : "Join group"}
                   </button>
                 )}
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       </motion.div>
 
       {isDeleting && (
         <ConfirmationModal
           isOpen={isDeleting}
           onClose={() => setIsDeleting(false)}
-          title="Dismantle Sector"
-          message="Are you sure you want to permanently dismantle this sector? This action will disconnect all linked nodes."
+          title="Dismantle group"
+          message="Are you sure you want to permanently dismantle this group? This action will disconnect all linked nodes."
           onConfirm={handleDelete}
           confirmText="Dismantle"
           isDanger={true}
@@ -189,8 +207,8 @@ export const GroupCard = ({ group, onUpdate }) => {
         <ConfirmationModal
           isOpen={isLeaving}
           onClose={() => setIsLeaving(false)}
-          title="Disconnect from Sector"
-          message="Are you sure you want to disconnect your local node from this community sector?"
+          title="Disconnect from group"
+          message="Are you sure you want to disconnect your local node from this community group?"
           onConfirm={handleLeave}
           confirmText="Disconnect"
           isDanger={true}
@@ -203,6 +221,18 @@ export const GroupCard = ({ group, onUpdate }) => {
           onClose={() => setShowInvite(false)}
           inviteCode={group.inviteCode}
           groupName={group.name}
+        />
+      )}
+
+      {showErrorModal && (
+        <ConfirmationModal
+          isOpen={showErrorModal}
+          onClose={() => setShowErrorModal(false)}
+          onConfirm={() => setShowErrorModal(false)}
+          title="Security System Alert"
+          message={errorMsg}
+          confirmText="Acknowledge"
+          isDanger={true}
         />
       )}
     </>

@@ -40,7 +40,7 @@ const VerifyEmail = () => {
                         <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto text-green-400">
                             <CheckCircle size={40} />
                         </div>
-                        <h2 className="text-2xl   font-medium text-white">Email Verified!</h2>
+                        <h2 className="text-2xl font-medium text-white">Email Verified!</h2>
                         <p className="text-slate-400 font-medium">Your account is now active. You can now report news and participate in polls.</p>
                         <button
                             onClick={() => navigate('/login')}

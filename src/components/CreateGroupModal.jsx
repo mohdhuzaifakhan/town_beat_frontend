@@ -3,24 +3,30 @@ import { motion } from "framer-motion";
 import { Users, PlusSquare, Loader2, Globe, Shield, X } from "lucide-react";
 import api from "../api/client";
 import { ProtocolTypeDropdown } from "./ProtocolTypeDropdown";
+import { useAuth } from "../context/AuthContext";
 
 export const CreateGroupModal = ({ onClose, onCreated }) => {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     type: "Civic",
+    city: user?.location || "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       await api.post("/groups", formData);
       onCreated();
       onClose();
     } catch (err) {
       console.error(err);
+      setError(err.response?.data?.message || "Failed to create community group. Check authorization.");
     } finally {
       setLoading(false);
     }
@@ -79,12 +85,32 @@ export const CreateGroupModal = ({ onClose, onCreated }) => {
                 className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
                 placeholder="Enter group name..."
               />
+              {error && (
+                <p className="text-[10px] font-bold text-rose-500 ml-1 animate-pulse uppercase tracking-wider">
+                  {error}
+                </p>
+              )}
             </div>
 
             <ProtocolTypeDropdown
               value={formData.type}
               onChange={(type) => setFormData({ ...formData, type })}
             />
+
+            <div className="space-y-2">
+              <label className="text-[12px] font-medium text-slate-500 ml-1">
+                City / Region
+              </label>
+              <input
+                required
+                value={formData.city}
+                onChange={(e) =>
+                  setFormData({ ...formData, city: e.target.value })
+                }
+                className="w-full bg-slate-950/50 border border-white/10 rounded-lg px-5 py-3 text-[12px] text-white placeholder:text-slate-500 focus:outline-none focus:border-primary-500/40 transition-all shadow-inner"
+                placeholder="Enter city name..."
+              />
+            </div>
 
             <div className="space-y-2">
               <label className="text-[12px] font-medium text-slate-500 ml-1">

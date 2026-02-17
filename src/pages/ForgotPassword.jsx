@@ -55,7 +55,7 @@ export default function ForgotPassword() {
               </span>
             </div>
 
-            <h2 className="text-4xl   font-medium text-white">
+            <h2 className="text-5xl font-bold text-white">
               Forgot <span className="text-primary-500">Access?</span>
               <br />
               Reset <span className="text-primary-500">Securely.</span>
@@ -103,16 +103,14 @@ export default function ForgotPassword() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className={`mb-8 flex items-center gap-4 p-4 rounded-lg text-[12px] border shadow-xl ${
-                  message
+                className={`mb-8 flex items-center gap-4 p-4 rounded-lg text-[12px] border shadow-xl ${message
                     ? "bg-primary-500/10 border-primary-500/20 text-primary-400"
                     : "bg-red-500/10 border-red-500/20 text-red-500"
-                }`}
+                  }`}
               >
                 <div
-                  className={`p-1.5 rounded-lg ${
-                    message ? "bg-primary-500/20" : "bg-red-500/20"
-                  }`}
+                  className={`p-1.5 rounded-lg ${message ? "bg-primary-500/20" : "bg-red-500/20"
+                    }`}
                 >
                   <AlertCircle className="w-4 h-4" />
                 </div>

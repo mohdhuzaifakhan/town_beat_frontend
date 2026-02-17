@@ -216,7 +216,7 @@ const Profile = () => {
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-slate-500 text-[12px] md:text-[12px] font-medium">
                   <div className="flex items-center gap-2">
                     <MapPin size={12} className="text-rose-500/60" />{" "}
-                    {user.location || "Unmapped Sector"}
+                    {user.location || "Unmapped group"}
                   </div>
                   <div className="flex items-center gap-2">
                     <Mail size={12} className="text-primary-500/60" />{" "}

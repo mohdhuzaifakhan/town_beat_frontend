@@ -65,7 +65,7 @@ export default function Register() {
               <span className="text-2xl   font-medium text-white">town beat</span>
             </div>
 
-            <h2 className="text-4xl   font-medium text-white">
+            <h2 className="text-5xl font-bold text-white">
               join your <span className="text-primary-500">city.</span>
               <br />
               share your <span className="text-primary-500">voice.</span>

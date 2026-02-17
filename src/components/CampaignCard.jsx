@@ -102,7 +102,7 @@ export const CampaignCard = ({ campaign, onSupported }) => {
                 </div>
                 <div className="flex items-center gap-1 text-[12px] font-medium text-rose-500/60">
                   <MapPin size={10} className="text-rose-500/50" />
-                  <span className="truncate">{campaign.location || "General Sector"}</span>
+                  <span className="truncate">{campaign.location || "General group"}</span>
                 </div>
               </div>
 

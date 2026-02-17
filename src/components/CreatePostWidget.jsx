@@ -11,6 +11,8 @@ export const CreatePostWidget = ({
   onPostCreated,
   isExpanded: propExpanded,
   setIsExpanded: propSetExpanded,
+  groupId = null,
+  placeholder = null,
 }) => {
   const { user } = useAuth();
   const [internalExpanded, setInternalExpanded] = useState(false);
@@ -19,6 +21,7 @@ export const CreatePostWidget = ({
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState("");
 
   // Use prop if provided, otherwise use internal state
   const isExpanded =
@@ -63,8 +66,10 @@ export const CreatePostWidget = ({
         category,
         image: fileUrl,
         location: user?.location || "Rampur",
+        groupId,
       });
 
+      setError("");
       setBody("");
       setFile(null);
       setProgress(0);
@@ -72,6 +77,7 @@ export const CreatePostWidget = ({
       onPostCreated();
     } catch (err) {
       console.error("Failed to create post", err);
+      setError(err.response?.data?.message || "Failed to publish intelligence report. Please verify authorization.");
     } finally {
       setLoading(false);
     }
@@ -147,10 +153,18 @@ export const CreatePostWidget = ({
                     <textarea
                       autoFocus
                       value={body}
-                      onChange={(e) => setBody(e.target.value)}
-                      className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 min-h-[140px] focus:outline-none focus:border-primary-500/40 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner"
-                      placeholder={`What's happening in ${user?.location || "your city"}...`}
+                      onChange={(e) => {
+                        setBody(e.target.value);
+                        setError("");
+                      }}
+                      className={`w-full bg-slate-950/50 border ${error ? 'border-rose-500/50' : 'border-white/10'} rounded-lg p-5 min-h-[140px] focus:outline-none focus:border-primary-500/40 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner`}
+                      placeholder={placeholder || `What's happening in ${user?.location || "your city"}...`}
                     />
+                    {error && (
+                      <p className="text-[10px] font-bold text-rose-500 ml-1 animate-pulse uppercase tracking-wider">
+                        {error}
+                      </p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
@@ -277,10 +291,18 @@ export const CreatePostWidget = ({
                       <textarea
                         autoFocus
                         value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        className="w-full bg-slate-950/50 border border-white/10 rounded-lg p-5 min-h-[160px] focus:outline-none focus:border-primary-500 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner"
-                        placeholder={`What's happening in ${user?.location || "your city"}...`}
+                        onChange={(e) => {
+                          setBody(e.target.value);
+                          setError("");
+                        }}
+                        className={`w-full bg-slate-950/50 border ${error ? 'border-rose-500/50' : 'border-white/10'} rounded-lg p-5 min-h-[160px] focus:outline-none focus:border-primary-500 transition-all resize-none placeholder:text-slate-500 text-[12px] text-white shadow-inner`}
+                        placeholder={placeholder || `What's happening in ${user?.location || "your city"}...`}
                       />
+                      {error && (
+                        <p className="text-[10px] font-bold text-rose-500 ml-1 animate-pulse uppercase tracking-wider">
+                          {error}
+                        </p>
+                      )}
                     </div>
 
                     <div className="space-y-6">

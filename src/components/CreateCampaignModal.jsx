@@ -46,7 +46,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
         ...formData,
         target: Number(formData.target),
         image: imageUrl,
-        location: user?.location || "General Sector",
+        location: user?.location || "General group",
         endDate: new Date(
           Date.now() + Number(formData.daysLeft) * 24 * 60 * 60 * 1000
         ),

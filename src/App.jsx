@@ -15,6 +15,7 @@ import ResetPassword from './pages/ResetPassword'
 import AdsManager from './pages/AdsManager'
 import SinglePost from './pages/SinglePost'
 import Settings from './pages/Settings'
+import GroupDetail from './pages/GroupDetail'
 
 function App() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -49,6 +50,7 @@ function App() {
           <Route path="/ads/manager" element={<AdsManager isCreateModalOpen={isCreateAdModalOpen} setCreateModalOpen={setIsCreateAdModalOpen} />} />
           <Route path="/ads/create" element={<AdsManager isCreateModalOpen={isCreateAdModalOpen} setCreateModalOpen={setIsCreateAdModalOpen} />} />
           <Route path="/post/:id" element={<SinglePost />} />
+          <Route path="/groups/:id" element={<GroupDetail isCreateModalOpen={isCreateModalOpen} setCreateModalOpen={setIsCreateModalOpen} />} />
         </Routes>
       </main>
     </div>
