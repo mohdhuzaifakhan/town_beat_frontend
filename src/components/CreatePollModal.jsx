@@ -10,6 +10,7 @@ export const CreatePollModal = ({ onClose, onCreated }) => {
   const [durationValue, setDurationValue] = useState(7);
   const [durationUnit, setDurationUnit] = useState("days");
   const [loading, setLoading] = useState(false);
+  const [isGlobal, setIsGlobal] = useState(false);
 
   const addOption = () => setOptions([...options, ""]);
 
@@ -53,6 +54,7 @@ export const CreatePollModal = ({ onClose, onCreated }) => {
         question,
         options: options.filter((o) => o.trim()),
         expiresAt: calculateExpiry().toISOString(),
+        isGlobal,
       });
       onCreated();
       onClose();
@@ -157,6 +159,19 @@ export const CreatePollModal = ({ onClose, onCreated }) => {
               durationValue={durationValue}
               setDurationValue={setDurationValue}
             />
+
+            <div className="flex items-center gap-3 bg-slate-950/30 p-3 rounded-lg border border-white/5">
+              <input
+                type="checkbox"
+                id="isGlobalPoll"
+                checked={isGlobal}
+                onChange={(e) => setIsGlobal(e.target.checked)}
+                className="w-4 h-4 rounded bg-slate-900 border-white/20 text-primary-500 focus:ring-primary-500 focus:ring-offset-slate-900"
+              />
+              <label htmlFor="isGlobalPoll" className="text-[12px] font-medium text-slate-400 cursor-pointer select-none">
+                Make this Global (visible to everyone)
+              </label>
+            </div>
 
             <div className="flex gap-4 pt-4">
               <button

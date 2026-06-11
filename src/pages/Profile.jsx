@@ -150,7 +150,7 @@ const Profile = () => {
     },
     {
       id: "movements",
-      label: "Compaigns",
+      label: "Campaigns",
       icon: Target,
       count: activity.movements.length,
     },

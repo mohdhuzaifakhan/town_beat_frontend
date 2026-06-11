@@ -24,20 +24,21 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
   const [category, setCategory] = useState("All");
   const [locationScope, setLocationScope] = useState("Local");
   const { user } = useAuth();
+  const [filterCity, setFilterCity] = useState(user?.location || "Rampur");
 
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search");
 
   useEffect(() => {
     fetchContent();
-  }, [category, locationScope, search]);
+  }, [category, locationScope, search, filterCity]);
 
   const fetchContent = async (silent = false) => {
     if (!silent) setLoading(true);
     try {
       let url = `/posts?category=${category}`;
       if (locationScope === "Local") {
-        url += `&location=${user?.location || "Rampur"}`;
+        url += `&location=${filterCity}`;
       }
       if (search) {
         url += `&search=${encodeURIComponent(search)}`;
@@ -144,9 +145,10 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
 
       <div className="px-3 md:px-4 hidden md:block my-4">
         <FeedHeader
-          location={user?.location || "Rampur"}
+          location={filterCity}
           locationScope={locationScope}
           setLocationScope={setLocationScope}
+          setFilterCity={setFilterCity}
         />
       </div>
 
@@ -164,7 +166,7 @@ const Home = ({ onCreatePostClick, isCreateModalOpen, setCreateModalOpen }) => {
             <div className="px-3 md:px-0">
               <NewsFilter
                 locationScope={locationScope}
-                location={user?.location}
+                location={filterCity}
                 category={category}
                 setCategory={setCategory}
               />

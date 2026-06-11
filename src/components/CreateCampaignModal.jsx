@@ -22,6 +22,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isGlobal, setIsGlobal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +51,7 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
         endDate: new Date(
           Date.now() + Number(formData.daysLeft) * 24 * 60 * 60 * 1000
         ),
+        isGlobal,
       };
 
       await api.post("/campaigns", payload);
@@ -183,6 +185,19 @@ export const CreateCampaignModal = ({ onClose, onCreated }) => {
                 >
                   {file ? file.name : "Upload image"}
                 </span>
+              </label>
+            </div>
+
+            <div className="flex items-center gap-3 bg-slate-950/30 p-3 rounded-lg border border-white/5">
+              <input
+                type="checkbox"
+                id="isGlobalCampaign"
+                checked={isGlobal}
+                onChange={(e) => setIsGlobal(e.target.checked)}
+                className="w-4 h-4 rounded bg-slate-900 border-white/20 text-primary-500 focus:ring-primary-500 focus:ring-offset-slate-900"
+              />
+              <label htmlFor="isGlobalCampaign" className="text-[12px] font-medium text-slate-400 cursor-pointer select-none">
+                Make this Global (visible to everyone)
               </label>
             </div>
 

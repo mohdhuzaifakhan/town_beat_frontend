@@ -22,6 +22,7 @@ export const CreatePostWidget = ({
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
+  const [isGlobal, setIsGlobal] = useState(false);
 
   // Use prop if provided, otherwise use internal state
   const isExpanded =
@@ -67,6 +68,7 @@ export const CreatePostWidget = ({
         image: fileUrl,
         location: user?.location || "Rampur",
         groupId,
+        isGlobal,
       });
 
       setError("");
@@ -196,6 +198,19 @@ export const CreatePostWidget = ({
                         </span>
                       </label>
                     </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-slate-950/30 p-3 rounded-lg border border-white/5">
+                    <input
+                      type="checkbox"
+                      id="isGlobalDesktop"
+                      checked={isGlobal}
+                      onChange={(e) => setIsGlobal(e.target.checked)}
+                      className="w-4 h-4 rounded bg-slate-900 border-white/20 text-primary-500 focus:ring-primary-500 focus:ring-offset-slate-900"
+                    />
+                    <label htmlFor="isGlobalDesktop" className="text-[12px] font-medium text-slate-400 cursor-pointer select-none">
+                      Make this Global (visible to everyone)
+                    </label>
                   </div>
 
                   <div className="flex gap-4">
@@ -333,6 +348,19 @@ export const CreatePostWidget = ({
                           </span>
                         </label>
                       </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-slate-950/30 p-3 rounded-lg border border-white/5">
+                      <input
+                        type="checkbox"
+                        id="isGlobalMobile"
+                        checked={isGlobal}
+                        onChange={(e) => setIsGlobal(e.target.checked)}
+                        className="w-4 h-4 rounded bg-slate-900 border-white/20 text-primary-500 focus:ring-primary-500 focus:ring-offset-slate-900"
+                      />
+                      <label htmlFor="isGlobalMobile" className="text-[12px] font-medium text-slate-400 cursor-pointer select-none">
+                        Make this Global (visible to everyone)
+                      </label>
                     </div>
 
                     <button

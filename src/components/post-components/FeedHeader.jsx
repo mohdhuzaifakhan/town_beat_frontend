@@ -1,9 +1,12 @@
 import { MapPin, Globe } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
-export function FeedHeader({ location, locationScope, setLocationScope }) {
+export function FeedHeader({ location, locationScope, setLocationScope, setFilterCity }) {
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search");
+  const [isEditing, setIsEditing] = useState(false);
+  const [tempCity, setTempCity] = useState(location);
 
   return (
     <>
@@ -25,14 +28,37 @@ export function FeedHeader({ location, locationScope, setLocationScope }) {
 
         <div className="flex items-center gap-1.5 p-1 glass rounded-lg border-white/10">
           <button
-            onClick={() => setLocationScope("Local")}
+            onClick={() => {
+              setLocationScope("Local");
+              setIsEditing(true);
+            }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-all ${locationScope === "Local"
                 ? "bg-primary-600 text-white shadow-lg shadow-primary-900/20"
                 : "text-slate-400 hover:text-slate-300 hover:bg-white/5"
               }`}
           >
             <MapPin size={12} />
-            {location || "Rampur"}
+            {isEditing && locationScope === "Local" ? (
+              <input 
+                autoFocus
+                type="text" 
+                value={tempCity}
+                onChange={(e) => setTempCity(e.target.value)}
+                onBlur={() => {
+                  setIsEditing(false);
+                  if (setFilterCity) setFilterCity(tempCity || "Rampur");
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setIsEditing(false);
+                    if (setFilterCity) setFilterCity(tempCity || "Rampur");
+                  }
+                }}
+                className="bg-transparent text-white border-b border-white/30 outline-none w-20 text-[12px]"
+              />
+            ) : (
+              location || "Rampur"
+            )}
           </button>
 
           <button
@@ -59,14 +85,37 @@ export function FeedHeader({ location, locationScope, setLocationScope }) {
 
           <div className="flex items-center gap-1.5 p-0.5 bg-white/5 rounded-lg border border-white/10">
             <button
-              onClick={() => setLocationScope("Local")}
+              onClick={() => {
+                setLocationScope("Local");
+                setIsEditing(true);
+              }}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[12px]   font-medium transition-all ${locationScope === "Local"
                   ? "bg-primary-600 text-white shadow-lg shadow-primary-900/40"
                   : "text-slate-400"
                 }`}
             >
               <MapPin size={10} />
-              {location || "Local"}
+              {isEditing && locationScope === "Local" ? (
+                <input 
+                  autoFocus
+                  type="text" 
+                  value={tempCity}
+                  onChange={(e) => setTempCity(e.target.value)}
+                  onBlur={() => {
+                    setIsEditing(false);
+                    if (setFilterCity) setFilterCity(tempCity || "Rampur");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setIsEditing(false);
+                      if (setFilterCity) setFilterCity(tempCity || "Rampur");
+                    }
+                  }}
+                  className="bg-transparent text-white border-b border-white/30 outline-none w-16 text-[12px]"
+                />
+              ) : (
+                location || "Local"
+              )}
             </button>
 
             <button
