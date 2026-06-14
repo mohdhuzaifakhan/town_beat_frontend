@@ -10,6 +10,7 @@ import Campaigns from './pages/Campaigns'
 import Profile from './pages/Profile'
 import VerifyEmail from './pages/VerifyEmail'
 import AdminAds from './pages/AdminAds'
+import AdminLocations from './pages/AdminLocations'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import AdsManager from './pages/AdsManager'
@@ -47,6 +48,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin/ads" element={<AdminAds />} />
+          <Route path="/admin/locations" element={<AdminLocations />} />
           <Route path="/ads/manager" element={<AdsManager isCreateModalOpen={isCreateAdModalOpen} setCreateModalOpen={setIsCreateAdModalOpen} />} />
           <Route path="/ads/create" element={<AdsManager isCreateModalOpen={isCreateAdModalOpen} setCreateModalOpen={setIsCreateAdModalOpen} />} />
           <Route path="/post/:id" element={<SinglePost />} />

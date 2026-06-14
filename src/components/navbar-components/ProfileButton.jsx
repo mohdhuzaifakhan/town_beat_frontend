@@ -4,6 +4,7 @@ import {
   PlusSquare,
   Settings,
   LogOut,
+  MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
@@ -84,31 +85,40 @@ export function ProfileButton() {
               <UserIcon size={16} /> Profile
             </Link>
 
-            {/* <Link
+            <Link
               to="/ads/manager"
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-amber-400 hover:text-amber-300 hover:bg-amber-500/10 rounded-lg transition-colors font-medium"
             >
               <Megaphone size={16} /> Promote
-            </Link> */}
+            </Link>
 
-            {/* {user.role === "Admin" && (
-              <Link
-                to="/admin/ads"
-                onClick={() => setShowUserMenu(false)}
-                className="flex items-center gap-2 px-3 py-2 text-[12px] text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/10 rounded-lg transition-colors font-medium"
-              >
-                <PlusSquare size={16} /> Billboard
-              </Link>
-            )} */}
+            {user.role === "Admin" && (
+              <>
+                <Link
+                  to="/admin/ads"
+                  onClick={() => setShowUserMenu(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-[12px] text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/10 rounded-lg transition-colors font-medium"
+                >
+                  <PlusSquare size={16} /> Billboard
+                </Link>
+                <Link
+                  to="/admin/locations"
+                  onClick={() => setShowUserMenu(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-[12px] text-teal-400 hover:text-teal-300 hover:bg-teal-500/10 rounded-lg transition-colors font-medium"
+                >
+                  <MapPin size={16} /> Locations
+                </Link>
+              </>
+            )}
 
-            {/* <Link
+            <Link
               to="/settings"
               onClick={() => setShowUserMenu(false)}
               className="flex items-center gap-2 px-3 py-2 text-[12px] text-slate-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors font-medium"
             >
               <Settings size={16} /> Settings
-            </Link> */}
+            </Link>
           </div>
 
           <div className="p-1 border-t border-white/10">
