@@ -60,7 +60,12 @@ const Groups = ({ isCreateModalOpen, setCreateModalOpen }) => {
   const filteredGroups = groups.filter((g) => {
     if (view === "explore") return true;
     if (view === "my") {
-      return g.members.includes(user?._id) || g.owner === user?._id;
+      const uid = user?._id;
+      return (
+        g.members?.some((m) => (m._id || m).toString() === uid) ||
+        g.owner === uid ||
+        g.owner?._id === uid
+      );
     }
     return false;
   });

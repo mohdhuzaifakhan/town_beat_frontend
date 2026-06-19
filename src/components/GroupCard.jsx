@@ -17,8 +17,10 @@ export const GroupCard = ({ group, onUpdate }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false);
 
-  const isOwner = user?._id === group.owner;
-  const isMember = group.members.includes(user?._id);
+  const isOwner = user?._id === group.owner || user?._id === group.owner?._id;
+  const isMember =
+    isOwner ||
+    group.members?.some((m) => (m._id || m).toString() === user?._id);
 
   const handleJoin = async () => {
     if (!user) return;

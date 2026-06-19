@@ -13,4 +13,18 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+// Response interceptor to handle session invalidation (401 Unauthorized)
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            // Boot user back to the login page if they are unauthorized
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default api;
